@@ -4,9 +4,11 @@ import 'package:canary_app/Home/Home.dart';
 import 'package:canary_app/MyRoom.dart/edit_room.dart';
 import 'package:canary_app/MyRoom.dart/peopleinroom.dart';
 import 'package:canary_app/MyRoom.dart/praicroom.dart';
+import 'package:canary_app/massge/Masseg.dart';
 import 'package:canary_app/min_baer/exstra/exstra.dart';
 import 'package:canary_app/min_baer/geft.dart';
 import 'package:canary_app/min_baer/imoge.dart';
+import 'package:canary_app/min_baer/thetext.dart';
 import 'package:canary_app/profail/show_profail_frend.dart';
 
 import 'package:flutter/material.dart';
@@ -609,7 +611,15 @@ class _MyRoomState extends State<MyRoom> {
                                   size: 35,
                                 )),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                   showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                          height: 700,
+                                          child: const Masseg());
+                                      });
+                                },
                                 icon: const Icon(
                                   Icons.mail,
                                   color: Colors.amber,
@@ -617,7 +627,13 @@ class _MyRoomState extends State<MyRoom> {
                                 )),
                             IconButton(
                                 onPressed: () {
-                                  
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                        height: 70.h,
+                                          child: const TheText());
+                                      });
                                 },
                                 icon: const Icon(
                                   Icons.comment_outlined,
