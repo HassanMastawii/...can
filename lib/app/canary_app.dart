@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
               ],
               locale: const Locale("ar"),
               darkTheme: darkTheme,
-              themeMode: ThemeMode.system,
+              themeMode: ThemeMode.light,
               theme: lightTheme,
               debugShowCheckedModeBanner: false,
               home: const Home(),

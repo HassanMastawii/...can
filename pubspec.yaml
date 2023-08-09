@@ -45,6 +45,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   get_it: ^7.2.0
+  flutter_image_slideshow: ^0.1.6
 
 
 
@@ -73,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+    - images/money/
  
 
   # An image asset can refer to one or more resolution-specific "variants", see
