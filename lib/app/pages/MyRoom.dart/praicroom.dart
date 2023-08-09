@@ -43,7 +43,7 @@ class _PraicroomState extends State<Praicroom> {
                         });
                       },
                       child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 400),
+                        duration: const Duration(milliseconds: 200),
                         margin: EdgeInsets.symmetric(horizontal: 49.h),
                         width: 80.w,
                         height: 45.h,

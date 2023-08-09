@@ -18,6 +18,7 @@ class RoomCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           Image.asset(
             imageLink,
@@ -27,8 +28,8 @@ class RoomCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(chatName, style: TextStyle(fontSize: 16)),
-                Text(chatCountry, style: TextStyle(fontSize: 16)),
+                Text(chatName, style: const TextStyle(fontSize: 16)),
+                Text(chatCountry, style: const TextStyle(fontSize: 16)),
               ],
             ),
           ),

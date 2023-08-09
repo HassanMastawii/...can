@@ -67,7 +67,7 @@ class _InputAreaState extends State<InputArea> {
                   controller: widget.controller,
                   minLines: 1,
                   maxLines: 6,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

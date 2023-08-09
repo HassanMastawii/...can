@@ -18,224 +18,258 @@ class _MyRoomState extends State<MyRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.black38,
-        title: ListTile(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Editroom(),
-                  ));
-            },
-            child: const CircleAvatar(
-              backgroundColor: Colors.amber,
-              radius: 25,
-              child: CircleAvatar(
-                radius: 24,
-                backgroundImage: const AssetImage("images/pic_room.jpg"),
-              ),
-            ),
-          ),
-          subtitle: Text("ID:5231564"),
-          title: Text("كناري شات"),
-        ),
-        actions: [
-          TextButton.icon(
-              style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide())),
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return const PeopleinRoom();
-                    });
-              },
-              icon: Icon(Icons.group),
-              label: Text("1000")),
-        ],
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.power_settings_new,
-          ),
-        ),
-      ),
       body: Container(
         color: Colors.black38,
         width: double.infinity,
-        child: Column(
+        child: Stack(
           children: [
-            Row(
-              children: [
-                TextButton.icon(
-                    style: const ButtonStyle(
-                      iconColor: MaterialStatePropertyAll(Colors.yellow),
-                      side: MaterialStatePropertyAll(
-                        BorderSide(color: Colors.amber),
-                      ),
-                    ),
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return const Praicroom();
-                          });
-                    },
-                    icon: const Icon(Icons.attach_money_rounded),
-                    label: const Text("1000")),
-              ],
-            ),
-            Wrap(
-              children: [
-                getMember(),
-                getMember(),
-                getMember(),
-                getMember(),
-                getMember(),
-                getMember(),
-                getMember(),
-                getMember(),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 30,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return const ShowProfailFrendInRoom();
-                          });
-                    },
-                    title: const Text("محمد علي كلاي"),
-                    subtitle: const Text("رسالة جديدة"),
-                    leading: const CircleAvatar(
-                      backgroundColor: Colors.amber,
-                      radius: 30,
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundImage: AssetImage("images/pic_room.jpg"),
-                      ),
-                    ),
-                  ),
+            Positioned.fill(
+              child: OverflowBox(
+                maxHeight: MediaQuery.of(context).size.height,
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? 'images/create_family_background.png'
+                      : 'images/create_family_background.png',
+                  repeat: ImageRepeat.repeat,
+                  alignment: Alignment.topLeft,
                 ),
               ),
             ),
-            Stack(alignment: Alignment.topCenter, children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 11, right: 11),
-                child: Container(
-                  width: double.infinity,
-                  height: 84.h,
-                  child: Column(
+            SafeArea(
+              child: Column(
+                children: [
+                  Row(
                     children: [
-                      SizedBox(
-                        height: 28.h,
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.power_settings_new,
+                        ),
                       ),
-                      Container(
-                        height: 55.h,
-                        decoration: BoxDecoration(
-                            color: Colors.black87,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                                color: Colors.amberAccent, width: 2)),
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.now_widgets_outlined,
-                                  color: Colors.amber,
-                                  size: 35,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  color: Colors.amber,
-                                  Icons.volume_up,
-                                  size: 35,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.settings_voice,
-                                  color: Colors.amber,
-                                  size: 35,
-                                )),
-                            const Spacer(
-                              flex: 2,
+                      Expanded(
+                        child: ListTile(
+                          leading: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Editroom(),
+                                  ));
+                            },
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.amber,
+                              radius: 25,
+                              child: CircleAvatar(
+                                radius: 24,
+                                backgroundImage:
+                                    AssetImage("images/pic_room.jpg"),
+                              ),
                             ),
-                            IconButton(
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (context) {
-                                        return Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(66)),
-                                            height: 280.h,
-                                            width: double.infinity,
-                                            child: const ImogeMic());
-                                      });
-                                },
-                                icon: const Icon(
-                                  Icons.mood,
-                                  color: Colors.amber,
-                                  size: 35,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.mail,
-                                  color: Colors.amber,
-                                  size: 35,
-                                )),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.comment_outlined,
-                                  color: Colors.amber,
-                                  size: 35,
-                                )),
+                          ),
+                          subtitle: const Text(
+                            "ID:5231564",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          title: const Text(
+                            "كناري شات",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton.icon(
+                          style: const ButtonStyle(
+                              side: MaterialStatePropertyAll(BorderSide())),
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return const PeopleinRoom();
+                                });
+                          },
+                          icon: const Icon(Icons.group),
+                          label: const Text("1000")),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      TextButton.icon(
+                          style: const ButtonStyle(
+                            iconColor: MaterialStatePropertyAll(Colors.yellow),
+                            side: MaterialStatePropertyAll(
+                              BorderSide(color: Colors.amber),
+                            ),
+                          ),
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return const Praicroom();
+                                });
+                          },
+                          icon: const Icon(Icons.attach_money_rounded),
+                          label: const Text("1000")),
+                    ],
+                  ),
+                  Wrap(
+                    children: [
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                      getMember(),
+                    ],
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: 30,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ListTile(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return const ShowProfailFrendInRoom();
+                                });
+                          },
+                          title: const Text("محمد علي كلاي"),
+                          subtitle: const Text("رسالة جديدة"),
+                          leading: const CircleAvatar(
+                            backgroundColor: Colors.amber,
+                            radius: 30,
+                            child: CircleAvatar(
+                              radius: 25,
+                              backgroundImage:
+                                  AssetImage("images/pic_room.jpg"),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Stack(alignment: Alignment.topCenter, children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 11, right: 11),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 84.h,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 28.h,
+                            ),
+                            Container(
+                              height: 55.h,
+                              decoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      color: Colors.amberAccent, width: 2)),
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.now_widgets_outlined,
+                                        color: Colors.amber,
+                                        size: 35,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        color: Colors.amber,
+                                        Icons.volume_up,
+                                        size: 35,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.settings_voice,
+                                        color: Colors.amber,
+                                        size: 35,
+                                      )),
+                                  const Spacer(
+                                    flex: 2,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return Container(
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              66)),
+                                                  height: 280.h,
+                                                  width: double.infinity,
+                                                  child: const ImogeMic());
+                                            });
+                                      },
+                                      icon: const Icon(
+                                        Icons.mood,
+                                        color: Colors.amber,
+                                        size: 35,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.mail,
+                                        color: Colors.amber,
+                                        size: 35,
+                                      )),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.comment_outlined,
+                                        color: Colors.amber,
+                                        size: 35,
+                                      )),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(66)),
+                                  height: 280.h,
+                                  width: double.infinity,
+                                  child: const Geftbox());
+                            });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 11),
+                        child: Container(
+                          width: 85.w,
+                          height: 85.h,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("images/geftbox.png"))),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ],
               ),
-              InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(66)),
-                            height: 280.h,
-                            width: double.infinity,
-                            child: const Geftbox());
-                      });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 11),
-                  child: Container(
-                    width: 85.w,
-                    height: 85.h,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/geftbox.png"))),
-                  ),
-                ),
-              ),
-            ]),
+            ),
           ],
         ),
       ),
@@ -255,7 +289,12 @@ class _MyRoomState extends State<MyRoom> {
               backgroundImage: const AssetImage("images/pic_room.jpg"),
             ),
           ),
-          const Text("ali"),
+          const Text(
+            "ali",
+            style: TextStyle(
+              color: Colors.grey,
+            ),
+          ),
         ],
       ),
     );

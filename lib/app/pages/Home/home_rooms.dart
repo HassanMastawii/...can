@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import '../../components/room_card.dart';
 import '../MyRoom.dart/my_room.dart';
 import 'my_visits.dart';
@@ -30,16 +30,27 @@ class _HomeRoomsState extends State<HomeRooms> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Container(
-              width: 360.w,
-              height: 75.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: const DecorationImage(
-                      fit: BoxFit.fill, image: AssetImage("images/bnar1.png"))),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: ImageSlideshow(
+                height: 150,
+                disableUserScrolling: false,
+                autoPlayInterval: 3000,
+                isLoop: true,
+                children: [
+                  Image.asset(
+                    'images/bnar1.png',
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/bnar1.png',
+                    fit: BoxFit.fill,
+                  ),
+                  Image.asset(
+                    'images/bnar1.png',
+                    fit: BoxFit.fill,
+                  ),
+                ],
+              )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
