@@ -1,4 +1,8 @@
+import 'package:canary_app/app/components/list_chat_privt_inroom.dart';
+import 'package:canary_app/app/components/model_bottom_sheet/chatInRoom.dart';
+import 'package:canary_app/app/pages/Home/home_chat.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/edit_room.dart';
+import 'package:canary_app/min_baer/exstra/exstra.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/model_bottom_sheet/geft.dart';
@@ -38,12 +42,13 @@ class _MyRoomState extends State<MyRoom> {
               ),
             ),
           ),
-          subtitle: Text("ID:5231564"),
-          title: Text("كناري شات"),
+          subtitle: const Text("ID:5231564"),
+          title: const Text("كناري شات"),
         ),
         actions: [
           TextButton.icon(
-              style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide())),
+              style: const ButtonStyle(
+                  side: MaterialStatePropertyAll(BorderSide())),
               onPressed: () {
                 showModalBottomSheet(
                     context: context,
@@ -51,8 +56,8 @@ class _MyRoomState extends State<MyRoom> {
                       return const PeopleinRoom();
                     });
               },
-              icon: Icon(Icons.group),
-              label: Text("1000")),
+              icon: const Icon(Icons.group),
+              label: const Text("1000")),
         ],
         leading: IconButton(
           onPressed: () {
@@ -148,7 +153,13 @@ class _MyRoomState extends State<MyRoom> {
                         child: Row(
                           children: [
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModalBottomSheet(context: context,
+                                  builder: (context){
+                                    return const Exstra();
+                                  }
+                                  );
+                                },
                                 icon: const Icon(
                                   Icons.now_widgets_outlined,
                                   color: Colors.amber,
@@ -191,14 +202,29 @@ class _MyRoomState extends State<MyRoom> {
                                   size: 35,
                                 )),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                            child: const ListChat());
+                                      });
+                                },
                                 icon: const Icon(
                                   Icons.mail,
                                   color: Colors.amber,
                                   size: 35,
                                 )),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                            height: 80.h,
+                                            child: const ChatInRoom());
+                                      });
+                                },
                                 icon: const Icon(
                                   Icons.comment_outlined,
                                   color: Colors.amber,

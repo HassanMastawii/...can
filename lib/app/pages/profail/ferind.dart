@@ -19,7 +19,7 @@ class _FerindState extends State<Ferind> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

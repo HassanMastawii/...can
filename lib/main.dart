@@ -1,7 +1,7 @@
 
 
 
-import 'package:canary_app/Home/home.dart';
+
 
 import 'package:flutter/material.dart';
 import 'app/canary_app.dart';

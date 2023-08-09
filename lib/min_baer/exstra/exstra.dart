@@ -1,6 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Exstra extends StatefulWidget {
   const Exstra({super.key});
@@ -14,19 +16,18 @@ class _ExstraState extends State<Exstra> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        SizedBox(
+          height: 11.h,
+        ),
+        Wrap(
           children: [
-            Column(
-              children: [
-                Container(
-                  height: 100, width: 100,
-                  // color: Colors.blueAccent,
-                  // decoration: const BoxDecoration(
-                  //     image: DecorationImage(
-                  //         fit: BoxFit.fill, image: AssetImage('images/m.png'))),
-                  // // child: Image.asset("images/exstra/m.png")),
-                ),
-              ],
+            Container(
+              height: 70,
+              width: 70,
+              child: Image.asset('images/1.png',fit: BoxFit.fill),
+              // decoration: const BoxDecoration(
+              //   image: DecorationImage(image: AssetImage())
+              // ),
             )
           ],
         )
@@ -34,3 +35,4 @@ class _ExstraState extends State<Exstra> {
     );
   }
 }
+
