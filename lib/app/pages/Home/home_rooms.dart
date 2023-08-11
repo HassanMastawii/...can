@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import '../../components/bnart.dart';
+import '../../components/exstra/card_superchat.dart';
 import '../../components/room_card.dart';
 import '../MyRoom.dart/my_room.dart';
 import 'my_visits.dart';
@@ -29,29 +31,35 @@ class _HomeRoomsState extends State<HomeRooms> {
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
               child: ImageSlideshow(
                 height: 80,
                 disableUserScrolling: false,
                 autoPlayInterval: 3000,
                 isLoop: true,
                 indicatorRadius: 4,
-
-                
                 children: [
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
+                 Baner(),
+                 Baner(),
+                 Baner(),
+                 Baner(),
+                 
+                ],
+              )),
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: ImageSlideshow(
+                height: 80,
+                disableUserScrolling: false,
+                autoPlayInterval: 9000,
+                isLoop: true,
+                indicatorRadius: 4,
+                children: [
+                  SuperChat(),
+                  SuperChat(),
+                  SuperChat(),
+                  SuperChat(),
                 ],
               )),
           Padding(

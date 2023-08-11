@@ -1,5 +1,6 @@
 import 'package:canary_app/app/components/model_bottom_sheet/chatInRoom.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/edit_room.dart';
+import 'package:canary_app/app/pages/MyRoom.dart/mic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/model_bottom_sheet/geft.dart';
@@ -120,16 +121,31 @@ class _MyRoomState extends State<MyRoom> {
                       //لم اعرف ان اثبت صورة المستخدم الاساسيه في المنتصف اريد حل لهاذه
                     ],
                   ),
-                  Wrap(
+                  Column(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      getMember(),
-                      getMember(),
-                      getMember(),
-                      getMember(),
-                      getMember(),
-                      getMember(),
-                      getMember(),
-                      getMember(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                        child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Mic(),
+                            Mic(),
+                            Mic(),
+                            Mic(),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                        child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            Mic(),
+                            Mic(),
+                            Mic(),
+                            Mic(),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   Expanded(
@@ -205,7 +221,9 @@ class _MyRoomState extends State<MyRoom> {
                                       showModalBottomSheet(
                                           context: context,
                                           builder: (context) {
-                                            return const ImogeMic();
+                                            return SizedBox(
+                                                height: 350.h,
+                                                child: const ImogeMic());
                                           });
                                     },
                                     icon: const Icon(
@@ -251,12 +269,8 @@ class _MyRoomState extends State<MyRoom> {
                         showModalBottomSheet(
                             context: context,
                             builder: (context) {
-                              return Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(66)),
-                                  height: 280.h,
-                                  width: double.infinity,
-                                  child: const Geftbox());
+                              return SizedBox(
+                                  height: 350.h, child: const Geftbox());
                             });
                       },
                       child: Padding(
