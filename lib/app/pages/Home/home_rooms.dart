@@ -32,10 +32,13 @@ class _HomeRoomsState extends State<HomeRooms> {
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: ImageSlideshow(
-                height: 150,
+                height: 80,
                 disableUserScrolling: false,
                 autoPlayInterval: 3000,
                 isLoop: true,
+                indicatorRadius: 4,
+
+                
                 children: [
                   Image.asset(
                     'images/bnar1.png',
@@ -73,7 +76,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                   icon: const Icon(
                     Icons.home,
                   ),
-                  iconSize: 35,
+                  iconSize: 30,
                 ),
                 const Spacer(),
                 TextButton(

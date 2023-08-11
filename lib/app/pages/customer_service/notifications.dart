@@ -17,7 +17,7 @@ class _NotificationsState extends State<Notifications> {
       ),
       body:  Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
+        children: const [
           Text("2/4/2023  22:23"),
           Padding(
             padding: EdgeInsets.all(8.0),

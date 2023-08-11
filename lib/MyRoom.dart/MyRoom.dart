@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 // // ignore_for_file: file_names, avoid_unnecessary_containers, sized_box_for_whitespace
 
 // import 'package:canary_app/Home/Home.dart';

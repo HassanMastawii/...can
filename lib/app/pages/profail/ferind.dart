@@ -20,10 +20,10 @@ class _FerindState extends State<Ferind> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
+                  children: const [
                     MyButton(text: "الأصدقاء"),
                     MyButton(text: "الرسائل"),
                   ],
