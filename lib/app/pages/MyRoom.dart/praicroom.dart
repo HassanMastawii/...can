@@ -4,7 +4,6 @@ import 'package:canary_app/app/pages/MyRoom.dart/praicday.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/praicmonthe.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Praicroom extends StatefulWidget {
   const Praicroom({Key? key}) : super(key: key);

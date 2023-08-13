@@ -3,6 +3,7 @@ import 'package:canary_app/app/pages/MyRoom.dart/edit_room.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/mic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../components/model_bottom_sheet/exstra.dart';
 import '../../components/model_bottom_sheet/geft.dart';
 import '../../components/model_bottom_sheet/imoge.dart';
 import '../../components/model_bottom_sheet/list_chat_privt_inroom.dart';
@@ -195,7 +196,15 @@ class _MyRoomState extends State<MyRoom> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                         showModalBottomSheet(
+                                          context: context,
+                                          builder: (context) {
+                                            return SizedBox(
+                                                height: 350.h,
+                                                child: const Exstra());
+                                          });
+                                    },
                                     icon: const Icon(
                                       Icons.now_widgets_outlined,
                                       color: Colors.amber,
