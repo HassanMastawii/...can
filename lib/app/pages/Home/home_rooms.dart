@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import '../../components/bnart.dart';
+import '../../components/exstra/card_superchat.dart';
 import '../../components/room_card.dart';
-import '../MyRoom.dart/my_room.dart';
+import '../MyRoom.dart/my_Room.dart';
 import 'my_visits.dart';
 
 class HomeRooms extends StatefulWidget {
@@ -12,43 +14,39 @@ class HomeRooms extends StatefulWidget {
 }
 
 class _HomeRoomsState extends State<HomeRooms> {
-  // List room = [
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
               child: ImageSlideshow(
-                height: 150,
+                height: 80,
                 disableUserScrolling: false,
                 autoPlayInterval: 3000,
                 isLoop: true,
+                indicatorRadius: 4,
                 children: [
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/bnar1.png',
-                    fit: BoxFit.fill,
-                  ),
+                  Baner(),
+                  Baner(),
+                  Baner(),
+                  Baner(),
+                ],
+              )),
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: ImageSlideshow(
+                height: 80,
+                disableUserScrolling: false,
+                autoPlayInterval: 9000,
+                isLoop: true,
+                indicatorRadius: 4,
+                children: [
+                  SuperChat(),
+                  SuperChat(),
+                  SuperChat(),
+                  SuperChat(),
                 ],
               )),
           Padding(
@@ -73,7 +71,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                   icon: const Icon(
                     Icons.home,
                   ),
-                  iconSize: 35,
+                  iconSize: 30,
                 ),
                 const Spacer(),
                 TextButton(

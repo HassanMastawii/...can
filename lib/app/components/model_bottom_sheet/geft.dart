@@ -66,8 +66,9 @@ class _GeftboxState extends State<Geftbox> {
                     height: 60,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            width: 4,
-                            color: const Color.fromARGB(207, 255, 224, 85),),
+                          width: 4,
+                          color: const Color.fromARGB(207, 255, 224, 85),
+                        ),
                         borderRadius: BorderRadius.circular(90),
                         color: Colors.black,
                         image: const DecorationImage(
@@ -249,47 +250,49 @@ class _GeftboxState extends State<Geftbox> {
               ],
             ),
           ),
-          Container(
-            height: 133.h,
-           width: 360.w,
-            color: Colors.black87,
-            child: GridView.builder(
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-           
-                ),
-                itemCount: 56,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: InkWell(
-                          child: Container(
-                            height: 40.h,
-                            width: 50.w,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage('images/sy.png'))),
+          Expanded(
+            child: Container(
+              width: 360.w,
+              color: Colors.black87,
+              child: GridView.builder(
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                  ),
+                  itemCount: 56,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: InkWell(
+                            child: Container(
+                              height: 30.h,
+                              width: 50.w,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('images/sy.png'))),
+                            ),
                           ),
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Text(
-                          "name geft",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        const Padding(
+                          padding: EdgeInsets.all(2.0),
+                          child: Text(
+                            "name geft",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                         ),
-                      ),
-                      const Text(
-                        "2000",
-                        style: TextStyle(
-                            color: Colors.amberAccent, fontSize: 14,),
-                      ),
-                    ],
-                  );
-                }),
+                        const Text(
+                          "2000",
+                          style: TextStyle(
+                            color: Colors.amberAccent,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+            ),
           ),
           Container(
             height: 61,

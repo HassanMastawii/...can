@@ -3,7 +3,9 @@ import 'package:canary_app/app/pages/store/my_money.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../customer_service/customers_service.dart';
 import '../family/family_profile.dart';
+import '../level/level.dart';
 import 'edit_profile.dart';
 
 class MyProfile extends StatefulWidget {
@@ -120,6 +122,11 @@ class _MyProfileState extends State<MyProfile> {
                   child: Card(
                     color: Colors.brown,
                     child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const LevelPage(),
+                        ));
+                      },
                       leading:
                           Icon(Icons.upload, color: Colors.yellowAccent[700]),
                       title: const Text(
@@ -137,6 +144,13 @@ class _MyProfileState extends State<MyProfile> {
                   child: Card(
                     color: Colors.purple,
                     child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyMoney(),
+                            ));
+                      },
                       leading: Icon(Icons.monetization_on,
                           color: Colors.yellowAccent[700]),
                       title: const Text(
@@ -187,15 +201,7 @@ class _MyProfileState extends State<MyProfile> {
                     flex: 2,
                   ),
                   getButton(
-                      imageLink: "images/d11.png",
-                      text: "الدخل",
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyMoney(),
-                            ));
-                      }),
+                      imageLink: "images/d11.png", text: "الدخل", onTap: () {}),
                   const Spacer(),
                 ],
               ),
@@ -217,9 +223,16 @@ class _MyProfileState extends State<MyProfile> {
                     const ListTile(
                         title: Text("الأعدادات"),
                         leading: Icon(Icons.settings)),
-                    const ListTile(
-                        title: Text("المساعدة وردود الفعل"),
-                        leading: Icon(Icons.support_agent)),
+                    ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CustomersService(),
+                              ));
+                        },
+                        title: const Text("المساعدة وردود الفعل"),
+                        leading: const Icon(Icons.support_agent)),
                     50.getHightSizedBox(),
                   ],
                 ),
