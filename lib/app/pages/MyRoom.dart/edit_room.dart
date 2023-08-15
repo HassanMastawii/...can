@@ -2,6 +2,7 @@ import 'package:canary_app/app/pages/MyRoom.dart/a3lanRoom.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/bacpicroom.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'adminroom.dart';
 import 'blokroom.dart';
 
@@ -37,18 +38,16 @@ class _EditroomState extends State<Editroom> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Center(
-                        child: IconButton(
-                            color: Colors.black,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.settings_applications_rounded,
-                              size: 50,
-                            )),
-                      ),
+                      IconButton(
+                          color: Colors.black,
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.settings_applications_rounded,
+                            size: 50,
+                          )),
                       Container(
-                        height: 60,
-                        width: 300,
+                        height: 50,
+                        width: 270.w,
                         decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(33)),
                             color: Colors.black38),
@@ -59,16 +58,14 @@ class _EditroomState extends State<Editroom> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(33))),
                               hintText: "اسم الغرف",
-                              hintTextDirection: TextDirection.ltr,
-                              fillColor: Colors.amber,
-                              focusColor: Colors.amber,
+                             
                               helperStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22),
+                                  TextStyle(color: Colors.white, ),
                               hintStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22),
+                                  TextStyle(color: Colors.white, ),
                               hoverColor: Colors.blueGrey,
                               labelStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22)),
+                                  TextStyle(color: Colors.white, )),
                         ),
                       ),
                     ],
@@ -76,186 +73,194 @@ class _EditroomState extends State<Editroom> {
                 ),
               ],
             ),
-            Card(
-              elevation: 11,
-              child: Container(
-                height: 90,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 280,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(33)),
-                          color: Colors.black38),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                            counterStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33))),
-                            hintText: "قفل الغرفه",
-                            hintTextDirection: TextDirection.ltr,
-                            fillColor: Colors.amber,
-                            focusColor: Colors.amber,
-                            helperStyle:
-                                TextStyle(color: Colors.white, fontSize: 22),
-                            hintStyle:
-                                TextStyle(color: Colors.white, fontSize: 22),
-                            hoverColor: Colors.blueGrey,
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: 22)),
-                      ),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return const States();
+                    });
+              },
+              child: Card(
+                elevation: 11,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.note_alt),
+                        Text(
+                          "الحاله",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
-                    const Text(
-                      "قفل الغرفه",
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            Card(
-              elevation: 11,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return const States();
-                              });
-                        },
-                        icon: const Icon(
-                          Icons.note_alt,
-                          size: 30,
-                        )),
-                    const Text(
-                      "الحاله",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) {
+                      return const A3lanRoom();
+                    });
+              },
+              child: Card(
+                elevation: 11,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.note_alt),
+                        Text(
+                          "اعلان الغرفه",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            Card(
-              elevation: 11,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                              useSafeArea: true,
-                              context: context,
-                              builder: (context) {
-                                return const A3lanRoom();
-                              });
-                        },
-                        icon: const Icon(
-                          Icons.note_alt,
-                          size: 30,
-                        )),
-                    const Text(
-                      "اعلان الغرفه",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              elevation: 11,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Bacpicroom(),
-                              ));
-                        },
-                        icon: const Icon(
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Bacpicroom(),
+                    ));
+              },
+              child: Card(
+                elevation: 11,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(
                           Icons.photo_library,
-                          size: 30,
-                        )),
-                    const Text(
-                      "اختيار خلفيه",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "اختيار خلفيه",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
             Card(
               elevation: 11,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                              useSafeArea: true,
-                              context: context,
-                              builder: (context) {
-                                return const Adminroom();
-                              });
-                        },
-                        icon: const Icon(
-                          Icons.admin_panel_settings_outlined,
-                          size: 30,
-                        )),
-                    const Text(
-                      "ادارة المشرفين",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                  ],
+              child: SizedBox(
+                height: 50.h,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 11),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 50,
+                        width: 200.w,
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(33)),
+                            color: Colors.black38),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                              counterStyle: TextStyle(color: Colors.white),
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(33))),
+                              hintText: "قفل الغرفه",
+                              helperStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              hoverColor: Colors.blueGrey,
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                              )),
+                        ),
+                      ),
+                      const Spacer(),
+                      const Text(
+                        "قفل الغرفه",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            Card(
-              elevation: 11,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                              useSafeArea: true,
-                              context: context,
-                              builder: (context) {
-                                return const Blokroom();
-                              });
-                        },
-                        icon: const Icon(
-                          Icons.person_off_outlined,
-                          size: 30,
-                        )),
-                    const Text(
-                      "ادارة الطرد",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) {
+                      return const Adminroom();
+                    });
+              },
+              child: Card(
+                elevation: 11,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.admin_panel_settings_outlined),
+                        Text(
+                          "ادارة المشرفين",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) {
+                      return const Blokroom();
+                    });
+              },
+              child: Card(
+                elevation: 11,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 22, right: 22, top: 10),
+                  child: SizedBox(height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Icon(Icons.person_off_outlined),
+                        Text(
+                          "ادارة الطرد",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),

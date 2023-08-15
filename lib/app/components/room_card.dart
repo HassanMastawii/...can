@@ -23,13 +23,33 @@ class RoomCard extends StatelessWidget {
           Image.asset(
             imageLink,
           ),
-          Container(
-            color: Colors.black.withOpacity(0.3),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(chatName, style: const TextStyle(fontSize: 16)),
-                Text(chatCountry, style: const TextStyle(fontSize: 16)),
+                Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black38,
+                        borderRadius: BorderRadius.circular(11)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Text(chatName,
+                          style: const TextStyle(
+                           color: Colors.white
+                          )),
+                    )),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black38,
+                        borderRadius: BorderRadius.circular(11)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Text(chatCountry,
+                          style: const TextStyle(
+                           color: Colors.white
+                          )),
+                    )),
               ],
             ),
           ),
