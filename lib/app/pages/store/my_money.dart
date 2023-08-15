@@ -31,12 +31,12 @@ class _MyMoneyState extends State<MyMoney> {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                 Center(
+                  const Center(
                     child: SizedBox(
                       height: 150,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
+                        children: [
                           Text(
                             "المتبقي من الذهب",
                             style: TextStyle(
@@ -129,12 +129,12 @@ class _MyMoneyState extends State<MyMoney> {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  Center(
+                  const Center(
                     child: SizedBox(
                       height: 150,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
+                        children: [
                           Text(
                             "المتبقي من الألماس",
                             style: TextStyle(

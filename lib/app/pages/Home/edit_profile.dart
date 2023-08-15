@@ -17,7 +17,7 @@ class _EditProfailState extends State<EditProfail> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 40,
             ),
             Center(
@@ -93,7 +93,7 @@ class _EditProfailState extends State<EditProfail> {
                 )),
               ),
             ),
-            SizedBox(
+            Container(
               width: double.infinity,
               height: 140.h,
               child: ListView.builder(
@@ -168,11 +168,11 @@ class _EditProfailState extends State<EditProfail> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          SizedBox(
+                        children: [
+                          Container(
                             width: 200,
                             height: 33,
-                            child: TextField(
+                            child: const TextField(
                               decoration: InputDecoration(
                                   counterStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
@@ -190,7 +190,7 @@ class _EditProfailState extends State<EditProfail> {
                                       color: Colors.white, fontSize: 22)),
                             ),
                           ),
-                          Text(
+                          const Text(
                             ":الاسم",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
@@ -202,11 +202,11 @@ class _EditProfailState extends State<EditProfail> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          SizedBox(
+                        children: [
+                          Container(
                             width: 200,
                             height: 33,
-                            child: TextField(
+                            child: const TextField(
                               decoration: InputDecoration(
                                   counterStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
@@ -224,7 +224,7 @@ class _EditProfailState extends State<EditProfail> {
                                       color: Colors.white, fontSize: 22)),
                             ),
                           ),
-                          Text(
+                          const Text(
                             ":البلد",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
@@ -236,11 +236,11 @@ class _EditProfailState extends State<EditProfail> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          SizedBox(
+                        children: [
+                          Container(
                             width: 200,
                             height: 33,
-                            child: TextField(
+                            child: const TextField(
                               decoration: InputDecoration(
                                   counterStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
@@ -258,7 +258,7 @@ class _EditProfailState extends State<EditProfail> {
                                       color: Colors.white, fontSize: 22)),
                             ),
                           ),
-                          Text(
+                          const Text(
                             ":تاريخ الميلاد",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
@@ -270,11 +270,11 @@ class _EditProfailState extends State<EditProfail> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          SizedBox(
+                        children: [
+                          Container(
                             width: 200,
                             height: 33,
-                            child: TextField(
+                            child: const TextField(
                               decoration: InputDecoration(
                                   counterStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(
@@ -290,7 +290,7 @@ class _EditProfailState extends State<EditProfail> {
                                       color: Colors.white, fontSize: 22)),
                             ),
                           ),
-                          Text(
+                          const Text(
                             ":نبذه مختصره",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),

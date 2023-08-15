@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'app/canary_app.dart';
 import 'data/datasources/local_database/local_database.dart';
@@ -18,6 +13,3 @@ Future<void> initial() async {
   await LocalDataSourceImpl.init();
   await initInjections();
 }
-
-
-

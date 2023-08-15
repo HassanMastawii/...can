@@ -19,7 +19,7 @@ class AccountCard extends StatelessWidget {
         title: const Text("محمد علي كلاي", style: TextStyle(fontSize: 20)),
         trailing: trailing ??
             IconButton(
-                onPressed: () {}, icon: const Icon(Icons.library_add_rounded)),
+                onPressed: () {}, icon: const Icon(Icons.add_comment_rounded)),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
