@@ -3,10 +3,6 @@
 		{
 			"name": "canary_app",
 			"path": "."
-		},
-		{
-			"name": "...can",
-			"path": "...can"
 		}
 	],
 	"settings": {}
