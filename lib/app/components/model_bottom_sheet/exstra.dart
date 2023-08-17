@@ -1,3 +1,4 @@
+import 'package:canary_app/app/components/exstra/super_chat.dart';
 import 'package:flutter/material.dart';
 
 import '../exstra/kisalhath.dart';
@@ -42,11 +43,23 @@ class _ExstraState extends State<Exstra> {
               imag: "myosic.png",
               name: 'المسيقى',
             ),
-            getimag(
+            getimag(ontap: () {
+                // Navigator.push(
+                //                   context,
+                //                   MaterialPageRoute(
+                //                     builder: (context) =>  const MyHomePage(),
+                //                   ));
+            },
               imag: "sher.png",
               name: 'مشاركه',
             ),
-            getimag(
+            getimag(ontap: () {
+                showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return const SuperChatinroom();
+                                });
+            },
               imag: "superchat.png",
               name: 'super chat',
             ),

@@ -58,14 +58,14 @@ class _KisalhathState extends State<Kisalhath> {
             color: Colors.amber[300],
             fontColor: Colors.black,
             
-              text: "كيس الحط"),
+              text: "كيس الحظ"),
                 MyButton(onPressed: () {
               
             },
             color: Colors.amber[300],
             fontColor: Colors.black,
             
-              text: " كيس الحط الدولي"),
+              text: " كيس الحظ الدولي"),
               
               
               ],
@@ -85,7 +85,7 @@ class _KisalhathState extends State<Kisalhath> {
                 
                 ],
               ),
-                     ),
+                     ), 
            ),
         ],
       ),
