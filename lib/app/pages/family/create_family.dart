@@ -50,7 +50,7 @@ class CreateFamily extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               20.getHightSizedBox(),
-                              Row(
+                               Row(
                                 children: const [
                                   Text("اسم العائلة : "),
                                   Expanded(

@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
+import 'package:canary_app/app/pages/auth/sign_up.dart';
+import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import '../../widgets/my_pass_form_field.dart';
+import '../../widgets/my_text_button.dart';
+import '../../widgets/my_text_form_field.dart';
 import '../Home/home.dart';
 
 class Login extends StatefulWidget {
@@ -14,13 +17,16 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController password = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  bool isRememberMe = false;
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 197, 247, 247),
-          body: Center(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 197, 247, 247),
+        body: SafeArea(
+          child: Center(
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -28,80 +34,69 @@ class _LoginState extends State<Login> {
                     'images/1.png',
                     height: 200,
                   ),
-                  // Text(
-                  //   'مرحبا بكم',
-                  //   style: GoogleFonts.cairo(fontSize: 48),
-                  // ),
-                  // Text(
-                  //   'هيا بنا نستمتع في كناري شات',
-                  //   style: GoogleFonts.cairo(fontSize: 28),
-                  // ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'email'),
-                        ),
-                      ),
+                  const Text(
+                    "أهلاً بعودتك في كناري شات",
+                    style: TextStyle(
+                      fontSize: 22,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'password'),
-                        ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextFormField(
+                      labelText: "email",
+                      preIcon: const Icon(
+                        Icons.alternate_email_outlined,
                       ),
+                      textEditingController: email,
+                      textInputType: TextInputType.emailAddress,
+                      autofillHints: const [AutofillHints.email],
                     ),
                   ),
-                  const SizedBox(
-                    height: 7,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextPassField(
+                      labelText: "password",
+                      preIcon: const Icon(Icons.lock),
+                      autofillHints: const [AutofillHints.password],
+                      textEditingController: password,
+                    ),
                   ),
-                  Row(
-                    children: const [
-                      SizedBox(
-                        width: 24,
-                      ),
-                      Text(
-                        'forget password',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(
-                        width: 90,
-                      ),
-                      Text(
-                        'remember me',
-                        style: TextStyle(fontSize: 18),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: isRememberMe,
+                              onChanged: (value) {
+                                setState(() {
+                                  isRememberMe = value!;
+                                });
+                              },
+                              activeColor: Colors.blue,
+                            ),
+                            const Text(
+                              "تذكرني",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        MyTextButton(
+                          onTap: () {},
+                          color: Colors.red,
+                          text: 'نسيت كلمة السر؟',
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    child: const Text('Login',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold)),
+                  MyButton(
+                    text: "تسجيل الدخول",
+                    color: Colors.blue,
+                    fontColor: Colors.white,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -109,61 +104,27 @@ class _LoginState extends State<Login> {
                       );
                     },
                   ),
-                  Text(
-                    '__________or__________',
-                    style: GoogleFonts.cairo(fontSize: 22),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
+                  Padding(
+                    padding: const EdgeInsets.all(10),
                     child: Row(
-                      children: const [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Icon(
-                          Icons.facebook,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('لا تملك حساب ؟ ',
+                            style: TextStyle(fontSize: 22)),
+                        MyTextButton(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const RegisterPage()),
+                            );
+                          },
                           color: Colors.blue,
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 44,
-                        ),
-                        Icon(
-                          Icons.email,
-                          color: Color.fromARGB(77, 230, 35, 35),
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 44,
-                        ),
-                        Icon(
-                          Icons.phone,
-                          color: Colors.blue,
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 25,
+                          text: 'انشأ الان',
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 70,
-                  ),
-                  Row(
-                    children: const [
-                      SizedBox(
-                        width: 24,
-                      ),
-                      Text('Create new account?',
-                          style: TextStyle(fontSize: 22)),
-                      Text(
-                        'create now',
-                        style: TextStyle(color: Colors.blue, fontSize: 22),
-                      )
-                    ],
                   ),
                 ],
               ),

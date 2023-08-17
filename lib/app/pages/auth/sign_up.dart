@@ -1,166 +1,119 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+import '../../widgets/my_button.dart';
+import '../../widgets/my_pass_form_field.dart';
+import '../../widgets/my_text_button.dart';
+import '../../widgets/my_text_form_field.dart';
 import '../Home/home.dart';
 
-// ignore: camel_case_types
-class sign_up extends StatefulWidget {
-  const sign_up({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<sign_up> createState() => _sign_upState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-// ignore: camel_case_types
-class _sign_upState extends State<sign_up> {
+class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController password = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController username = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: const Color.fromARGB(255, 197, 247, 247),
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Image.asset(
-                    'images/1.png',
-                    height: 100,
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 197, 247, 247),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(
+                  'images/1.png',
+                  height: 100,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    'أهلاً بك في كناري شات',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: MyTextFormField(
+                    labelText: "الايميل",
+                    preIcon: const Icon(
+                      Icons.alternate_email_outlined,
+                    ),
+                    textEditingController: email,
+                    textInputType: TextInputType.emailAddress,
+                    autofillHints: const [AutofillHints.email],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'email'),
-                        ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: MyTextFormField(
+                    labelText: "اسم المستخدم",
+                    preIcon: const Icon(
+                      Icons.account_circle,
+                    ),
+                    textEditingController: username,
+                    textInputType: TextInputType.name,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: MyTextPassField(
+                    labelText: "كلمة المرور",
+                    preIcon: const Icon(Icons.lock),
+                    autofillHints: const [AutofillHints.password],
+                    textEditingController: password,
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: MyTextPassField(
+                    labelText: "تأكيد كلمة المرور",
+                    preIcon: const Icon(Icons.lock),
+                    autofillHints: const [AutofillHints.password],
+                    textEditingController: confirmPassword,
+                  ),
+                ),
+                MyButton(
+                  text: "انشاء الحساب",
+                  color: Colors.blue,
+                  fontColor: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Home()),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('لديك حساب بالفعل؟',
+                          style: TextStyle(fontSize: 22)),
+                      MyTextButton(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        color: Colors.blue,
+                        text: 'سجل دخول',
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'Username'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: 'password'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12)),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Confirm password'),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    child: const Text('Sign Up',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
-                    },
-                  ),
-                  Text(
-                    '__________or__________',
-                    style: GoogleFonts.cairo(fontSize: 22),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Row(
-                      children: const [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Icon(
-                          Icons.facebook,
-                          color: Colors.blue,
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 44,
-                        ),
-                        Icon(
-                          Icons.email,
-                          color: Color.fromARGB(77, 230, 35, 35),
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 44,
-                        ),
-                        Icon(
-                          Icons.phone,
-                          color: Colors.blue,
-                          size: 70,
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

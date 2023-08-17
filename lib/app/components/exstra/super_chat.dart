@@ -35,7 +35,7 @@ class _SuperChatinroomState extends State<SuperChatinroom> {
               Text("تميز برسائلك \n اكتب رسالتك هنا من 60 حرفا"),
             ],
           ),
-          Card(
+          const Card(
             elevation: 11,
             child: MyTextField(maxLines: 2),
           ),

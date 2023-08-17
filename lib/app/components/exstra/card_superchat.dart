@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/MyRoom.dart/my_room.dart';
+import '../../pages/MyRoom.dart/my_Room.dart';
 
 class SuperChat extends StatelessWidget {
   const SuperChat({super.key});
@@ -16,7 +16,10 @@ class SuperChat extends StatelessWidget {
           ));
         },
         child: Container(
-          decoration: BoxDecoration(border: Border.all(color: Colors.black87,),
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black87,
+              ),
               borderRadius: BorderRadius.circular(11),
               color: Colors.amberAccent[100]),
           child: Row(
@@ -28,8 +31,12 @@ class SuperChat extends StatelessWidget {
                   backgroundImage: AssetImage("images/pic_room.jpg"),
                 ),
               ),
-              Column(crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [Text("user neam"), Text("massig massig massig")],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text("user neam"),
+                  Text("massig massig massig")
+                ],
               ),
             ],
           ),

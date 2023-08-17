@@ -1,9 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../components/cart_users.dart';
 
 class Praicmonthe extends StatefulWidget {
   const Praicmonthe({super.key});
@@ -15,19 +12,6 @@ class Praicmonthe extends StatefulWidget {
 class _PraicmontheState extends State<Praicmonthe> {
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      children: [
-        SizedBox(height: 60.h,),
-        Expanded(
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: 56,
-            itemBuilder: (context, index) {
-              return const Carduserspricinroom();
-            },
-          ),
-        ),
-      ],
-    );
+    return  const Center(child: Text("day"));
   }
 }

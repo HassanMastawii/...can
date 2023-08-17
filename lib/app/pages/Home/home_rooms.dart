@@ -3,7 +3,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import '../../components/bnart.dart';
 import '../../components/exstra/card_superchat.dart';
 import '../../components/room_card.dart';
-import '../MyRoom.dart/my_room.dart';
+import '../MyRoom.dart/my_Room.dart';
 import 'my_visits.dart';
 
 class HomeRooms extends StatefulWidget {
@@ -14,18 +14,6 @@ class HomeRooms extends StatefulWidget {
 }
 
 class _HomeRoomsState extends State<HomeRooms> {
-  // List room = [
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  //   {"img": "images/1.png", "name": "canary Chat", "contry": "syria"},
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,11 +28,10 @@ class _HomeRoomsState extends State<HomeRooms> {
                 isLoop: true,
                 indicatorRadius: 4,
                 children: [
-                 Baner(),
-                 Baner(),
-                 Baner(),
-                 Baner(),
-                 
+                  Baner(),
+                  Baner(),
+                  Baner(),
+                  Baner(),
                 ],
               )),
           const Padding(

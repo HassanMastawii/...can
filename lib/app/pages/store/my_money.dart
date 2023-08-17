@@ -2,6 +2,7 @@ import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/my_animated_button.dart';
+import '../customer_service/customers_service.dart';
 
 class MyMoney extends StatefulWidget {
   const MyMoney({super.key});
@@ -102,7 +103,13 @@ class _MyMoneyState extends State<MyMoney> {
           ),
           MyButton(
             text: "تواصل مع خدمة العملاء",
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CustomersService(),
+                  ));
+            },
             color: Colors.orange,
             fontColor: Colors.black,
           )

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class Mic extends StatefulWidget {
@@ -10,7 +8,6 @@ class Mic extends StatefulWidget {
 }
 
 class _MicState extends State<Mic> {
- 
   @override
   Widget build(BuildContext context) {
     return Padding(
