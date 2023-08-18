@@ -287,16 +287,7 @@ class _LevelPageState extends State<LevelPage> {
               children: [
                 Row(
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                    ),
+                    
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
