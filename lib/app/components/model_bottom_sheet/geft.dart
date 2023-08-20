@@ -79,7 +79,8 @@ class _GeftboxState extends State<Geftbox> {
                   return Container(
                     child: Column(
                       children: [
-                        Stack(alignment: Alignment.bottomCenter,
+                        Stack(
+                          alignment: Alignment.bottomCenter,
                           children: [
                             InkWell(
                               child: Container(
