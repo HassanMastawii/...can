@@ -19,7 +19,7 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: CircleAvatar(
-                radius: 40,
+                radius: 30,
                 backgroundImage: AssetImage("images/pic_room.jpg"),
               ),
             ),

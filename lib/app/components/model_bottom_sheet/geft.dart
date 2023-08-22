@@ -14,6 +14,8 @@ class Geftbox extends StatefulWidget {
 }
 
 class _GeftboxState extends State<Geftbox> {
+  List<int> selectedList = [];
+  int selectedGift = -1;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,17 +25,22 @@ class _GeftboxState extends State<Geftbox> {
           color: Colors.black,
           child: Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: ListView(scrollDirection: Axis.horizontal, children: const [
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-              Mic(),
-            ]),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context, index) => Mic(
+                isSelected: selectedList.contains(index),
+                onTap: () {
+                  setState(() {
+                    if (selectedList.contains(index)) {
+                      selectedList.removeWhere((element) => element == index);
+                    } else {
+                      selectedList.add(index);
+                    }
+                  });
+                },
+              ),
+            ),
           ),
         ),
         Container(
@@ -76,36 +83,59 @@ class _GeftboxState extends State<Geftbox> {
                 ),
                 itemCount: 56,
                 itemBuilder: (context, index) {
-                  return Container(
-                    child: Column(
-                      children: [
-                        Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            InkWell(
-                              child: Container(
-                                height: 59.h,
-                                width: 59.w,
-                                decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage('images/sy.png'))),
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (selectedGift == index) {
+                          selectedGift = -1;
+                        } else {
+                          selectedGift = index;
+                        }
+                      });
+                    },
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              Stack(
+                                children: [
+                                  Container(
+                                    height: 59.h,
+                                    width: 59.w,
+                                    decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                            image:
+                                                AssetImage('images/sy.png'))),
+                                  ),
+                                  if (selectedGift == index)
+                                    const CircleAvatar(
+                                      backgroundColor: Colors.amber,
+                                      radius: 10,
+                                      child: Icon(
+                                        Icons.done,
+                                        size: 10,
+                                      ),
+                                    ),
+                                ],
                               ),
-                            ),
-                            const Text(
-                              "name geft",
-                              style: TextStyle(
-                                color: Colors.white,
+                              const Text(
+                                "name geft",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const Text(
-                          "2000",
-                          style: TextStyle(
-                            color: Colors.amberAccent,
+                            ],
                           ),
-                        ),
-                      ],
+                          const Text(
+                            "2000",
+                            style: TextStyle(
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }),
