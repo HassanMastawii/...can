@@ -24,10 +24,10 @@ class _CustomersServiceState extends State<CustomersService> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                children: const [
                   Text(
                     "فريق الدعم",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

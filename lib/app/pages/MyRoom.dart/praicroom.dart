@@ -1,7 +1,9 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:canary_app/app/pages/MyRoom.dart/praicday.dart';
+import 'package:canary_app/app/pages/MyRoom.dart/praicmonthe.dart';
+import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Praicroom extends StatefulWidget {
   const Praicroom({Key? key}) : super(key: key);
@@ -11,69 +13,48 @@ class Praicroom extends StatefulWidget {
 }
 
 class _PraicroomState extends State<Praicroom> {
-  List<String> items = [
-    "سنوي",
-    "يومي",
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        PageViewExample(),
+        Card(elevation: 22,
+        
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 8),
+            child: Row(
+              children: [
+                MyButton(
+                    text: "يومي",
+                    fontColor: Colors.white,
+                    color: Colors.blueAccent[700]),
+                const Spacer(),
+                MyButton(
+                    text: "سنوي",
+                    fontColor: Colors.white,
+                    color: Colors.blueAccent[700]),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class PageViewExample extends StatelessWidget {
+  final List<Widget> pages = [
+    const Praicday(),
+    const Praicmonthe(),
   ];
 
-  int pri = 0;
-  int current = 0;
+  PageViewExample({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Text("قائمة الدعم", style: TextStyle(fontSize: 18)),
-          const Divider(
-            height: 11,
-          ),
-          Container(
-            height: 45.h,
-            child: ListView.builder(
-              itemCount: items.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          current = index;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        margin: EdgeInsets.symmetric(horizontal: 49.h),
-                        width: 80.w,
-                        height: 45.h,
-                        decoration: BoxDecoration(
-                            color: current == index
-                                ? Colors.black87
-                                : Colors.black45,
-                            borderRadius: current == index
-                                ? BorderRadius.circular(22)
-                                : BorderRadius.circular(15),
-                            border: current == index
-                                ? Border.all(
-                                    color: Colors.amber,
-                                    width: 3,
-                                  )
-                                : null),
-                        child: Center(
-                          child: Text(
-                            items[index],
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
+      body: PageView(
+        children: pages,
       ),
     );
   }

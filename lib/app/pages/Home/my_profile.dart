@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../customer_service/customers_service.dart';
 import '../family/family_profile.dart';
 import '../level/level.dart';
+import '../the_shop/home_shop.dart';
 import 'edit_profile.dart';
 
 class MyProfile extends StatefulWidget {
@@ -22,29 +23,35 @@ class _MyProfileState extends State<MyProfile> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Stack(
+              alignment: Alignment.topLeft,
               children: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const EditProfail(),
-                          ));
-                    },
-                    icon: const Icon(
-                      Icons.edit_note_rounded,
-                      size: 50,
-                    )),
-                CircleAvatar(
-                  backgroundColor: Colors.amber,
-                  radius: 75.w,
-                  child: CircleAvatar(
-                    radius: 73.w,
-                    backgroundImage: const AssetImage("images/pic_room.jpg"),
-                  ),
+                     SizedBox(width: double.infinity,
+                       child: CircleAvatar(
+                                       backgroundColor: Colors.amber,
+                                       radius: 75.w,
+                                       child: CircleAvatar(
+                                         radius: 73.w,
+                                         backgroundImage: const AssetImage("images/pic_room.jpg"),
+                                       ),
+                                     ),
+                     ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const EditProfail(),
+                            ));
+                      },
+                      icon: const Icon(
+                        Icons.edit_note_rounded,
+                        size: 50,
+                      )),
                 ),
+           
               ],
             ),
             const Text(
@@ -108,7 +115,7 @@ class _MyProfileState extends State<MyProfile> {
                 child: Container(
                   height: 50.h,
                   width: 360.w,
-                  decoration: BoxDecoration(
+                  decoration: BoxDecoration(color: Colors.black,
                     border: Border.all(width: 2, color: Colors.yellow),
                     borderRadius: BorderRadius.circular(11),
                   ),
@@ -158,7 +165,7 @@ class _MyProfileState extends State<MyProfile> {
                         style: TextStyle(color: Colors.white),
                       ),
                       subtitle: const Text(
-                        "567954321564",
+                        "56321564",
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -196,7 +203,11 @@ class _MyProfileState extends State<MyProfile> {
                 children: [
                   const Spacer(),
                   getButton(
-                      imageLink: "images/m1.png", text: "المتجر", onTap: () {}),
+                      imageLink: "images/m1.png", text: "المتجر", onTap: () {
+                           Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomeShop(),
+                           ));
+                      }),
                   const Spacer(
                     flex: 2,
                   ),

@@ -15,9 +15,9 @@ class _NotificationsState extends State<Notifications> {
       appBar: AppBar(
         title: const Center(child: Text("رسائل النظام")),
       ),
-      body: const Column(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
+        children: const [
           Text("2/4/2023  22:23"),
           Padding(
             padding: EdgeInsets.all(8.0),

@@ -78,7 +78,7 @@ class _EditroomState extends State<Editroom> {
             ),
             Card(
               elevation: 11,
-              child: Container(
+              child: SizedBox(
                 height: 90,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

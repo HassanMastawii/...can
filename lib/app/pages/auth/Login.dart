@@ -1,11 +1,7 @@
-import 'package:canary_app/app/components/toast.dart';
+// ignore_for_file: file_names
 import 'package:canary_app/app/pages/auth/sign_up.dart';
-import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../domain/models/user.dart';
-import '../../provider/states/states.dart';
 import '../../widgets/my_pass_form_field.dart';
 import '../../widgets/my_text_button.dart';
 import '../../widgets/my_text_form_field.dart';
