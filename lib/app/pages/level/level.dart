@@ -48,10 +48,10 @@ class _LevelPageState extends State<LevelPage> {
               ),
             ],
           ),
-       Padding(
-            padding: const EdgeInsets.all(8.0),
+       const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
-              children: const [
+              children: [
                 Text("10k"),
                 Expanded(
                   child: Padding(
@@ -173,10 +173,10 @@ class _LevelPageState extends State<LevelPage> {
               ),
             ],
           ),
-           Padding(
-            padding: const EdgeInsets.all(8.0),
+           const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
-              children: const [
+              children: [
                 Text("10k"),
                 Expanded(
                   child: Padding(

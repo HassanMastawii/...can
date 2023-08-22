@@ -30,8 +30,8 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
                   "user name",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Text("123456789"),
                     Text(":ID"),
                     Icon(Icons.library_add_rounded),

@@ -6,5 +6,8 @@ class appcolor {
 static const Color buttons =Color(0xFF92DBC7);
 static const Color shopcontenaer =Color.fromARGB(255, 217, 247, 239);
 
+//لون الدخل
+static const Color agency = Colors.cyanAccent;
+
 
 }

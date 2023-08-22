@@ -19,11 +19,11 @@ class _FerindState extends State<Ferind> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-            Padding(
-                padding: const EdgeInsets.all(8.0),
+            const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     MyButton(text: "الأصدقاء"),
                     MyButton(text: "الرسائل"),
                   ],
