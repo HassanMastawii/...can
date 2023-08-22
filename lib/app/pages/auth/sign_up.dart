@@ -17,6 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   final TextEditingController username = TextEditingController();
+  final TextEditingController gender = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +84,30 @@ class _RegisterPageState extends State<RegisterPage> {
                     preIcon: const Icon(Icons.lock),
                     autofillHints: const [AutofillHints.password],
                     textEditingController: confirmPassword,
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: DropdownButton(
+                    value: gender.text.isEmpty ? null : gender.text,
+                    padding: EdgeInsets.all(5),
+                    items: [
+                      DropdownMenuItem(child: Text("أنثى"), value: "أنثى"),
+                      DropdownMenuItem(child: Text("ذكر"), value: "ذكر"),
+                    ],
+                    underline: SizedBox.shrink(),
+                    hint: Text("الجنس"),
+                    isExpanded: true,
+                    onChanged: (value) {
+                      setState(() {
+                        gender.text = value!;
+                      });
+                    },
                   ),
                 ),
                 MyButton(

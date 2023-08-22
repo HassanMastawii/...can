@@ -5,7 +5,7 @@ const String validateMax = "يجب ان لايتعدى الحقل عن عدد م
 const String validateMin = "يجب ان لا يقل الحقل عن عدد محارف ";
 
 // ignore: must_be_immutable
-class MyTextFormField extends StatelessWidget {
+class MyTextFormField extends StatefulWidget {
   final String labelText;
   final TextInputType textInputType;
   TextEditingController? textEditingController;
@@ -17,7 +17,7 @@ class MyTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   String? initVal;
   final Iterable<String>? autofillHints;
-
+  final Color color;
   MyTextFormField({
     super.key,
     required this.labelText,
@@ -31,55 +31,63 @@ class MyTextFormField extends StatelessWidget {
     this.autofillHints,
     this.focusnode,
     this.textEditingController,
+    this.color = Colors.white,
   });
+
+  @override
+  State<MyTextFormField> createState() => _MyTextFormFieldState();
+}
+
+class _MyTextFormFieldState extends State<MyTextFormField> {
   @override
   Widget build(BuildContext context) {
-    textEditingController ??= TextEditingController(text: initVal);
+    widget.textEditingController ??=
+        TextEditingController(text: widget.initVal);
 
     return TextFormField(
       minLines: 1,
-      maxLines: textInputType == TextInputType.text ? 6 : 1,
+      maxLines: widget.textInputType == TextInputType.text ? 6 : 1,
       textAlign: TextAlign.right,
       validator: (value) {
         return validate(
           text: value,
-          min: minimum,
-          max: maximum,
+          min: widget.minimum,
+          max: widget.maximum,
           msgMin: validateMin,
           msgMax: validateMax,
         );
       },
-      textDirection: textInputType == TextInputType.emailAddress
+      textDirection: widget.textInputType == TextInputType.emailAddress
           ? TextDirection.ltr
           : null,
-      autofillHints: autofillHints,
-      controller: textEditingController,
-      enabled: enabled,
+      autofillHints: widget.autofillHints,
+      controller: widget.textEditingController,
+      enabled: widget.enabled,
       onChanged: (value) {
-        if (onChanged != null) {
-          onChanged!(value);
+        if (widget.onChanged != null) {
+          widget.onChanged!(value);
         }
-        initVal = value;
+        widget.initVal = value;
       },
-      inputFormatters: textInputType != TextInputType.number
+      inputFormatters: widget.textInputType != TextInputType.number
           ? null
           : [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
-      focusNode: focusnode,
+      focusNode: widget.focusnode,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-        fillColor: Colors.white,
+        fillColor: widget.color,
         filled: true,
         contentPadding: const EdgeInsets.all(10),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none),
-        labelText: labelText,
-        prefixIcon: preIcon,
+        labelText: widget.labelText,
+        prefixIcon: widget.preIcon,
       ),
       // onTapOutside: (event) {
       //   FocusScope.of(context).unfocus();
       // },
-      keyboardType: textInputType,
+      keyboardType: widget.textInputType,
     );
   }
 }

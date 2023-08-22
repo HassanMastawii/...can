@@ -1,6 +1,11 @@
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/pages/auth/sign_up.dart';
+import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../domain/models/user.dart';
+import '../../provider/states/states.dart';
 import '../../widgets/my_pass_form_field.dart';
 import '../../widgets/my_text_button.dart';
 import '../../widgets/my_text_form_field.dart';
@@ -18,6 +23,23 @@ class _LoginState extends State<Login> {
   final TextEditingController password = TextEditingController();
   final TextEditingController email = TextEditingController();
   bool isRememberMe = false;
+
+  login() async {
+    // final loginState = await context.read<CoreProvider>().logIn(User(
+    //       email: email.text,
+    //       password: password.text,
+    //     ));
+    // if (loginState is UserState && mounted) {
+    //   MySnackBar.showDoneToast();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Home()),
+    );
+    // } else if (loginState is ErrorState && mounted) {
+    //   MySnackBar.showMyToast(text: loginState.failure.message);
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -42,7 +64,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: MyTextFormField(
-                      labelText: "email",
+                      labelText: "الايميل",
                       preIcon: const Icon(
                         Icons.alternate_email_outlined,
                       ),
@@ -55,7 +77,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: MyTextPassField(
-                      labelText: "password",
+                      labelText: "كلمة المرور",
                       preIcon: const Icon(Icons.lock),
                       autofillHints: const [AutofillHints.password],
                       textEditingController: password,
@@ -95,11 +117,8 @@ class _LoginState extends State<Login> {
                     text: "تسجيل الدخول",
                     color: Colors.blue,
                     fontColor: Colors.white,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
+                    onPressed: () async {
+                      await login();
                     },
                   ),
                   Padding(

@@ -53,16 +53,15 @@ class _MyTextPassField extends State<MyTextPassField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: Theme.of(context).colorScheme.secondary,
       onChanged: widget.onChanged,
       enabled: widget.enable,
       controller: widget.textEditingController,
-      toolbarOptions: const ToolbarOptions(
-        copy: false,
-        cut: false,
-        paste: true,
-        selectAll: true,
-      ),
+      // toolbarOptions: const ToolbarOptions(
+      //   copy: false,
+      //   cut: false,
+      //   paste: true,
+      //   selectAll: true,
+      // ),
       validator: (value) {
         return validate(
           text: value,

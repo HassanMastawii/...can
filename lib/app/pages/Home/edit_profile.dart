@@ -1,6 +1,11 @@
+import 'package:canary_app/app/pages/Home/record_page.dart';
 import 'package:canary_app/app/pages/profail/chang_myphoto.dart';
+import 'package:canary_app/app/widgets/my_button.dart';
+import 'package:canary_app/app/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../components/image_picker_mobile.dart';
 
 class EditProfail extends StatefulWidget {
   const EditProfail({super.key});
@@ -10,14 +15,25 @@ class EditProfail extends StatefulWidget {
 }
 
 class _EditProfailState extends State<EditProfail> {
+  final TextEditingController username = TextEditingController();
+  DateTime? birthDate;
+  List<TextEditingController> imagecontroller = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromRGBO(144, 202, 249, 1),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Center(
@@ -93,7 +109,7 @@ class _EditProfailState extends State<EditProfail> {
                 )),
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 140.h,
               child: ListView.builder(
@@ -102,31 +118,8 @@ class _EditProfailState extends State<EditProfail> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(22)),
-                      height: 140,
-                      width: 120,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.delete_outline_rounded,
-                                size: 33,
-                              )),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.camera_alt_rounded,
-                                size: 33,
-                              )),
-                        ],
-                      ),
-                    ),
+                    child: ImagePickerMobile(
+                        imageController: imagecontroller[index], radius: 50),
                   );
                 },
               ),
@@ -135,189 +128,89 @@ class _EditProfailState extends State<EditProfail> {
               height: 6,
               color: Colors.black,
             ),
-            Center(
-              child: Container(
-                height: 33.h,
-                width: 240,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(33),
-                  color: Colors.blueAccent[700],
-                ),
-                child: const Center(
-                    child: Text(
-                  "المعلومات الاساسيه",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                )),
-              ),
+            MyButton(
+              text: "المعلومات الاساسيه",
+              color: Colors.blueAccent[700],
+              fontColor: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Container(
-                width: double.infinity,
-                height: 200.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(22),
-                  color: Colors.black38,
-                ),
+              child: Card(
+                color: Colors.black12,
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 33,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                  counterStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(33))),
-                                  hintTextDirection: TextDirection.ltr,
-                                  fillColor: Colors.amber,
-                                  focusColor: Colors.amber,
-                                  helperStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hoverColor: Colors.blueGrey,
-                                  labelStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22)),
-                            ),
-                          ),
-                          const Text(
-                            ":الاسم",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
+                      padding: const EdgeInsets.all(8.0),
+                      child: MyTextFormField(
+                        labelText: "الاسم :",
+                        color: const Color.fromRGBO(144, 202, 249, 1),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 33,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                  counterStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(33))),
-                                  hintTextDirection: TextDirection.ltr,
-                                  fillColor: Colors.amber,
-                                  focusColor: Colors.amber,
-                                  helperStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hoverColor: Colors.blueGrey,
-                                  labelStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22)),
-                            ),
-                          ),
-                          const Text(
-                            ":البلد",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
+                      padding: const EdgeInsets.all(8.0),
+                      child: MyTextFormField(
+                        labelText: "البلد :",
+                        color: const Color.fromRGBO(144, 202, 249, 1),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 33,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                  counterStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(33))),
-                                  hintTextDirection: TextDirection.ltr,
-                                  fillColor: Colors.amber,
-                                  focusColor: Colors.amber,
-                                  helperStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hoverColor: Colors.blueGrey,
-                                  labelStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22)),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                          color: const Color.fromRGBO(144, 202, 249, 1),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                const Text("birth date : "),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                    child: Text(
+                                        birthDate?.toString().split(" ")[0] ??
+                                            "")),
+                                const SizedBox(width: 5),
+                                IconButton(
+                                  onPressed: () {
+                                    showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime(2002),
+                                      firstDate: DateTime(1930),
+                                      lastDate: DateTime.now(),
+                                    ).then((value) {
+                                      if (value != null) {
+                                        setState(() {
+                                          birthDate = value;
+                                        });
+                                      }
+                                    });
+                                  },
+                                  icon: const Icon(Icons.date_range),
+                                ),
+                              ],
                             ),
-                          ),
-                          const Text(
-                            ":تاريخ الميلاد",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
-                      ),
+                          )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 200,
-                            height: 33,
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                  counterStyle: TextStyle(color: Colors.white),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(33))),
-                                  hintTextDirection: TextDirection.ltr,
-                                  helperStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hintStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22),
-                                  hoverColor: Colors.amber,
-                                  labelStyle: TextStyle(
-                                      color: Colors.white, fontSize: 22)),
-                            ),
-                          ),
-                          const Text(
-                            ":نبذه مختصره",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                        ],
+                      padding: const EdgeInsets.all(8.0),
+                      child: MyTextFormField(
+                        labelText: " نبذة مختصرة :",
+                        color: const Color.fromRGBO(144, 202, 249, 1),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                height: 33.h,
-                width: 240,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(33),
-                  color: Colors.blueAccent[700],
-                ),
-                child: const Center(
-                    child: Text(
-                  "تسجيل صوتي ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: MyButton(
+                text: "تسجيل صوتي",
+                color: Colors.blueAccent[700],
+                fontColor: Colors.white,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const RecordPage(),
+                  ));
+                },
               ),
             ),
           ],

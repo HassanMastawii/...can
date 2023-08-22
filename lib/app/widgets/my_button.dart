@@ -17,7 +17,12 @@ class MyButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)),
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(fontSize: 18, color: fontColor)),
+      child: Text(text,
+          style: TextStyle(
+            fontSize: 18,
+            color: fontColor,
+            fontWeight: FontWeight.bold,
+          )),
     );
   }
 }
