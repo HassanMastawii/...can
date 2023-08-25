@@ -1,6 +1,8 @@
 import 'package:canary_app/app/pages/agency/monay_home.dart';
+import 'package:canary_app/app/pages/costomaer_servici_global/costomer.dart';
 import 'package:canary_app/app/pages/profail/ferind.dart';
 import 'package:canary_app/app/pages/store/my_money.dart';
+import 'package:canary_app/app/pages/vip/vip_home.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -112,7 +114,13 @@ class _MyProfileState extends State<MyProfile> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Viphome(),
+                      ));
+                },
                 child: Container(
                   height: 50.h,
                   width: 360.w,
@@ -249,7 +257,7 @@ class _MyProfileState extends State<MyProfile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CustomersService(),
+                                builder: (context) => const Costmarglobal(),
                               ));
                         },
                         title: const Text("المساعدة وردود الفعل"),
