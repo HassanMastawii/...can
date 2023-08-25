@@ -1,7 +1,7 @@
-
-
 import 'package:canary_app/app/colorApp/color.dart';
 import 'package:canary_app/app/pages/agency/look_agency.dart';
+import 'package:canary_app/app/pages/agency/shenmony.dart';
+import 'package:canary_app/app/pages/agency/shepmony.dart';
 import 'package:flutter/material.dart';
 
 class MonayHome extends StatefulWidget {
@@ -27,9 +27,9 @@ class _MonayHomeState extends State<MonayHome> {
         actions: [
           TextButton(
               onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Lookagency(),
-                        ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const Lookagency(),
+                ));
               },
               child: const Text(
                 'الأنظمام لوكالة>>>',
@@ -98,7 +98,14 @@ class _MonayHomeState extends State<MonayHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const  Shepmony();
+                            },
+                          );
+                        },
                         child: const Text(
                           'سحب الرصيد',
                           style: TextStyle(
@@ -106,8 +113,15 @@ class _MonayHomeState extends State<MonayHome> {
                               fontSize: 20,
                               color: Colors.black),
                         )),
-                        TextButton(
-                        onPressed: () {},
+                    TextButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (context) {
+                              return const  Shenmony();
+                            },
+                          );
+                        },
                         child: const Text(
                           'شحن الرصيد',
                           style: TextStyle(

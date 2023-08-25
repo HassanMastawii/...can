@@ -100,7 +100,9 @@ class _LookagencyState extends State<Lookagency> {
                     ),
                   )),
             ),
-            const Spacer(flex: 3,),
+            const Spacer(
+              flex: 3,
+            ),
             const Text(
               'ملاحظة',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -111,25 +113,26 @@ class _LookagencyState extends State<Lookagency> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 44, top: 55),
-                child: InkWell(onTap: () {
-                     Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Agency(),
-                        ));
-                },
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const Agency(),
+                    ));
+                  },
                   child: Container(
                     width: 200,
                     height: 60,
                     decoration: BoxDecoration(
                         color: appcolor.agency,
                         borderRadius: BorderRadius.circular(33)),
-                    child:   const Center(
+                    child: const Center(
                       child: Text(
-                            'أنظمام',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black),
-                          ),
+                        'أنظمام',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
