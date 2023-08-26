@@ -10,4 +10,9 @@ static const Color shopcontenaer =Color.fromARGB(255, 217, 247, 239);
 static const Color agency = Colors.cyanAccent;
 
 
+//===============vip===================
+
+static const Color vip = Color.fromARGB(255, 172, 252, 252);
+
+
 }

@@ -38,10 +38,10 @@ class _CostmarglobalState extends State<Costmarglobal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('خدمة العملاء'),
+        title: const Text('خدمة العملاء'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,13 +49,13 @@ class _CostmarglobalState extends State<Costmarglobal> {
               controller: descriptionController,
               maxLength: 500,
               maxLines: 5,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'تفضل بوصف المشكاكل اللتي تواجهها ',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             CheckboxListTile(
-              title: Text('اضافة صوره اختياريه'),
+              title: const Text('اضافة صوره اختياريه'),
               value: includeImage,
               onChanged: (value) {
                 setState(() {
@@ -75,28 +75,26 @@ class _CostmarglobalState extends State<Costmarglobal> {
                     onPressed: () {
                       _getImageFromGallery(0); // Pass the appropriate index
                     },
-                    child: Text('تحميل الصورة'),
+                    child: const Text('تحميل الصورة'),
                   );
                 },
               ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: contactController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText:
                     'اضافة طريقة تواصل معك\n\n  (WhatsApp, Email, Phone)',
               ),
             ),
-            SizedBox(height: 170),
+            const SizedBox(height: 170),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   // Implement submit functionality
-                  String description = descriptionController.text;
-                  String contactInfo = contactController.text;
                   // Send the data to your backend or handle it as needed
                 },
-                child: Text('ارسال'),
+                child: const Text('ارسال'),
               ),
             ),
           ],
@@ -114,7 +112,7 @@ class _CostmarglobalState extends State<Costmarglobal> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Costmarglobal(),
   ));
 }

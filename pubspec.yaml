@@ -85,6 +85,7 @@ flutter:
   assets:
     - images/
     - images/money/
+    - images/vip/
     - images/exstra/
     - images/shop/frames/
     - images/shop/cars/
