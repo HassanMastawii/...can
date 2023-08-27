@@ -56,10 +56,10 @@ class _AdminroomState extends State<Adminroom> {
                             ),
                           ),
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: const [
+                          children: [
                             Text("user name",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w700)),

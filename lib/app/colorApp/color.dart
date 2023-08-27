@@ -2,7 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class appcolor {
-  static const Color buttons = Color(0xFF92DBC7);
-  static const Color shopcontenaer = Color.fromARGB(255, 217, 247, 239);
-}
+const Color buttons = Color(0xFF92DBC7);
+const Color shopcontenaer = Color.fromARGB(255, 217, 247, 239);
+
+//لون الدخل
+const Color agency = Colors.cyanAccent;
+
+//===============vip===================
+
+const Color vip = Color.fromARGB(255, 172, 252, 252);

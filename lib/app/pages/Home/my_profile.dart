@@ -1,5 +1,8 @@
+import 'package:canary_app/app/pages/agency/monay_home.dart';
+import 'package:canary_app/app/pages/costomaer_servici_global/costomer.dart';
 import 'package:canary_app/app/pages/profail/ferind.dart';
 import 'package:canary_app/app/pages/store/my_money.dart';
+import 'package:canary_app/app/pages/vip/vip_home.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,16 +29,17 @@ class _MyProfileState extends State<MyProfile> {
             Stack(
               alignment: Alignment.topLeft,
               children: [
-                     SizedBox(width: double.infinity,
-                       child: CircleAvatar(
-                                       backgroundColor: Colors.amber,
-                                       radius: 75.w,
-                                       child: CircleAvatar(
-                                         radius: 73.w,
-                                         backgroundImage: const AssetImage("images/pic_room.jpg"),
-                                       ),
-                                     ),
-                     ),
+                SizedBox(
+                  width: double.infinity,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.amber,
+                    radius: 75.w,
+                    child: CircleAvatar(
+                      radius: 73.w,
+                      backgroundImage: const AssetImage("images/pic_room.jpg"),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
@@ -51,7 +55,6 @@ class _MyProfileState extends State<MyProfile> {
                         size: 50,
                       )),
                 ),
-           
               ],
             ),
             const Text(
@@ -111,11 +114,18 @@ class _MyProfileState extends State<MyProfile> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Viphome(),
+                      ));
+                },
                 child: Container(
                   height: 50.h,
                   width: 360.w,
-                  decoration: BoxDecoration(color: Colors.black,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
                     border: Border.all(width: 2, color: Colors.yellow),
                     borderRadius: BorderRadius.circular(11),
                   ),
@@ -203,16 +213,24 @@ class _MyProfileState extends State<MyProfile> {
                 children: [
                   const Spacer(),
                   getButton(
-                      imageLink: "images/m1.png", text: "المتجر", onTap: () {
-                           Navigator.of(context).push(MaterialPageRoute(
+                      imageLink: "images/m1.png",
+                      text: "المتجر",
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const HomeShop(),
-                           ));
+                        ));
                       }),
                   const Spacer(
                     flex: 2,
                   ),
                   getButton(
-                      imageLink: "images/d11.png", text: "الدخل", onTap: () {}),
+                      imageLink: "images/d11.png",
+                      text: "الدخل",
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const MonayHome(),
+                        ));
+                      }),
                   const Spacer(),
                 ],
               ),
@@ -239,7 +257,7 @@ class _MyProfileState extends State<MyProfile> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CustomersService(),
+                                builder: (context) => const Costmarglobal(),
                               ));
                         },
                         title: const Text("المساعدة وردود الفعل"),

@@ -29,9 +29,9 @@ class _SuperChatinroomState extends State<SuperChatinroom> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children: [
               Text("تميز برسائلك \n اكتب رسالتك هنا من 60 حرفا"),
             ],
           ),

@@ -64,10 +64,10 @@ class _BlokroomState extends State<Blokroom> {
                               ),
                             ),
                           ),
-                          Column(
+                          const Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
+                            children: [
                               Text("user name",
                                   style: TextStyle(
                                       fontSize: 18,

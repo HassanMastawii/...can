@@ -45,8 +45,8 @@ class _ChangMyPhotoState extends State<ChangMyPhoto> {
                     borderRadius: BorderRadius.circular(11)),
                 width: double.infinity,
                 height: 300.h,
-                child: Column(
-                  children: const [
+                child: const Column(
+                  children: [
                     Text(
                       "يرجى الانتباه قبل تغير الصوره ان هذه الصور لا تمر من قبل المراجعه ",
                       style: TextStyle(color: Colors.white),

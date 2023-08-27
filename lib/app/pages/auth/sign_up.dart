@@ -95,13 +95,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   child: DropdownButton(
                     value: gender.text.isEmpty ? null : gender.text,
-                    padding: EdgeInsets.all(5),
-                    items: [
-                      DropdownMenuItem(child: Text("أنثى"), value: "أنثى"),
-                      DropdownMenuItem(child: Text("ذكر"), value: "ذكر"),
+                    padding: const EdgeInsets.all(5),
+                    items: const [
+                      DropdownMenuItem(value: "أنثى", child: Text("أنثى")),
+                      DropdownMenuItem(value: "ذكر", child: Text("ذكر")),
                     ],
-                    underline: SizedBox.shrink(),
-                    hint: Text("الجنس"),
+                    underline: const SizedBox.shrink(),
+                    hint: const Text("الجنس"),
                     isExpanded: true,
                     onChanged: (value) {
                       setState(() {

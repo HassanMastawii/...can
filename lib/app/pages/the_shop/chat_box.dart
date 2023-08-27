@@ -31,8 +31,8 @@ class _ChatboxinshopState extends State<Chatboxinshop> {
                   Container(
                     height: 20,
                     padding: const EdgeInsets.symmetric(horizontal: 11),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Text("data"),
                         Spacer(),
                         Icon(Icons.access_time_filled),

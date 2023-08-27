@@ -13,8 +13,8 @@ class _A3lanRoomState extends State<A3lanRoom> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           Divider(),
           Text(
             "اعلان الغرفه",

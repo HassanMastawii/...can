@@ -79,8 +79,8 @@ class _KisalhathState extends State<Kisalhath> {
               decoration: BoxDecoration(
                   color: Colors.lightBlue[200],
                   borderRadius: BorderRadius.circular(22)),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children:  const [
+              child: const Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children:  [
              
                 
                 ],

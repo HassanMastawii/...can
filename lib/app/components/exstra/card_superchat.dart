@@ -22,9 +22,9 @@ class SuperChat extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(11),
               color: Colors.amberAccent[100]),
-          child: Row(
+          child: const Row(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
                   radius: 24,
@@ -33,7 +33,7 @@ class SuperChat extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text("user neam"),
                   Text("massig massig massig")
                 ],

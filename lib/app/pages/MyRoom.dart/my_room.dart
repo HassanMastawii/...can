@@ -146,12 +146,12 @@ class _MyRoomState extends State<MyRoom> {
                         ),
                       ],
                     ),
-                     Padding(
+                     const Padding(
                       padding:
-                          const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Mic(),
                           Mic(),
                           Mic(),
@@ -159,12 +159,12 @@ class _MyRoomState extends State<MyRoom> {
                         ],
                       ),
                     ),
-                     Padding(
+                     const Padding(
                       padding:
-                          const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Mic(),
                           Mic(),
                           Mic(),
