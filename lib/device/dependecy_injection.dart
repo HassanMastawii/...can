@@ -1,3 +1,4 @@
+import 'package:canary_app/domain/usecases/auth/get_my_profile_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import '../app/provider/providers/core_provider.dart';
@@ -21,6 +22,7 @@ Future<void> initInjections() async {
         sl(),
         sl(),
         sl(),
+        sl(),
       ));
 
   //Useecases
@@ -32,6 +34,8 @@ Future<void> initInjections() async {
   //auth
   sl.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(sl()));
   sl.registerLazySingleton<LogInUsecase>(() => LogInUsecase(sl()));
+  sl.registerLazySingleton<GetmyProfileUsecase>(
+      () => GetmyProfileUsecase(sl()));
 
   //Repositories
   sl.registerLazySingleton<SettingRepository>(() => SettingRepositoryImpl(

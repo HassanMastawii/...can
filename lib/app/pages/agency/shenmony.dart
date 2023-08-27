@@ -50,9 +50,7 @@ class _ShenmonyState extends State<Shenmony> {
                 padding: EdgeInsets.only(bottom: 20, top: 30),
                 child: Center(
                     child: MyButton(
-                        color: appcolor.agency,
-                        fontColor: Colors.black,
-                        text: 'ارسال')),
+                        color: agency, fontColor: Colors.black, text: 'ارسال')),
               )
             ],
           ),

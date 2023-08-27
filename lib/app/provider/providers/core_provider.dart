@@ -1,5 +1,6 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
+import 'package:canary_app/domain/usecases/auth/get_my_profile_usecase.dart';
 import 'package:flutter/material.dart';
 import '../../../domain/models/user.dart';
 import '../../../domain/usecases/auth/log_in_usecase.dart';
@@ -12,6 +13,7 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
   final SetThemeUsecase _setThemeUsecase;
   final LogInUsecase _logInUsecase;
   final RegisterUsecase _registerUsecase;
+  final GetmyProfileUsecase _getmyProfileUsecase;
   String _themeMode = ThemeMode.system.name;
 
   CoreProvider(
@@ -19,9 +21,11 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     this._setThemeUsecase,
     this._logInUsecase,
     this._registerUsecase,
+    this._getmyProfileUsecase,
   );
   String get themeMode => _themeMode;
   bool isLoading = false;
+  Profile? myProfile;
 
   Future<ProviderStates> logIn(User user) async {
     isLoading = true;
@@ -29,7 +33,16 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     final failureOrUser = await _logInUsecase(user);
     isLoading = false;
     notifyListeners();
-    return failureOrUserToState(failureOrUser);
+    return failureOrDoneToState(failureOrUser);
+  }
+
+  Future<ProviderStates> getMyProfile() async {
+    isLoading = true;
+    notifyListeners();
+    final failureOrUser = await _getmyProfileUsecase();
+    isLoading = false;
+    notifyListeners();
+    return failureOrProfileToState(failureOrUser);
   }
 
   changeTheme(String theme) async {

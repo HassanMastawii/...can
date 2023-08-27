@@ -9,13 +9,23 @@ class Viphome extends StatefulWidget {
 }
 
 class _ViphomeState extends State<Viphome> {
-  String selectedVip = 'vip1';
+  int selectedVip = 1;
   double selectedRadius = 12.0;
-
+  List<VipItem> vipItems = [
+    VipItem("1", "1.png", 1),
+    VipItem("2", "1.png", 1),
+    VipItem("3", "1.png", 2),
+    VipItem("4", "1.png", 2),
+    VipItem("5", "1.png", 3),
+    VipItem("6", "1.png", 4),
+    VipItem("7", "1.png", 5),
+    VipItem("8", "1.png", 6),
+    VipItem("9", "1.png", 7),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appcolor.vip,
+      backgroundColor: vip,
       body: SafeArea(
         child: Column(
           children: [
@@ -24,26 +34,83 @@ class _ViphomeState extends State<Viphome> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  cardvipnamber(text: 'vip1'),
-                  cardvipnamber(text: 'vip2'),
-                  cardvipnamber(text: 'vip3'),
-                  cardvipnamber(text: 'vip4'),
-                  cardvipnamber(text: 'vip5'),
-                  cardvipnamber(text: 'vip6'),
-                  cardvipnamber(text: 'vip7'),
+                  cardvipnamber(
+                    text: 'vip1',
+                    isSelected: selectedVip == 1,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 1;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip2',
+                    isSelected: selectedVip == 2,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 2;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip3',
+                    isSelected: selectedVip == 3,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 3;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip4',
+                    isSelected: selectedVip == 4,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 4;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip5',
+                    isSelected: selectedVip == 5,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 5;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip6',
+                    isSelected: selectedVip == 6,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 6;
+                      });
+                    },
+                  ),
+                  cardvipnamber(
+                    text: 'vip7',
+                    isSelected: selectedVip == 7,
+                    ontap: () {
+                      setState(() {
+                        selectedVip = 7;
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: 12, // تغيير العدد حسب الحاجة
-                itemExtent: MediaQuery.of(context).size.height / 3,
-                itemBuilder: (BuildContext context, int index) {
-                  return card2(
-                      text: "$index",
-                      img: "1.png"); // تغيير النص والصورة حسب الحاجة
-                },
+              child: GridView.builder(
+                itemCount: vipItems.length,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 150,
+                ),
+                itemBuilder: (context, index) => card2(
+                  text: vipItems[index].name,
+                  img: vipItems[index].pic,
+                  requiredVip: vipItems[index].requiredVipLevel,
+                ),
               ),
             ),
             Stack(
@@ -179,17 +246,13 @@ class _ViphomeState extends State<Viphome> {
 
   Widget cardvipnamber({
     required String text,
+    required bool isSelected,
+    required void Function()? ontap,
   }) {
-    bool isSelected = text == selectedVip;
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedVip = text;
-            selectedRadius = isSelected ? 12.0 : 18.0;
-          });
-        },
+        onTap: ontap,
         child: Container(
           height: 50,
           width: 80,
@@ -217,6 +280,7 @@ class _ViphomeState extends State<Viphome> {
   Widget card2({
     required String text,
     required String img,
+    required int requiredVip,
   }) {
     return Container(
       color: Colors.blueAccent,
@@ -225,17 +289,37 @@ class _ViphomeState extends State<Viphome> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.amberAccent,
-            radius: 40,
-            child: Image.asset('images/vip/$img'),
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                if (requiredVip <= selectedVip)
+                  const BoxShadow(color: Colors.amber, blurRadius: 25),
+              ],
+            ),
+            child: CircleAvatar(
+              backgroundColor: Colors.amberAccent,
+              radius: 40,
+              child: Image.asset('images/vip/$img'),
+            ),
           ),
           Text(
             text,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: requiredVip <= selectedVip ? Colors.amber : null,
+            ),
           )
         ],
       ),
     );
   }
+}
+
+class VipItem {
+  final String name;
+  final String pic;
+  final int requiredVipLevel;
+
+  VipItem(this.name, this.pic, this.requiredVipLevel);
 }

@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LocalDataSource {
   Future<String> getThemeMode();
+  String? getToken();
+  Future<Unit> setToken(String token);
   Future<Unit> setThemeMode(String themeMode);
 }
 
@@ -29,5 +31,16 @@ class LocalDataSourceImpl implements LocalDataSource {
     } else {
       return Future.value(isDarkMode);
     }
+  }
+
+  @override
+  String? getToken() {
+    return sharedPreferences.getString("token");
+  }
+
+  @override
+  Future<Unit> setToken(String token) async {
+    await sharedPreferences.setString("token", token);
+    return Future.value(unit);
   }
 }

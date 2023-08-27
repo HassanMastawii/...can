@@ -8,7 +8,6 @@ import 'package:canary_app/app/pages/the_shop/entryforroom.dart';
 import 'package:canary_app/app/pages/the_shop/frames.dart';
 import 'package:canary_app/app/pages/the_shop/personalSnaps.dart';
 
-
 class HomeShop extends StatefulWidget {
   const HomeShop({super.key});
 
@@ -49,7 +48,7 @@ class _HomeShopState extends State<HomeShop> {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Container(
               decoration: BoxDecoration(
-                color: appcolor.buttons,
+                color: buttons,
                 borderRadius: BorderRadius.circular(11),
               ),
               child: TextButton.icon(
@@ -87,7 +86,8 @@ class _HomeShopState extends State<HomeShop> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height - 150, // تعديل الارتفاع هنا
+              height: MediaQuery.of(context).size.height -
+                  150, // تعديل الارتفاع هنا
               child: PageView(
                 controller: _pageController,
                 onPageChanged: (page) {
@@ -123,9 +123,7 @@ class _HomeShopState extends State<HomeShop> {
           textStyle: TextStyle(
             color: _selectedText == page ? Colors.white : Colors.black,
           ),
-          primary: _selectedTab == page
-              ?appcolor.buttons
-              : Colors.white,
+          primary: _selectedTab == page ? buttons : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(

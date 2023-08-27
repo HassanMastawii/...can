@@ -56,8 +56,7 @@ class _MonayHomeState extends State<MonayHome> {
               width: double.infinity,
               height: 70,
               decoration: BoxDecoration(
-                  color: appcolor.agency,
-                  borderRadius: BorderRadius.circular(33)),
+                  color: agency, borderRadius: BorderRadius.circular(33)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -92,8 +91,7 @@ class _MonayHomeState extends State<MonayHome> {
                 width: double.infinity,
                 height: 70,
                 decoration: BoxDecoration(
-                    color: appcolor.agency,
-                    borderRadius: BorderRadius.circular(33)),
+                    color: agency, borderRadius: BorderRadius.circular(33)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -102,7 +100,7 @@ class _MonayHomeState extends State<MonayHome> {
                           showModalBottomSheet(
                             context: context,
                             builder: (context) {
-                              return const  Shepmony();
+                              return const Shepmony();
                             },
                           );
                         },
@@ -118,7 +116,7 @@ class _MonayHomeState extends State<MonayHome> {
                           showModalBottomSheet(
                             context: context,
                             builder: (context) {
-                              return const  Shenmony();
+                              return const Shenmony();
                             },
                           );
                         },

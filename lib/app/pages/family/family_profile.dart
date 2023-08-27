@@ -4,6 +4,8 @@ import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 
+import 'family_stars.dart';
+
 class FamilyProfile extends StatefulWidget {
   const FamilyProfile({super.key});
 
@@ -177,7 +179,11 @@ class _FamilyProfileState extends State<FamilyProfile> {
                         text: "النجوم",
                         color: Colors.transparent,
                         fontColor: Colors.amber,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const FamilyStars(),
+                          ));
+                        },
                       ),
                       Expanded(
                         child: ListView.builder(

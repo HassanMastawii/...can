@@ -22,7 +22,7 @@ class _PersonalsnapsState extends State<Personalsnaps> {
             padding: const EdgeInsets.all(2.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: appcolor.shopcontenaer,
+                  color: shopcontenaer,
                   borderRadius: BorderRadius.circular(11)),
               child: Column(
                 children: [
@@ -52,13 +52,14 @@ class _PersonalsnapsState extends State<Personalsnaps> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 22),
                       decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.amberAccent, width: 2),
+                          border:
+                              Border.all(color: Colors.amberAccent, width: 2),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(4))),
-                      child: GestureDetector(onTap: () {
-                        //الذهاب لقائمة الاصدقاء واختيار الصديق وارسار الميزه له
-                      },
+                      child: GestureDetector(
+                        onTap: () {
+                          //الذهاب لقائمة الاصدقاء واختيار الصديق وارسار الميزه له
+                        },
                         child: const Text(
                           "اهداء",
                           style: TextStyle(

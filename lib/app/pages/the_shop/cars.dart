@@ -9,7 +9,7 @@ class Cars extends StatefulWidget {
 }
 
 class _CarsState extends State<Cars> {
-    int selectedProductIndex = -1;
+  int selectedProductIndex = -1;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -20,26 +20,26 @@ class _CarsState extends State<Cars> {
         itemCount: 56,
         itemBuilder: (context, index) {
           return GestureDetector(
-              onTap: () {
-            setState(() {
-              selectedProductIndex = index;
-            });
-          },
+            onTap: () {
+              setState(() {
+                selectedProductIndex = index;
+              });
+            },
             child: Padding(
               padding: const EdgeInsets.all(2.0),
               child: Container(
                 decoration: BoxDecoration(
-                color: selectedProductIndex == index
-                    ? Colors.amber
-                    : appcolor.shopcontenaer,
-                border: Border.all(
                   color: selectedProductIndex == index
-                      ? Colors.yellow
-                      : Colors.transparent,
-                  width: 2,
+                      ? Colors.amber
+                      : shopcontenaer,
+                  border: Border.all(
+                    color: selectedProductIndex == index
+                        ? Colors.yellow
+                        : Colors.transparent,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(11),
                 ),
-                borderRadius: BorderRadius.circular(11),
-              ),
                 child: Column(
                   children: [
                     Container(

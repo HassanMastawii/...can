@@ -30,7 +30,7 @@ class _LookagencyState extends State<Lookagency> {
                     width: 320,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        border: Border.all(width: 1, color: appcolor.agency)),
+                        border: Border.all(width: 1, color: agency)),
                     child: const TextField(),
                   ),
                 ),
@@ -46,7 +46,7 @@ class _LookagencyState extends State<Lookagency> {
                   width: double.infinity,
                   height: 150,
                   decoration: BoxDecoration(
-                      border: Border.all(color: appcolor.agency, width: 1),
+                      border: Border.all(color: agency, width: 1),
                       borderRadius: BorderRadius.circular(18)),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 11),
@@ -123,8 +123,7 @@ class _LookagencyState extends State<Lookagency> {
                     width: 200,
                     height: 60,
                     decoration: BoxDecoration(
-                        color: appcolor.agency,
-                        borderRadius: BorderRadius.circular(33)),
+                        color: agency, borderRadius: BorderRadius.circular(33)),
                     child: const Center(
                       child: Text(
                         'أنظمام',

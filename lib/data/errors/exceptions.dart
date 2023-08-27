@@ -6,10 +6,10 @@ class ServerException implements Exception {
 
 class OfflineException implements Exception {}
 
-class WrongAuthException implements Exception {
+class NotLogedInException implements Exception {
   final String message;
 
-  WrongAuthException({this.message = "WrongAuthFailure"});
+  NotLogedInException({this.message = "NotLogedInException"});
 }
 
 class UnKnownException implements Exception {}

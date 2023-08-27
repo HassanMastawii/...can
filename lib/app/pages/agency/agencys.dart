@@ -31,7 +31,6 @@ class _AgencyState extends State<Agency> {
                               'تاكيد',
                               style: TextStyle(fontSize: 20),
                             )),
-                    
                         TextButton(
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -67,7 +66,7 @@ class _AgencyState extends State<Agency> {
                     width: double.infinity,
                     height: 110,
                     decoration: BoxDecoration(
-                        border: Border.all(color: appcolor.agency, width: 1),
+                        border: Border.all(color: agency, width: 1),
                         borderRadius: BorderRadius.circular(18)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 11),
@@ -153,7 +152,7 @@ class _AgencyState extends State<Agency> {
                     width: double.infinity,
                     height: 80,
                     decoration: BoxDecoration(
-                        border: Border.all(color: appcolor.agency, width: 1),
+                        border: Border.all(color: agency, width: 1),
                         borderRadius: BorderRadius.circular(18)),
                     child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 11),
@@ -194,7 +193,7 @@ class _AgencyState extends State<Agency> {
                   width: double.infinity,
                   height: 160,
                   decoration: BoxDecoration(
-                      border: Border.all(color: appcolor.agency, width: 1),
+                      border: Border.all(color: agency, width: 1),
                       borderRadius: BorderRadius.circular(18)),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(vertical: 11),

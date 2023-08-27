@@ -9,14 +9,16 @@ class InitialState extends ProviderStates {}
 
 class LoadingState extends ProviderStates {}
 
+class DoneState extends ProviderStates {}
+
 class ErrorState extends ProviderStates {
   final Failure failure;
 
   const ErrorState({required this.failure});
 }
 
-class UserState extends ProviderStates {
-  final User user;
+class ProfileState extends ProviderStates {
+  final Profile profile;
 
-  UserState({required this.user});
+  ProfileState({required this.profile});
 }

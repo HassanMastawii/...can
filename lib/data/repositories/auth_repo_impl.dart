@@ -17,17 +17,16 @@ class AuthRepositoryImpl implements AuthRepository {
       await Connectivity().checkConnectivity() != ConnectivityResult.none);
 
   @override
-  Future<Either<Failure, User>> logIn(User user) async {
+  Future<Either<Failure, Unit>> logIn(User user) async {
     if (await isConnected) {
       try {
         final remoteUser = await _authRemoteDataSource.logIn(user);
-        // remoteUser.password = user.passWord;
-        // await _localDataSource.cacheAccount(remoteUser);
-        return Right(remoteUser);
+        await _localDataSource.setToken(remoteUser);
+        return const Right(unit);
       } on ServerException catch (e) {
         return Left(ServerFailure(message: e.message));
-      } on WrongAuthException catch (e) {
-        return Left(WrongAuthFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
       } on Exception catch (e) {
         return Left(UnKnownFailure(message: e.toString()));
       }
@@ -40,5 +39,28 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User>> register(User user) {
     // TODO: implement register
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, Profile>> getMyProfile() async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource
+              .getMyProfile(_localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
   }
 }

@@ -1,5 +1,9 @@
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../components/toast.dart';
 import 'home_chat.dart';
 import 'home_rooms.dart';
 import 'my_profile.dart';
@@ -19,6 +23,25 @@ class _HomeState extends State<Home> {
     HomeChat(),
     HomeRooms(),
   ];
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await getMyProfile();
+    });
+
+    super.initState();
+  }
+
+  getMyProfile() async {
+    await context.read<CoreProvider>().getMyProfile().then((value) {
+      if (value is ProfileState) {
+        context.read<CoreProvider>().myProfile = value.profile;
+        MySnackBar.showDoneToast();
+      } else if (value is ErrorState) {
+        MySnackBar.showMyToast(text: value.failure.message);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

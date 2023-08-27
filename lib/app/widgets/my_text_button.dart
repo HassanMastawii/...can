@@ -6,8 +6,10 @@ class MyTextButton extends StatelessWidget {
     this.color = Colors.black,
     required this.text,
     this.onTap,
+    this.backColor,
   });
   final Color color;
+  final Color? backColor;
   final String text;
   final void Function()? onTap;
   @override
@@ -16,6 +18,7 @@ class MyTextButton extends StatelessWidget {
       style: ButtonStyle(
         foregroundColor: MaterialStatePropertyAll(color),
         overlayColor: MaterialStatePropertyAll(color.withOpacity(0.2)),
+        backgroundColor: MaterialStatePropertyAll(backColor),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),

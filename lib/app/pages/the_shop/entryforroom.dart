@@ -1,5 +1,4 @@
 import 'package:canary_app/app/colorApp/color.dart';
-
 import 'package:flutter/material.dart';
 
 class Entryforroom extends StatefulWidget {
@@ -25,7 +24,7 @@ class _EntryforroomState extends State<Entryforroom> {
               height: 400,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                  color: appcolor.shopcontenaer,
+                  color: shopcontenaer,
                   borderRadius: BorderRadius.circular(11)),
               child: Column(
                 children: [

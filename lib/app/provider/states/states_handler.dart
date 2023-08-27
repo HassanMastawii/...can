@@ -4,12 +4,19 @@ import '../../../data/errors/failures.dart';
 import '../../../domain/models/user.dart';
 
 mixin StatesHandler {
-  ProviderStates failureOrUserToState(Either<Failure, User> either) {
+  ProviderStates failureOrProfileToState(Either<Failure, Profile> either) {
     return either.fold(
       (failure) => ErrorState(failure: failure),
-      (user) => UserState(
-        user: user,
+      (profile) => ProfileState(
+        profile: profile,
       ),
+    );
+  }
+
+  ProviderStates failureOrDoneToState(Either<Failure, Unit> either) {
+    return either.fold(
+      (failure) => ErrorState(failure: failure),
+      (_) => DoneState(),
     );
   }
 }

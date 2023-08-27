@@ -24,7 +24,7 @@ class _FramesState extends State<Frames> {
               height: 400,
               width: MediaQuery.of(context).size.width / 2,
               decoration: BoxDecoration(
-                  color: appcolor.shopcontenaer,
+                  color: shopcontenaer,
                   borderRadius: BorderRadius.circular(11)),
               child: Column(
                 children: [

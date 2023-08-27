@@ -20,8 +20,8 @@ class ServerFailure extends Failure {
   List<Object?> get props => [];
 }
 
-class WrongAuthFailure extends Failure {
-  const WrongAuthFailure({super.message = "WrongAuthFailure"});
+class NotLogedInFailure extends Failure {
+  const NotLogedInFailure({super.message = "NotLogedInFailure"});
 
   @override
   List<Object?> get props => [];
