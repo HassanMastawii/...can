@@ -1,3 +1,4 @@
+import 'package:canary_app/app/pages/profile_public/visite_profail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,17 +33,25 @@ class _ShowProfailFrendInRoomState extends State<ShowProfailFrendInRoom> {
               ),
               Column(
                 children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 4,
-                            color: const Color.fromARGB(207, 255, 224, 85)),
-                        borderRadius: BorderRadius.circular(90),
-                        color: Colors.black,
-                        image: const DecorationImage(
-                            image: AssetImage('images/pic_room.jpg'))),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => const VisiteProfail())));
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: const Color.fromARGB(207, 255, 224, 85)),
+                          borderRadius: BorderRadius.circular(90),
+                          color: Colors.black,
+                          image: const DecorationImage(
+                              image: AssetImage('images/pic_room.jpg'))),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 11),
@@ -173,8 +182,7 @@ class _ShowProfailFrendInRoomState extends State<ShowProfailFrendInRoom> {
         const Spacer(),
         const Padding(
           padding: EdgeInsets.all(11),
-          child: Text(
-              "jjjjjsfdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"),
+          child: Text("jjjjjsfddddddddddddddddddddddddd"),
         ),
         const Spacer(),
         Padding(
