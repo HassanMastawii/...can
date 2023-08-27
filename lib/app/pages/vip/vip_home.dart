@@ -149,7 +149,9 @@ class _ViphomeState extends State<Viphome> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      print("object");
+                    },
                     child: Container(
                       width: 80,
                       height: 40,

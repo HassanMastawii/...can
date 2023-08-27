@@ -1,3 +1,4 @@
+import 'package:canary_app/app/pages/profile_public/show_profail_frend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/input_area.dart';
@@ -5,7 +6,7 @@ import '../../components/model_bottom_sheet/exstra.dart';
 import '../../components/model_bottom_sheet/geft.dart';
 import '../../components/model_bottom_sheet/imoge.dart';
 import '../../components/model_bottom_sheet/list_chat_privt_inroom.dart';
-import '../profile/show_profail_frend.dart';
+
 import 'edit_room.dart';
 import 'peopleinroom.dart';
 import 'praicroom.dart';
@@ -19,6 +20,21 @@ class MyRoom extends StatefulWidget {
 }
 
 class _MyRoomState extends State<MyRoom> {
+  bool isVolumeOn = true;
+  bool ismic = true;
+
+  void toggleVolume() {
+    setState(() {
+      isVolumeOn = !isVolumeOn;
+    });
+  }
+
+  void micval() {
+    setState(() {
+      ismic = !ismic;
+    });
+  }
+
   final TextEditingController _controller = TextEditingController();
   bool isTextFeildShown = false;
 
@@ -146,7 +162,7 @@ class _MyRoomState extends State<MyRoom> {
                         ),
                       ],
                     ),
-                     const Padding(
+                    const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                       child: Row(
@@ -159,7 +175,7 @@ class _MyRoomState extends State<MyRoom> {
                         ],
                       ),
                     ),
-                     const Padding(
+                    const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                       child: Row(
@@ -228,13 +244,13 @@ class _MyRoomState extends State<MyRoom> {
                                   children: [
                                     IconButton(
                                         onPressed: () {
-                                           showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return SizedBox(
-                                                height: 350.h,
-                                                child: const Exstra());
-                                          });
+                                          showModalBottomSheet(
+                                              context: context,
+                                              builder: (context) {
+                                                return SizedBox(
+                                                    height: 350.h,
+                                                    child: const Exstra());
+                                              });
                                         },
                                         icon: const Icon(
                                           Icons.now_widgets_outlined,
@@ -242,16 +258,20 @@ class _MyRoomState extends State<MyRoom> {
                                           size: 30,
                                         )),
                                     IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
+                                        onPressed: toggleVolume,
+                                        icon: Icon(
+                                          isVolumeOn
+                                              ? Icons.volume_up
+                                              : Icons.volume_off,
                                           color: Colors.amber,
-                                          Icons.volume_up,
                                           size: 30,
                                         )),
                                     IconButton(
-                                        onPressed: () {},
-                                        icon: const Icon(
-                                          Icons.settings_voice,
+                                        onPressed: micval,
+                                        icon: Icon(
+                                          ismic
+                                              ? Icons.keyboard_voice
+                                              : Icons.mic_off,
                                           color: Colors.amber,
                                           size: 30,
                                         )),
