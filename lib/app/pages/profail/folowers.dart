@@ -1,7 +1,5 @@
-import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../components/account_card.dart';
 import '../../components/friend_card.dart';
 
 class FolowerPage extends StatefulWidget {

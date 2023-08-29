@@ -1,9 +1,12 @@
 import 'package:canary_app/app/pages/Home/record_page.dart';
 import 'package:canary_app/app/pages/profail/chang_myphoto.dart';
+import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:canary_app/app/widgets/my_text_form_field.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/image_picker_mobile.dart';
 
@@ -25,6 +28,7 @@ class _EditProfailState extends State<EditProfail> {
     TextEditingController(),
     TextEditingController(),
   ];
+  int? gender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,15 +150,33 @@ class _EditProfailState extends State<EditProfail> {
                         color: const Color.fromRGBO(144, 202, 249, 1),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: MyTextFormField(
-                        labelText: "البلد :",
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
                         color: const Color.fromRGBO(144, 202, 249, 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: DropdownButton<int>(
+                        dropdownColor: const Color.fromRGBO(144, 202, 249, 1),
+                        value: gender,
+                        padding: const EdgeInsets.all(5),
+                        items: const [
+                          DropdownMenuItem(value: 0, child: Text("ذكر")),
+                          DropdownMenuItem(value: 1, child: Text("أنثى")),
+                        ],
+                        underline: const SizedBox.shrink(),
+                        hint: const Text("الجنس"),
+                        isExpanded: true,
+                        onChanged: (value) {
+                          setState(() {
+                            gender = value!;
+                          });
+                        },
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(5),
                       child: Card(
                           color: const Color.fromRGBO(144, 202, 249, 1),
                           child: Padding(
@@ -188,6 +210,37 @@ class _EditProfailState extends State<EditProfail> {
                               ],
                             ),
                           )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Card(
+                        color: const Color.fromRGBO(144, 202, 249, 1),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Text("البلد : "),
+                              ),
+                            ),
+                            CountryCodePicker(
+                              showCountryOnly: true,
+                              initialSelection: context
+                                  .watch<CoreProvider>()
+                                  .myProfile
+                                  ?.contry,
+                              showDropDownButton: true,
+                              countryFilter: codes
+                                  .map((e) => e["code"].toString())
+                                  .toList()
+                                ..removeWhere((element) => element == "IL"),
+                              onChanged: (value) {
+                                print(value.code);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

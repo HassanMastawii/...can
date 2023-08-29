@@ -1,4 +1,12 @@
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/data/errors/failures.dart';
+import 'package:canary_app/domain/models/user.dart';
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../components/toast.dart';
+import '../../provider/states/states.dart';
 import '../../widgets/my_button.dart';
 import '../../widgets/my_pass_form_field.dart';
 import '../../widgets/my_text_button.dart';
@@ -17,8 +25,39 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
   final TextEditingController username = TextEditingController();
-  final TextEditingController gender = TextEditingController();
+  int? gender;
+  String? country;
+  register() async {
+    if (!_key.currentState!.validate()) {
+      MySnackBar.showMyToast(text: "أملئ الحقول بشكل مناسب");
+    } else if (password.text != confirmPassword.text) {
+      MySnackBar.showMyToast(text: "كلمتي المرور غير متطابقتين");
+    } else if (gender == null) {
+      MySnackBar.showMyToast(text: "أختر جنسك");
+    } else if (country == null) {
+      MySnackBar.showMyToast(text: "أختر بلدك");
+    } else {
+      final registerstate = await context.read<CoreProvider>().register(User(
+            contry: country,
+            email: email.text,
+            gender: gender,
+            name: username.text,
+            password: password.text,
+          ));
+      if (registerstate is DoneState && mounted) {
+        MySnackBar.showDoneToast();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      } else if (registerstate is ErrorState && mounted) {
+        MySnackBar.showMyToast(text: registerstate.failure.message);
+      }
+    }
+  }
 
+  final List<String> genders = ["male", "female"];
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,119 +65,149 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Image.asset(
-                  'images/1.png',
-                  height: 100,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    'أهلاً بك في كناري شات',
-                    style: TextStyle(
-                      fontSize: 22,
+            child: Form(
+              key: _key,
+              child: Column(
+                children: [
+                  Image.asset(
+                    'images/1.png',
+                    height: 100,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'أهلاً بك في كناري شات',
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: MyTextFormField(
-                    labelText: "الايميل",
-                    preIcon: const Icon(
-                      Icons.alternate_email_outlined,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextFormField(
+                      labelText: "الايميل",
+                      preIcon: const Icon(
+                        Icons.alternate_email_outlined,
+                      ),
+                      textEditingController: email,
+                      textInputType: TextInputType.emailAddress,
+                      autofillHints: const [AutofillHints.email],
                     ),
-                    textEditingController: email,
-                    textInputType: TextInputType.emailAddress,
-                    autofillHints: const [AutofillHints.email],
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: MyTextFormField(
-                    labelText: "اسم المستخدم",
-                    preIcon: const Icon(
-                      Icons.account_circle,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextFormField(
+                      labelText: "اسم المستخدم",
+                      preIcon: const Icon(
+                        Icons.account_circle,
+                      ),
+                      minimum: 2,
+                      textEditingController: username,
+                      textInputType: TextInputType.name,
                     ),
-                    textEditingController: username,
-                    textInputType: TextInputType.name,
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: MyTextPassField(
-                    labelText: "كلمة المرور",
-                    preIcon: const Icon(Icons.lock),
-                    autofillHints: const [AutofillHints.password],
-                    textEditingController: password,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextPassField(
+                      labelText: "كلمة المرور",
+                      preIcon: const Icon(Icons.lock),
+                      minChar: 6,
+                      autofillHints: const [AutofillHints.password],
+                      textEditingController: password,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: MyTextPassField(
-                    labelText: "تأكيد كلمة المرور",
-                    preIcon: const Icon(Icons.lock),
-                    autofillHints: const [AutofillHints.password],
-                    textEditingController: confirmPassword,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: MyTextPassField(
+                      labelText: "تأكيد كلمة المرور",
+                      minChar: 6,
+                      preIcon: const Icon(Icons.lock),
+                      autofillHints: const [AutofillHints.password],
+                      textEditingController: confirmPassword,
+                    ),
                   ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: DropdownButton<int>(
+                      value: gender,
+                      padding: const EdgeInsets.all(5),
+                      items: const [
+                        DropdownMenuItem(value: 0, child: Text("ذكر")),
+                        DropdownMenuItem(value: 1, child: Text("أنثى")),
+                      ],
+                      underline: const SizedBox.shrink(),
+                      hint: const Text("الجنس"),
+                      isExpanded: true,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value!;
+                        });
+                      },
+                    ),
                   ),
-                  child: DropdownButton(
-                    value: gender.text.isEmpty ? null : gender.text,
-                    padding: const EdgeInsets.all(5),
-                    items: const [
-                      DropdownMenuItem(value: "أنثى", child: Text("أنثى")),
-                      DropdownMenuItem(value: "ذكر", child: Text("ذكر")),
-                    ],
-                    underline: const SizedBox.shrink(),
-                    hint: const Text("الجنس"),
-                    isExpanded: true,
-                    onChanged: (value) {
-                      setState(() {
-                        gender.text = value!;
-                      });
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Text("البلد"),
+                            ),
+                          ),
+                          CountryCodePicker(
+                            showCountryOnly: true,
+                            showDropDownButton: true,
+                            countryFilter:
+                                codes.map((e) => e["code"].toString()).toList()
+                                  ..removeWhere((element) => element == "IL"),
+                            onChanged: (value) {
+                              country = value.code;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  MyButton(
+                    text: "انشاء الحساب",
+                    color: Colors.blue,
+                    isLoading: context.watch<CoreProvider>().isLoading,
+                    fontColor: Colors.white,
+                    onPressed: () async {
+                      await register();
                     },
                   ),
-                ),
-                MyButton(
-                  text: "انشاء الحساب",
-                  color: Colors.blue,
-                  fontColor: Colors.white,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Home()),
-                    );
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('لديك حساب بالفعل؟',
-                          style: TextStyle(fontSize: 22)),
-                      MyTextButton(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        color: Colors.blue,
-                        text: 'سجل دخول',
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('لديك حساب بالفعل؟',
+                            style: TextStyle(fontSize: 22)),
+                        MyTextButton(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          color: Colors.blue,
+                          text: 'سجل دخول',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

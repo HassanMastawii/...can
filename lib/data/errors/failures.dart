@@ -27,6 +27,22 @@ class NotLogedInFailure extends Failure {
   List<Object?> get props => [];
 }
 
+class RegisterFailure extends Failure {
+  final String? name;
+  final String? email;
+  final String? password;
+
+  const RegisterFailure({
+    super.message = "RegisterException",
+    this.name,
+    this.email,
+    this.password,
+  });
+
+  @override
+  List<Object?> get props => [];
+}
+
 class UnKnownFailure extends Failure {
   const UnKnownFailure({super.message = "UnKnownFailure"});
   @override

@@ -36,6 +36,15 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     return failureOrDoneToState(failureOrUser);
   }
 
+  Future<ProviderStates> register(User user) async {
+    isLoading = true;
+    notifyListeners();
+    final failureOrUser = await _registerUsecase(user);
+    isLoading = false;
+    notifyListeners();
+    return failureOrDoneToState(failureOrUser);
+  }
+
   Future<ProviderStates> getMyProfile() async {
     isLoading = true;
     notifyListeners();

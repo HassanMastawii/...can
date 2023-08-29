@@ -36,9 +36,29 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> register(User user) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> register(User user) async {
+    if (await isConnected) {
+      try {
+        final remoteUser = await _authRemoteDataSource.register(user);
+        await _localDataSource.setToken(remoteUser);
+        return const Right(unit);
+      } on RegisterException catch (e) {
+        return Left(RegisterFailure(
+          message: e.message,
+          email: e.email,
+          name: e.name,
+          password: e.password,
+        ));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
   }
 
   @override

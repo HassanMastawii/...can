@@ -79,6 +79,7 @@ class _LoginState extends State<Login> {
                         horizontal: 20, vertical: 10),
                     child: MyTextPassField(
                       labelText: "كلمة المرور",
+                      minChar: 6,
                       preIcon: const Icon(Icons.lock),
                       autofillHints: const [AutofillHints.password],
                       textEditingController: password,
@@ -117,6 +118,7 @@ class _LoginState extends State<Login> {
                   MyButton(
                     text: "تسجيل الدخول",
                     color: Colors.blue,
+                    isLoading: context.watch<CoreProvider>().isLoading,
                     fontColor: Colors.white,
                     onPressed: () async {
                       await login();

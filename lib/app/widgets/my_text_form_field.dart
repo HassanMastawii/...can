@@ -18,6 +18,7 @@ class MyTextFormField extends StatefulWidget {
   String? initVal;
   final Iterable<String>? autofillHints;
   final Color color;
+  final String? valError;
   MyTextFormField({
     super.key,
     required this.labelText,
@@ -32,6 +33,7 @@ class MyTextFormField extends StatefulWidget {
     this.focusnode,
     this.textEditingController,
     this.color = Colors.white,
+    this.valError,
   });
 
   @override
@@ -53,8 +55,8 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           text: value,
           min: widget.minimum,
           max: widget.maximum,
-          msgMin: validateMin,
-          msgMax: validateMax,
+          msgMin: widget.valError ?? validateMin,
+          msgMax: widget.valError ?? validateMax,
         );
       },
       textDirection: widget.textInputType == TextInputType.emailAddress
@@ -69,9 +71,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         }
         widget.initVal = value;
       },
-      inputFormatters: widget.textInputType != TextInputType.number
-          ? null
-          : [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
       focusNode: widget.focusnode,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -84,9 +83,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         labelText: widget.labelText,
         prefixIcon: widget.preIcon,
       ),
-      // onTapOutside: (event) {
-      //   FocusScope.of(context).unfocus();
-      // },
       keyboardType: widget.textInputType,
     );
   }
