@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
               themeMode: ThemeMode.light,
               theme: lightTheme,
               debugShowCheckedModeBanner: false,
-              home: const Home(),
+              home: const Login(),
             ),
           );
         },
