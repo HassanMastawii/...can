@@ -1,3 +1,4 @@
+import 'package:canary_app/app/pages/Home/home.dart';
 import 'package:canary_app/app/pages/auth/Login.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/themes/light_theme.dart';
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
               themeMode: ThemeMode.light,
               theme: lightTheme,
               debugShowCheckedModeBanner: false,
-              home: const Login(),
+              home: const Home(),
             ),
           );
         },
