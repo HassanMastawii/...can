@@ -1,8 +1,7 @@
 import 'package:canary_app/app/provider/providers/core_provider.dart';
-import 'package:canary_app/data/errors/failures.dart';
+import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/domain/models/user.dart';
 import 'package:country_code_picker/country_code_picker.dart';
-import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../components/toast.dart';
@@ -46,10 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ));
       if (registerstate is DoneState && mounted) {
         MySnackBar.showDoneToast();
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
+        MyRouter.myPushReplacmentAll(context, const Home());
       } else if (registerstate is ErrorState && mounted) {
         MySnackBar.showMyToast(text: registerstate.failure.message);
       }

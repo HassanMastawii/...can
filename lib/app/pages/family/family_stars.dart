@@ -1,6 +1,4 @@
-import 'package:canary_app/app/components/account_card.dart';
 import 'package:flutter/material.dart';
-
 import '../../components/friend_card.dart';
 
 class FamilyStars extends StatelessWidget {

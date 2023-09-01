@@ -1,4 +1,4 @@
-import 'package:canary_app/app/components/account_card.dart';
+import 'package:canary_app/app/components/cart_users.dart';
 import 'package:flutter/material.dart';
 
 class FriendCard extends StatelessWidget {
@@ -34,9 +34,9 @@ class FriendCard extends StatelessWidget {
                                 style: TextStyle(fontSize: 18)),
                             InkWell(
                                 onTap: () {},
-                                child: Row(
+                                child: const Row(
                                   children: [
-                                    const Text("id:5798462"),
+                                    Text("id:5798462"),
                                     Icon(Icons.add_to_photos_outlined),
                                   ],
                                 )),

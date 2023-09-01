@@ -6,6 +6,7 @@ abstract class LocalDataSource {
   Future<String> getThemeMode();
   String? getToken();
   Future<Unit> setToken(String token);
+  Future<Unit> removeToken();
   Future<Unit> setThemeMode(String themeMode);
 }
 
@@ -41,6 +42,12 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   Future<Unit> setToken(String token) async {
     await sharedPreferences.setString("token", token);
+    return Future.value(unit);
+  }
+
+  @override
+  Future<Unit> removeToken() async {
+    await sharedPreferences.remove("token");
     return Future.value(unit);
   }
 }

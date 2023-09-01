@@ -1,4 +1,3 @@
-import 'package:canary_app/app/pages/Home/home_serche.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import '../../components/bnart.dart';
