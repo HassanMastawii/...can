@@ -1,6 +1,8 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
 import 'package:canary_app/domain/usecases/auth/get_my_profile_usecase.dart';
+import 'package:canary_app/domain/usecases/auth/get_stored_token_usecase.dart';
+import 'package:canary_app/domain/usecases/auth/log_out_usecase.dart';
 import 'package:flutter/material.dart';
 import '../../../domain/models/user.dart';
 import '../../../domain/usecases/auth/log_in_usecase.dart';
@@ -14,6 +16,8 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
   final LogInUsecase _logInUsecase;
   final RegisterUsecase _registerUsecase;
   final GetmyProfileUsecase _getmyProfileUsecase;
+  final GetStoredTokenUsecase _getStoredTokenUsecase;
+  final LogOutUsecase _logOutUsecase;
   String _themeMode = ThemeMode.system.name;
 
   CoreProvider(
@@ -22,11 +26,14 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     this._logInUsecase,
     this._registerUsecase,
     this._getmyProfileUsecase,
+    this._getStoredTokenUsecase,
+    this._logOutUsecase,
   );
   String get themeMode => _themeMode;
   bool isLoading = false;
+  bool isLoadingProfile = false;
   Profile? myProfile;
-
+  String? token;
   Future<ProviderStates> logIn(User user) async {
     isLoading = true;
     notifyListeners();
@@ -46,10 +53,10 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
   }
 
   Future<ProviderStates> getMyProfile() async {
-    isLoading = true;
+    isLoadingProfile = true;
     notifyListeners();
     final failureOrUser = await _getmyProfileUsecase();
-    isLoading = false;
+    isLoadingProfile = false;
     notifyListeners();
     return failureOrProfileToState(failureOrUser);
   }
@@ -62,6 +69,16 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
 
   getTheme() async {
     _themeMode = await _getThemeUsecase();
+    notifyListeners();
+  }
+
+  getToken() async {
+    token = await _getStoredTokenUsecase();
+    notifyListeners();
+  }
+
+  logOut() async {
+    await _logOutUsecase();
     notifyListeners();
   }
 }

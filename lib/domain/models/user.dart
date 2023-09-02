@@ -46,6 +46,7 @@ class User extends Equatable {
   }
 }
 
+// ignore: must_be_immutable
 class Profile extends Equatable {
   int? id;
   int? roomId;

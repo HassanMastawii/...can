@@ -83,4 +83,18 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Left(OfflineFailure());
     }
   }
+
+  @override
+  Future<String?> getStoredToken() async {
+    return _localDataSource.getToken();
+  }
+
+  @override
+  Future<Either<Failure, Unit>> logOut() async {
+    try {
+      return Right(await _localDataSource.removeToken());
+    } catch (e) {
+      return Left(UnKnownFailure(message: e.toString()));
+    }
+  }
 }

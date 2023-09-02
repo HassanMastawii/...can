@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../device/dependecy_injection.dart';
 import 'themes/dark_theme.dart';
 
 class MyApp extends StatefulWidget {
@@ -19,40 +18,35 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CoreProvider>(
-          create: (_) => sl<CoreProvider>()..getTheme(),
-        ),
-      ],
-      child: Selector<CoreProvider, String>(
-        selector: (_, p1) => p1.themeMode,
-        builder: (__, value, _) {
-          return ScreenUtilInit(
-            designSize: const Size(360, 690),
-            minTextAdapt: true,
-            useInheritedMediaQuery: true,
-            splitScreenMode: true,
-            builder: (_, __) => MaterialApp(
-              localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('ar'),
-                Locale('en'),
-              ],
-              locale: const Locale("ar"),
-              darkTheme: darkTheme,
-              themeMode: ThemeMode.light,
-              theme: lightTheme,
-              debugShowCheckedModeBanner: false,
-              home: const Login(),
-            ),
-          );
-        },
-      ),
+    return Selector<CoreProvider, String>(
+      selector: (_, p1) => p1.themeMode,
+      builder: (__, value, _) {
+        return ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          useInheritedMediaQuery: true,
+          splitScreenMode: false,
+          builder: (_, __) => MaterialApp(
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('ar'),
+              Locale('en'),
+            ],
+            locale: const Locale("ar"),
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.light,
+            theme: lightTheme,
+            debugShowCheckedModeBanner: false,
+            home: context.read<CoreProvider>().token == null
+                ? const Login()
+                : const Home(),
+          ),
+        );
+      },
     );
   }
 }

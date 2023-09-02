@@ -1,5 +1,4 @@
 import 'package:canary_app/app/widgets/my_button.dart';
-import 'package:canary_app/app/widgets/my_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../components/friend_card.dart';
@@ -48,7 +47,7 @@ class _FolowingPageState extends State<FolowingPage> {
                   scrollDirection: Axis.vertical,
                   itemCount: 56,
                   itemBuilder: (context, index) {
-                    return FriendCard(
+                    return const FriendCard(
                       trailing: Column(children: [
                         MyButton(
                           text: "حظر",

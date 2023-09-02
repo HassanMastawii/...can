@@ -1,5 +1,5 @@
-import 'package:canary_app/app/widgets/my_text_button.dart';
-import 'package:flutter/material.dart';
+// import 'package:canary_app/app/widgets/my_text_button.dart';
+// import 'package:flutter/material.dart';
 
 // class AccountCard extends StatelessWidget {
 //   const AccountCard({super.key, this.trailing});
@@ -56,40 +56,40 @@ import 'package:flutter/material.dart';
 //   }
 // }
 
-getButton({
-  void Function()? onTap,
-  required String text,
-  required String imageLink,
-  double hieght = 50,
-  double width = 125,
-}) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 5),
-    child: InkWell(
-      onTap: onTap,
-      child: Container(
-        height: hieght,
-        width: width,
-        decoration: BoxDecoration(
-          image:
-              DecorationImage(image: AssetImage(imageLink), fit: BoxFit.fill),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(11),
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Expanded(
-              child: Text(
-                text,
-                textAlign: TextAlign.end,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
+// getButton({
+//   void Function()? onTap,
+//   required String text,
+//   required String imageLink,
+//   double hieght = 50,
+//   double width = 125,
+// }) {
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: 5),
+//     child: InkWell(
+//       onTap: onTap,
+//       child: Container(
+//         height: hieght,
+//         width: width,
+//         decoration: BoxDecoration(
+//           image:
+//               DecorationImage(image: AssetImage(imageLink), fit: BoxFit.fill),
+//           borderRadius: const BorderRadius.all(
+//             Radius.circular(11),
+//           ),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           children: [
+//             Expanded(
+//               child: Text(
+//                 text,
+//                 textAlign: TextAlign.end,
+//                 style: const TextStyle(color: Colors.white, fontSize: 20),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
