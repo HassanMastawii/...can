@@ -3,6 +3,7 @@ import 'package:canary_app/app/pages/costomaer_servici_global/costomer.dart';
 import 'package:canary_app/app/pages/profail/ferind.dart';
 import 'package:canary_app/app/pages/profail/folowers.dart';
 import 'package:canary_app/app/pages/profail/visitors.dart';
+import 'package:canary_app/app/pages/settings/setting.dart';
 import 'package:canary_app/app/pages/store/my_money.dart';
 import 'package:canary_app/app/pages/vip/vip_home.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
@@ -274,9 +275,16 @@ class _MyProfileState extends State<MyProfile> {
                       const ListTile(
                           title: Text("دعوة الأصدقاء"),
                           leading: Icon(Icons.person_add)),
-                      const ListTile(
-                          title: Text("الأعدادات"),
-                          leading: Icon(Icons.settings)),
+                       ListTile(
+                        onTap: () {
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Setting(),
+                                ));
+                        },
+                          title: const Text("الأعدادات"),
+                          leading: const Icon(Icons.settings)),
                       ListTile(
                           onTap: () {
                             Navigator.push(
