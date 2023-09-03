@@ -64,10 +64,10 @@ class _CarsState extends State<Cars> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 22),
+                       padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 5),
                             decoration: const BoxDecoration(
                                 color: Colors.amberAccent,
                                 borderRadius:
@@ -75,12 +75,12 @@ class _CarsState extends State<Cars> {
                             child: const Text(
                               "شراء",
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          const Spacer(),
+                          
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 22),
+                             padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 5),
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: Colors.amberAccent, width: 2),
@@ -89,7 +89,7 @@ class _CarsState extends State<Cars> {
                             child: const Text(
                               "اهداء",
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],

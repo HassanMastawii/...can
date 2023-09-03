@@ -174,17 +174,17 @@ class _ViphomeState extends State<Viphome> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("تأكيد الشراء"),
-                            content: Text("هل أنت متأكد من رغبتك في الشراء؟"),
+                            title: const Text("تأكيد الشراء"),
+                            content: const Text("هل أنت متأكد من رغبتك في الشراء؟"),
                             actions: [
                               TextButton(
-                                child: Text("إلغاء"),
+                                child: const Text("إلغاء"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                               ),
                               TextButton(
-                                child: Text("تأكيد"),
+                                child: const Text("تأكيد"),
                                 onPressed: () {
                                   // هنا يمكنك إجراء الشراء أو الإجراء الذي ترغب فيه
                                   Navigator.of(context)
@@ -217,7 +217,6 @@ class _ViphomeState extends State<Viphome> {
                   ),
                   InkWell(
                     onTap: () {
-                      print("object");
                     },
                     child: Container(
                       width: 80,

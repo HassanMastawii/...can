@@ -50,36 +50,36 @@ class _FramesState extends State<Frames> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 22),
-                          decoration: const BoxDecoration(
-                              color: Colors.amberAccent,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4))),
-                          child: const Text(
-                            "شراء",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                       padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 5),
+                            decoration: const BoxDecoration(
+                                color: Colors.amberAccent,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4))),
+                            child: const Text(
+                              "شراء",
+                              style: TextStyle(
+                                   fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 22),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.amberAccent, width: 2),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(4))),
-                          child: const Text(
-                            "اهداء",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                          
+                          Container(
+                             padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 5),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.amberAccent, width: 2),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(4))),
+                            child: const Text(
+                              "اهداء",
+                              style: TextStyle(
+                                   fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                   )
                 ],
               ),

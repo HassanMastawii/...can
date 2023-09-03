@@ -235,7 +235,6 @@ class _EditProfailState extends State<EditProfail> {
                                   .toList()
                                 ..removeWhere((element) => element == "IL"),
                               onChanged: (value) {
-                                print(value.code);
                               },
                             ),
                           ],

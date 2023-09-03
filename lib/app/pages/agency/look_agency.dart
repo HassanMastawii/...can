@@ -1,6 +1,7 @@
 import 'package:canary_app/app/colorApp/color.dart';
 import 'package:canary_app/app/pages/agency/agencys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Lookagency extends StatefulWidget {
   const Lookagency({super.key});
@@ -16,6 +17,9 @@ class _LookagencyState extends State<Lookagency> {
       appBar: AppBar(
         title: const Text('الأنظمام لوكالة'),
       ),
+      // اريد حل لمشكلة الكيبورد عند الضغط على البحث يطلع اكسيبشن
+      
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 11),
         child: Column(
@@ -23,20 +27,21 @@ class _LookagencyState extends State<Lookagency> {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 11),
+                Expanded(
                   child: Container(
-                    height: 50,
-                    width: 320,
+                    
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
                         border: Border.all(width: 1, color: agency)),
                     child: const TextField(),
                   ),
                 ),
-                const Text(
-                  'بحث',
-                  style: TextStyle(fontSize: 18),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'بحث',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ],
             ),
@@ -100,16 +105,14 @@ class _LookagencyState extends State<Lookagency> {
                     ),
                   )),
             ),
-            const Spacer(
-              flex: 3,
-            ),
+           SizedBox(height: 70.h,),
             const Text(
               'ملاحظة',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const Spacer(),
             const Text(
-                "في انظمامك الى وكالة ما انت تخلي كامل المسؤليه عن البرنامجعلى ايصال راتبك ويبقى تواصلك مع وكيلك في ذالك"),
+                "في انظمامك الى وكالة ما انت تخلي كامل المسؤليه عن البرنامج على ايصال راتبك ويبقى تواصلك مع وكيلك في ذالك"),
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 44, top: 55),

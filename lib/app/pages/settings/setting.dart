@@ -1,4 +1,9 @@
+import 'package:canary_app/app/components/toast.dart';
+import 'package:canary_app/app/pages/auth/Login.dart';
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/router/my_router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -131,8 +136,22 @@ class _SettingState extends State<Setting> {
                 ),
               ),
                const Divider(),
-              const ListTile(
-                title: Text(
+               ListTile(
+                 onTap: () async {
+                                    final agreeLogout =
+                                        await MySnackBar.showYesNoDialog(
+                                            context,
+                                            "هل تود تسجيل الخروج بالفعل؟");
+                                    if (agreeLogout && mounted) {
+                                      context.read<CoreProvider>().token = null;
+                                      context.read<CoreProvider>().logOut();
+                                      MyRouter.myPushReplacmentAll(
+                                        context,
+                                        const Login(),
+                                      );
+                                    }
+                                  },
+                title: const Text(
                   'تسجيل خروج',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
