@@ -33,7 +33,7 @@ class _MyProfileState extends State<MyProfile> {
     return SafeArea(
       child: Consumer<CoreProvider>(
         builder: (__, value, _) => value.isLoadingProfile
-            ? const Center(
+            ?  Center(
                 child: CircularProgressIndicator(),
               )
             : SingleChildScrollView(
@@ -163,12 +163,12 @@ class _MyProfileState extends State<MyProfile> {
                         ),
                       ),
                     ),
-<<<<<<< HEAD
-                  ),
-                ],
-              ),
+                  
+                  
+                
+              
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding:  const EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -251,7 +251,6 @@ class _MyProfileState extends State<MyProfile> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const Costmarglobal(),
-=======
                     Row(
                       children: [
                         Expanded(
@@ -261,7 +260,6 @@ class _MyProfileState extends State<MyProfile> {
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const LevelPage(),
->>>>>>> 65bc9a315318e37c9be52e1839749cbd47ad00d2
                                 ));
                               },
                               leading: Icon(Icons.upload,
@@ -406,11 +404,15 @@ class _MyProfileState extends State<MyProfile> {
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                );
+  },),
+  ],),
                 ),
               ),
+           ] ),
       ),
-    );
+    ));
   }
 
   getButton({
