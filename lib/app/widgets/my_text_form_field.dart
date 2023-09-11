@@ -49,7 +49,6 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
     return TextFormField(
       minLines: 1,
       maxLines: widget.textInputType == TextInputType.text ? 6 : 1,
-      textAlign: TextAlign.right,
       validator: (value) {
         return validate(
           text: value,

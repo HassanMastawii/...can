@@ -56,12 +56,6 @@ class _MyTextPassField extends State<MyTextPassField> {
       onChanged: widget.onChanged,
       enabled: widget.enable,
       controller: widget.textEditingController,
-      // toolbarOptions: const ToolbarOptions(
-      //   copy: false,
-      //   cut: false,
-      //   paste: true,
-      //   selectAll: true,
-      // ),
       validator: (value) {
         return validate(
           text: value,

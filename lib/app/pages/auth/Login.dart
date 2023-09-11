@@ -1,8 +1,10 @@
 // ignore_for_file: file_names
+import 'package:canary_app/app/components/model_bottom_sheet/lang_sheet.dart';
 import 'package:canary_app/app/pages/auth/sign_up.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
+import 'package:canary_app/device/locale/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../domain/models/user.dart';
@@ -42,93 +44,107 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 197, 247, 247),
-        body: Form(
-          key: _key,
-          child: SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'images/1.png',
-                      height: 200,
-                    ),
-                    const Text(
-                      "أهلاً بعودتك في كناري شات",
-                      style: TextStyle(
-                        fontSize: 22,
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 197, 247, 247),
+      body: Form(
+        key: _key,
+        child: SafeArea(
+          child: Stack(
+            alignment: AlignmentDirectional.topStart,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      showDragHandle: true,
+                      isScrollControlled: true,
+                      useSafeArea: true,
+                      builder: (context) => const LangSheet(),
+                    );
+                  },
+                  icon: const Icon(Icons.language)),
+              Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'images/1.png',
+                        height: 200,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: MyTextFormField(
-                        labelText: "الايميل",
-                        preIcon: const Icon(
-                          Icons.alternate_email_outlined,
+                      Text(
+                        getText(context, "welcomeback"),
+                        style: const TextStyle(
+                          fontSize: 22,
                         ),
-                        textEditingController: email,
-                        textInputType: TextInputType.emailAddress,
-                        autofillHints: const [AutofillHints.email],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: MyTextPassField(
-                        labelText: "كلمة المرور",
-                        minChar: 6,
-                        preIcon: const Icon(Icons.lock),
-                        autofillHints: const [AutofillHints.password],
-                        textEditingController: password,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          MyTextButton(
-                            onTap: () {},
-                            color: Colors.red,
-                            text: 'نسيت كلمة السر؟',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: MyTextFormField(
+                          labelText: getText(context, "email"),
+                          preIcon: const Icon(
+                            Icons.alternate_email_outlined,
                           ),
-                        ],
+                          textEditingController: email,
+                          textInputType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
+                        ),
                       ),
-                    ),
-                    MyButton(
-                      text: "تسجيل الدخول",
-                      color: Colors.blue,
-                      isLoading: context.watch<CoreProvider>().isLoading,
-                      fontColor: Colors.white,
-                      onPressed: () async {
-                        await login();
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('لا تملك حساب ؟ ',
-                              style: TextStyle(fontSize: 22)),
-                          MyTextButton(
-                            onTap: () {
-                              MyRouter.myPush(context, const RegisterPage());
-                            },
-                            color: Colors.blue,
-                            text: 'انشأ الان',
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: MyTextPassField(
+                          labelText: getText(context, "password"),
+                          minChar: 6,
+                          preIcon: const Icon(Icons.lock),
+                          autofillHints: const [AutofillHints.password],
+                          textEditingController: password,
+                        ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            MyTextButton(
+                              onTap: () {},
+                              color: Colors.red,
+                              text: getText(context, "forgetpassword"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      MyButton(
+                        text: getText(context, "login"),
+                        color: Colors.blue,
+                        isLoading: context.watch<CoreProvider>().isLoading,
+                        fontColor: Colors.white,
+                        onPressed: () async {
+                          await login();
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(getText(context, "donthaveaccount"),
+                                style: const TextStyle(fontSize: 22)),
+                            MyTextButton(
+                              onTap: () {
+                                MyRouter.myPush(context, const RegisterPage());
+                              },
+                              color: Colors.blue,
+                              text: getText(context, "register"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
         ),
       ),

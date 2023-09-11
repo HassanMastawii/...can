@@ -14,7 +14,8 @@ void main() async {
         ChangeNotifierProvider<CoreProvider>(
           create: (_) => sl<CoreProvider>()
             ..getTheme()
-            ..getToken(),
+            ..getToken()
+            ..getLocale(),
         ),
       ],
       child: const MyApp(),

@@ -1,3 +1,4 @@
+import 'package:canary_app/app/components/model_bottom_sheet/lang_sheet.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/pages/agency/monay_home.dart';
 import 'package:canary_app/app/pages/auth/Login.dart';
@@ -9,6 +10,7 @@ import 'package:canary_app/app/pages/store/my_money.dart';
 import 'package:canary_app/app/pages/vip/vip_home.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/router/my_router.dart';
+import 'package:canary_app/device/locale/locale.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,9 +177,9 @@ class _MyProfileState extends State<MyProfile> {
                               },
                               leading: Icon(Icons.upload,
                                   color: Colors.yellowAccent[700]),
-                              title: const Text(
-                                "المستوى",
-                                style: TextStyle(color: Colors.white),
+                              title: Text(
+                                getText(context, "level"),
+                                style: const TextStyle(color: Colors.white),
                               ),
                               subtitle: const Text(
                                 "22",
@@ -199,9 +201,9 @@ class _MyProfileState extends State<MyProfile> {
                               },
                               leading: Icon(Icons.monetization_on,
                                   color: Colors.yellowAccent[700]),
-                              title: const Text(
-                                "الشحن",
-                                style: TextStyle(color: Colors.white),
+                              title: Text(
+                                getText(context, "coins"),
+                                style: const TextStyle(color: Colors.white),
                               ),
                               subtitle: Text(
                                 value.myProfile?.balance?.toString() ?? "0",
@@ -220,14 +222,14 @@ class _MyProfileState extends State<MyProfile> {
                           const Spacer(),
                           getButton(
                               imageLink: "images/s1.png",
-                              text: "الشارة",
+                              text: getText(context, "badge"),
                               onTap: () {}),
                           const Spacer(
                             flex: 2,
                           ),
                           getButton(
                               imageLink: "images/f1.png",
-                              text: "العائلة",
+                              text: getText(context, "family"),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const FamilyProfile(),
@@ -245,7 +247,7 @@ class _MyProfileState extends State<MyProfile> {
                           const Spacer(),
                           getButton(
                               imageLink: "images/m1.png",
-                              text: "المتجر",
+                              text: getText(context, "store"),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const HomeShop(),
@@ -256,7 +258,7 @@ class _MyProfileState extends State<MyProfile> {
                           ),
                           getButton(
                               imageLink: "images/d11.png",
-                              text: "الدخل",
+                              text: getText(context, "income"),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const MonayHome(),
@@ -277,12 +279,16 @@ class _MyProfileState extends State<MyProfile> {
                             )),
                         child: Column(
                           children: [
-                            const ListTile(
-                                title: Text("دعوة الأصدقاء"),
-                                leading: Icon(Icons.person_add)),
-                            const ListTile(
-                                title: Text("الأعدادات"),
-                                leading: Icon(Icons.settings)),
+                            ListTile(
+                                title: Text(
+                                  getText(context, "invitefriends"),
+                                ),
+                                leading: const Icon(Icons.person_add)),
+                            ListTile(
+                                title: Text(
+                                  getText(context, "settings"),
+                                ),
+                                leading: const Icon(Icons.settings)),
                             ListTile(
                                 onTap: () {
                                   Navigator.push(
@@ -292,8 +298,24 @@ class _MyProfileState extends State<MyProfile> {
                                             const Costmarglobal(),
                                       ));
                                 },
-                                title: const Text("المساعدة وردود الفعل"),
+                                title: Text(
+                                  getText(context, "feedback"),
+                                ),
                                 leading: const Icon(Icons.support_agent)),
+                            ListTile(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    showDragHandle: true,
+                                    isScrollControlled: true,
+                                    useSafeArea: true,
+                                    builder: (context) => const LangSheet(),
+                                  );
+                                },
+                                title: Text(
+                                  getText(context, "applang"),
+                                ),
+                                leading: const Icon(Icons.language)),
                             ListTile(
                                 onTap: () async {
                                   final agreeLogout =
@@ -308,7 +330,9 @@ class _MyProfileState extends State<MyProfile> {
                                     );
                                   }
                                 },
-                                title: const Text("تسجيل الخروج"),
+                                title: Text(
+                                  getText(context, "logout"),
+                                ),
                                 leading: const Icon(Icons.logout)),
                             50.getHightSizedBox(),
                           ],
@@ -347,8 +371,7 @@ class _MyProfileState extends State<MyProfile> {
             Expanded(
               child: Center(
                 child: Text(
-                  "\t\t\t\t\t$text",
-                  textAlign: TextAlign.end,
+                  text,
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),

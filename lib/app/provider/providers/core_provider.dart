@@ -1,5 +1,6 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
+import 'package:canary_app/data/datasources/local_database/local_database.dart';
 import 'package:canary_app/domain/usecases/auth/get_my_profile_usecase.dart';
 import 'package:canary_app/domain/usecases/auth/get_stored_token_usecase.dart';
 import 'package:canary_app/domain/usecases/auth/log_out_usecase.dart';
@@ -34,6 +35,7 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
   bool isLoadingProfile = false;
   Profile? myProfile;
   String? token;
+  String? local;
   Future<ProviderStates> logIn(User user) async {
     isLoading = true;
     notifyListeners();
@@ -69,6 +71,22 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
 
   getTheme() async {
     _themeMode = await _getThemeUsecase();
+    notifyListeners();
+  }
+
+  Future<void> setLocale(String? locale) async {
+    local = locale;
+    if (locale != null) {
+      await LocalDataSourceImpl.sharedPreferences.setString("locale", locale);
+    } else {
+      await LocalDataSourceImpl.sharedPreferences.remove("locale");
+    }
+
+    notifyListeners();
+  }
+
+  getLocale() async {
+    local = LocalDataSourceImpl.sharedPreferences.getString("locale");
     notifyListeners();
   }
 
