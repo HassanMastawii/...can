@@ -18,24 +18,12 @@ class _FolowerPageState extends State<FolowerPage> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Stack(
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.logout,
-                          size: 30,
-                        )),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("المتابعين", style: TextStyle(fontSize: 30)),
-                      ],
-                    ),
+                   
+                     
                   ],
                 ),
               ),

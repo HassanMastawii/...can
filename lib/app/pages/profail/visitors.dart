@@ -47,7 +47,7 @@ class _VisitorsPageState extends State<VisitorsPage> {
                   scrollDirection: Axis.vertical,
                   itemCount: 56,
                   itemBuilder: (context, index) {
-                    return FriendCard(
+                    return const FriendCard(
                       trailing: Column(children: [
                         MyButton(
                           text: "حظر",

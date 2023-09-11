@@ -6,6 +6,7 @@ import 'package:canary_app/app/pages/costomaer_servici_global/costomer.dart';
 import 'package:canary_app/app/pages/profail/ferind.dart';
 import 'package:canary_app/app/pages/profail/folowers.dart';
 import 'package:canary_app/app/pages/profail/visitors.dart';
+import 'package:canary_app/app/pages/settings/setting.dart';
 import 'package:canary_app/app/pages/store/my_money.dart';
 import 'package:canary_app/app/pages/vip/vip_home.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
@@ -382,3 +383,112 @@ class _MyProfileState extends State<MyProfile> {
     );
   }
 }
+
+
+
+
+
+  // Row(
+  //                     children: [
+  //                       Expanded(
+  //                         child: Card(
+  //                           color: Colors.brown,
+  //                           child: ListTile(
+  //                             onTap: () {
+  //                               Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (context) => const LevelPage(),
+  //                               ));
+  //                             },
+  //                             leading: Icon(Icons.upload,
+  //                                 color: Colors.yellowAccent[700]),
+  //                             title: const Text(
+  //                               "المستوى",
+  //                               style: TextStyle(color: Colors.white),
+  //                             ),
+  //                             subtitle: const Text(
+  //                               "22",
+  //                               style: TextStyle(color: Colors.white),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       Expanded(
+  //                         child: Card(
+  //                           color: Colors.purple,
+  //                           child: ListTile(
+  //                             onTap: () {
+  //                               Navigator.push(
+  //                                   context,
+  //                                   MaterialPageRoute(
+  //                                     builder: (context) => const MyMoney(),
+  //                                   ));
+  //                             },
+  //                             leading: Icon(Icons.monetization_on,
+  //                                 color: Colors.yellowAccent[700]),
+  //                             title: const Text(
+  //                               "الشحن",
+  //                               style: TextStyle(color: Colors.white),
+  //                             ),
+  //                             subtitle: Text(
+  //                               value.myProfile?.balance?.toString() ?? "0",
+  //                               style: const TextStyle(color: Colors.white),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Padding(
+  //                     padding: const EdgeInsets.symmetric(vertical: 8.0),
+  //                     child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         const Spacer(),
+  //                         getButton(
+  //                             imageLink: "images/s1.png",
+  //                             text: "الشارة",
+  //                             onTap: () {}),
+  //                         const Spacer(
+  //                           flex: 2,
+  //                         ),
+  //                         getButton(
+  //                             imageLink: "images/f1.png",
+  //                             text: "العائلة",
+  //                             onTap: () {
+  //                               Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (context) => const FamilyProfile(),
+  //                               ));
+  //                             }),
+  //                         const Spacer(),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Padding(
+  //                     padding: const EdgeInsets.symmetric(vertical: 8),
+  //                     child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       children: [
+  //                         const Spacer(),
+  //                         getButton(
+  //                             imageLink: "images/m1.png",
+  //                             text: "المتجر",
+  //                             onTap: () {
+  //                               Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (context) => const HomeShop(),
+  //                               ));
+  //                             }),
+  //                         const Spacer(
+  //                           flex: 2,
+  //                         ),
+  //                         getButton(
+  //                             imageLink: "images/d11.png",
+  //                             text: "الدخل",
+  //                             onTap: () {
+  //                               Navigator.of(context).push(MaterialPageRoute(
+  //                                 builder: (context) => const MonayHome(),
+  //                               ));
+  //                             }),
+  //                         const Spacer(),
+  //                       ],
+  //                     ),
+  //                   ),
