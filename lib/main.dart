@@ -1,3 +1,4 @@
+import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app/canary_app.dart';
@@ -16,6 +17,9 @@ void main() async {
             ..getTheme()
             ..getToken()
             ..getLocale(),
+        ),
+        ChangeNotifierProvider<RoomProvider>(
+          create: (_) => sl<RoomProvider>(),
         ),
       ],
       child: const MyApp(),

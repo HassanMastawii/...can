@@ -1,4 +1,26 @@
-const String serverLink = "https://app.canary-chat.com/api/";
-const String logInLink = "${serverLink}login";
-const String getMyProfileLink = "${serverLink}user";
-const String registerLink = "${serverLink}register";
+const String serverLink = "https://app.canary-chat.com";
+const String apiLink = "$serverLink/api/";
+
+///auth links
+const String logInLink = "${apiLink}login";
+const String registerLink = "${apiLink}register";
+
+///user links
+const String getMyProfileLink = "${apiLink}user";
+const String searchUserLink = "${apiLink}x/searchuser";
+
+///room links
+const String searchRoomLink = "${apiLink}x/searchroom";
+const String roomInfoLink = "${apiLink}x/roominfo";
+const String createRoomLink = "${apiLink}x/createroom";
+const String upRoomImgLink = "${apiLink}x/up_room_img";
+const String newRoomAdsLink = "${apiLink}x/new_room_ads";
+const String checkRoomLink = "${apiLink}x/checkroom";
+const String dads1Link = "${apiLink}x/dads1";
+const String dads2Link = "${apiLink}x/dads2";
+
+///message links
+const String getMessagesLink = "${apiLink}x/messages";
+const String userEntryLink = "${apiLink}x/userentry";
+const String userLeaveLink = "${apiLink}x/userleave";
+const String voiceLink = "${apiLink}x/voice";

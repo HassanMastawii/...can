@@ -1,5 +1,7 @@
+import 'package:canary_app/domain/models/profile.dart';
+import 'package:canary_app/domain/models/room.dart';
+
 import '../../../data/errors/failures.dart';
-import '../../../domain/models/user.dart';
 
 abstract class ProviderStates {
   const ProviderStates();
@@ -21,4 +23,16 @@ class ProfileState extends ProviderStates {
   final Profile profile;
 
   ProfileState({required this.profile});
+}
+
+class RoomsState extends ProviderStates {
+  final List<Room> rooms;
+
+  RoomsState({required this.rooms});
+}
+
+class RoomState extends ProviderStates {
+  final Room room;
+
+  RoomState({required this.room});
 }

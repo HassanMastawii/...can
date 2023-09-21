@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:canary_app/domain/models/profile.dart';
 import 'package:http/http.dart';
 import '../../../domain/models/user.dart';
 import '../../errors/exceptions.dart';

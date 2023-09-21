@@ -1,3 +1,4 @@
+import 'package:canary_app/domain/models/profile.dart';
 import 'package:dartz/dartz.dart';
 import '../../data/errors/failures.dart';
 import '../models/user.dart';

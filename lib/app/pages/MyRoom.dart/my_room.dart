@@ -1,4 +1,6 @@
 import 'package:canary_app/app/pages/profile_public/show_profail_frend.dart';
+import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/input_area.dart';
@@ -13,7 +15,8 @@ import 'praicroom.dart';
 import 'mic.dart';
 
 class MyRoom extends StatefulWidget {
-  const MyRoom({super.key});
+  const MyRoom({super.key, this.room});
+  final Room? room;
 
   @override
   State<MyRoom> createState() => _MyRoomState();
@@ -58,13 +61,17 @@ class _MyRoomState extends State<MyRoom> {
               child: OverflowBox(
                 maxHeight: MediaQuery.of(context).size.height,
                 alignment: Alignment.topLeft,
-                child: Image.asset(
-                  Theme.of(context).brightness == Brightness.dark
-                      ? 'images/create_family_background.png'
-                      : 'images/create_family_background.png',
-                  repeat: ImageRepeat.repeat,
-                  alignment: Alignment.topLeft,
-                ),
+                child: widget.room?.background == null
+                    ? Image.asset(
+                        'images/create_family_background.png',
+                        repeat: ImageRepeat.repeat,
+                        alignment: Alignment.topLeft,
+                      )
+                    : Image.network(
+                        "$serverLink${widget.room!.background}",
+                        repeat: ImageRepeat.repeat,
+                        alignment: Alignment.topLeft,
+                      ),
               ),
             ),
             SafeArea(

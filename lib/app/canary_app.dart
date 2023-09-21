@@ -1,10 +1,7 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:canary_app/app/pages/Home/home.dart';
 import 'package:canary_app/app/pages/auth/Login.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
-import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/themes/light_theme.dart';
 import 'package:canary_app/device/locale/locale.dart';
 import 'package:flutter/material.dart';

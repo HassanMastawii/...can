@@ -1,3 +1,5 @@
+import 'package:canary_app/app/pages/search/search_page.dart';
+import 'package:canary_app/app/router/my_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import '../../components/bnart.dart';
@@ -55,11 +57,7 @@ class _HomeRoomsState extends State<HomeRooms> {
               children: [
                 IconButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) =>  SearchPage(),
-                    //     ));
+                    MyRouter.myPush(context, const SearchPage());
                   },
                   icon: const Icon(
                     Icons.search,
