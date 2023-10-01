@@ -23,6 +23,15 @@ mixin StatesHandler {
     );
   }
 
+  ProviderStates failureOrResToState(Either<Failure, String> either) {
+    return either.fold(
+      (failure) => ErrorState(failure: failure),
+      (path) => ResState(
+        path: path,
+      ),
+    );
+  }
+
   ProviderStates failureOrRoomToState(Either<Failure, Room> either) {
     return either.fold(
       (failure) => ErrorState(failure: failure),

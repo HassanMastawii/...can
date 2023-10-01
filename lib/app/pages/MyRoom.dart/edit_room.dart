@@ -46,29 +46,31 @@ class _EditroomState extends State<Editroom> {
                               size: 50,
                             )),
                       ),
-                      Container(
-                        height: 60,
-                        width: 300,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(33)),
-                            color: Colors.black38),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                              counterStyle: TextStyle(color: Colors.white),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(33))),
-                              hintText: "اسم الغرف",
-                              hintTextDirection: TextDirection.ltr,
-                              fillColor: Colors.amber,
-                              focusColor: Colors.amber,
-                              helperStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22),
-                              hintStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22),
-                              hoverColor: Colors.blueGrey,
-                              labelStyle:
-                                  TextStyle(color: Colors.white, fontSize: 22)),
+                      Expanded(
+                        child: Container(
+                          height: 60,
+                          decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(33)),
+                              color: Colors.black38),
+                          child: const TextField(
+                            decoration: InputDecoration(
+                                counterStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(33))),
+                                hintText: "اسم الغرف",
+                                hintTextDirection: TextDirection.ltr,
+                                fillColor: Colors.amber,
+                                focusColor: Colors.amber,
+                                helperStyle: TextStyle(
+                                    color: Colors.white, fontSize: 22),
+                                hintStyle: TextStyle(
+                                    color: Colors.white, fontSize: 22),
+                                hoverColor: Colors.blueGrey,
+                                labelStyle: TextStyle(
+                                    color: Colors.white, fontSize: 22)),
+                          ),
                         ),
                       ),
                     ],

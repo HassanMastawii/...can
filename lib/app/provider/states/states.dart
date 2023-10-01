@@ -36,3 +36,9 @@ class RoomState extends ProviderStates {
 
   RoomState({required this.room});
 }
+
+class ResState extends ProviderStates {
+  final String path;
+
+  ResState({required this.path});
+}

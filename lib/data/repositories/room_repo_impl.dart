@@ -84,4 +84,26 @@ class RoomRepositoryImpl implements RoomRepository {
       return const Left(OfflineFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, String>> upRoomImg(String path) async {
+    if (await isConnected) {
+      // try {
+      if (_localDataSource.getToken() == null) {
+        return const Left(NotLogedInFailure());
+      } else {
+        final remoteUser = await _authRemoteDataSource.upRoomImg(
+            path, _localDataSource.getToken()!);
+        return Right(remoteUser);
+      }
+      // } on ServerException catch (e) {
+      //   return Left(ServerFailure(message: e.message));
+      // } on NotLogedInException catch (e) {
+      //   return Left(NotLogedInFailure(message: e.message));
+      // } on Exception catch (e) {
+      //   return Left(UnKnownFailure(message: e.toString()));
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
 }

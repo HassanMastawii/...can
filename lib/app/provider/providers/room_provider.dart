@@ -4,16 +4,19 @@ import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
 import 'package:canary_app/domain/usecases/room/search_room_usecase.dart';
+import 'package:canary_app/domain/usecases/room/up_room_img_usecase.dart';
 import 'package:flutter/material.dart';
 
 class RoomProvider extends ChangeNotifier with StatesHandler {
   final SearchRoomUsecase _searchRoomUsecase;
   final RoomInfoUsecase _roomInfoUsecase;
   final CreateRoomUsecase _createRoomUsecase;
+  final UpRoomImgUsecase _upRoomImgUsecase;
   RoomProvider(
     this._searchRoomUsecase,
     this._roomInfoUsecase,
     this._createRoomUsecase,
+    this._upRoomImgUsecase,
   );
   bool isLoading = false;
 
@@ -24,6 +27,15 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
     isLoading = false;
     notifyListeners();
     return failureOrRoomsToState(failureOrRooms);
+  }
+
+  Future<ProviderStates> upRoomImg(String path) async {
+    isLoading = true;
+    notifyListeners();
+    final failureOrRes = await _upRoomImgUsecase(path);
+    isLoading = false;
+    notifyListeners();
+    return failureOrResToState(failureOrRes);
   }
 
   Future<ProviderStates> getRoomInfoRoom(int id) async {

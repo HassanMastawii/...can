@@ -8,6 +8,7 @@ import 'package:canary_app/domain/usecases/auth/log_out_usecase.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
 import 'package:canary_app/domain/usecases/room/search_room_usecase.dart';
+import 'package:canary_app/domain/usecases/room/up_room_img_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import '../app/provider/providers/core_provider.dart';
@@ -39,6 +40,7 @@ Future<void> initInjections() async {
         sl(),
         sl(),
         sl(),
+        sl(),
       ));
   //Useecases
 
@@ -50,6 +52,7 @@ Future<void> initInjections() async {
   sl.registerLazySingleton<CreateRoomUsecase>(() => CreateRoomUsecase(sl()));
   sl.registerLazySingleton<SearchRoomUsecase>(() => SearchRoomUsecase(sl()));
   sl.registerLazySingleton<RoomInfoUsecase>(() => RoomInfoUsecase(sl()));
+  sl.registerLazySingleton<UpRoomImgUsecase>(() => UpRoomImgUsecase(sl()));
 
   //auth
   sl.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(sl()));

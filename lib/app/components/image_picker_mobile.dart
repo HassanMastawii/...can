@@ -4,10 +4,17 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerMobile extends StatefulWidget {
-  const ImagePickerMobile(
-      {super.key, required this.imageController, required this.radius});
+  const ImagePickerMobile({
+    super.key,
+    required this.imageController,
+    required this.radius,
+    this.width = 125,
+    this.height = 125,
+  });
   final TextEditingController imageController;
   final double radius;
+  final double width;
+  final double height;
   @override
   State<ImagePickerMobile> createState() => _ImagePickerMobileState();
 }
@@ -63,38 +70,45 @@ class _ImagePickerMobileState extends State<ImagePickerMobile> {
                     showMySheet();
                   },
                   child: Container(
-                    width: 125,
+                    width: widget.width,
                     color: Colors.white,
-                    height: double.infinity,
+                    height: widget.height,
                     child: const Icon(
                       Icons.add,
                       color: Colors.grey,
                     ),
                   ),
                 )
-              : Image.file(File(widget.imageController.text)),
+              : Image.file(
+                  File(widget.imageController.text),
+                  width: widget.width,
+                  height: widget.height,
+                ),
         ),
         if (widget.imageController.text.isNotEmpty)
-          IconButton.filled(
-            onPressed: () {
-              showMySheet();
-            },
-            icon: const Icon(Icons.edit),
-          ),
-        if (widget.imageController.text.isNotEmpty)
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: IconButton.filled(
-              onPressed: () {
-                setState(() {
-                  widget.imageController.text = "";
-                });
-              },
-              color: Colors.red,
-              icon: const Icon(
-                Icons.delete,
-              ),
+          SizedBox(
+            width: widget.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton.filled(
+                  onPressed: () {
+                    setState(() {
+                      widget.imageController.text = "";
+                    });
+                  },
+                  color: Colors.red,
+                  icon: const Icon(
+                    Icons.delete,
+                  ),
+                ),
+                IconButton.filled(
+                  onPressed: () {
+                    showMySheet();
+                  },
+                  icon: const Icon(Icons.edit),
+                ),
+              ],
             ),
           ),
       ],

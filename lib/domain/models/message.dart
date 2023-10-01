@@ -57,4 +57,8 @@ class Message extends Equatable {
   Message copy() {
     return Message.fromJson(toJson());
   }
+
+  String postQuery() {
+    return "from_user=$fromUser&to_user=$toUser&room_id=$room&type=$type&message=$message";
+  }
 }

@@ -5,7 +5,7 @@ class RecordPage extends StatefulWidget {
   const RecordPage({Key? key}) : super(key: key);
 
   @override
-  _RecordPageState createState() => _RecordPageState();
+  State<RecordPage> createState() => _RecordPageState();
 }
 
 class _RecordPageState extends State<RecordPage> {

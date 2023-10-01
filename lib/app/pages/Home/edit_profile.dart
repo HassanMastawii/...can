@@ -122,8 +122,13 @@ class _EditProfailState extends State<EditProfail> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ImagePickerMobile(
-                        imageController: imagecontroller[index], radius: 50),
+                    child: SizedBox(
+                      width: 125,
+                      child: ImagePickerMobile(
+                        imageController: imagecontroller[index],
+                        radius: 50,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -234,8 +239,7 @@ class _EditProfailState extends State<EditProfail> {
                                   .map((e) => e["code"].toString())
                                   .toList()
                                 ..removeWhere((element) => element == "IL"),
-                              onChanged: (value) {
-                              },
+                              onChanged: (value) {},
                             ),
                           ],
                         ),

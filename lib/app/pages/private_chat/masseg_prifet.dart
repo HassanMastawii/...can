@@ -1,4 +1,5 @@
 import 'package:canary_app/app/components/input_area.dart';
+import 'package:canary_app/domain/models/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/message_buble.dart';
@@ -12,10 +13,7 @@ class MassegPraifet extends StatefulWidget {
 
 class _MassegPraifetState extends State<MassegPraifet> {
   TextEditingController controller = TextEditingController();
-  List<Message> msgs = [
-    Message("الو", "انا", 1),
-    Message("هلا", "محمد علي كلاي", 2),
-  ];
+  List<Message> msgs = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,9 +75,9 @@ class _MassegPraifetState extends State<MassegPraifet> {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: MessageBuble(
-                  text: msgs.reversed.toList()[index].text,
-                  username: msgs.reversed.toList()[index].username,
-                  userId: msgs.reversed.toList()[index].userId,
+                  text: msgs.reversed.toList()[index].message ?? "",
+                  username: msgs.reversed.toList()[index].fromUser ?? "",
+                  userId: msgs.reversed.toList()[index].id ?? 0,
                 ),
               ),
               reverse: true,
@@ -90,7 +88,13 @@ class _MassegPraifetState extends State<MassegPraifet> {
             controller: controller,
             onSend: () {
               setState(() {
-                msgs.add(Message(controller.text, "انا", 1));
+                msgs.add(
+                  Message(
+                    message: controller.text,
+                    fromUser: "انا",
+                    id: 1,
+                  ),
+                );
                 controller.clear();
               });
             },
@@ -99,12 +103,4 @@ class _MassegPraifetState extends State<MassegPraifet> {
       ),
     );
   }
-}
-
-class Message {
-  final String text;
-  final String username;
-  final int userId;
-
-  Message(this.text, this.username, this.userId);
 }
