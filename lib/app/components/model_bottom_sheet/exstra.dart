@@ -1,4 +1,6 @@
+import 'package:canary_app/app/components/exstra/mesicplayr.dart';
 import 'package:canary_app/app/components/exstra/super_chat.dart';
+import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
 
 import '../exstra/kisalhath.dart';
@@ -13,63 +15,77 @@ class Exstra extends StatefulWidget {
 class _ExstraState extends State<Exstra> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 11,
-        ),
-        Wrap(
-          children: [
-            getimag(
-              ontap: () {},
-              imag: "adad.png",
-              name: 'عداد',
-            ),
-            getimag(ontap: () {
-                showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return const Kisalhath();
-                                });
-            },
-              imag: "kisalhath.png",
-              name: 'كيس الحظ',
-            ),
-            getimag(
-              imag: "m.png",
-              name: 'كرسي اضافي',
-            ),
-            getimag(
-              imag: "myosic.png",
-              name: 'المسيقى',
-            ),
-            getimag(ontap: () {
-                // Navigator.push(
-                //                   context,
-                //                   MaterialPageRoute(
-                //                     builder: (context) =>  const MyHomePage(),
-                //                   ));
-            },
-              imag: "sher.png",
-              name: 'مشاركه',
-            ),
-            getimag(ontap: () {
-                showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return const SuperChatinroom();
-                                });
-            },
-              imag: "superchat.png",
-              name: 'super chat',
-            ),
-            getimag(
-              imag: "vs11.png",
-              name: 'التحدي',
-            ),
-          ],
-        )
-      ],
+    return Container(
+      width: double.infinity,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 11,
+          ),
+          Wrap(
+            children: [
+              getimag(
+                ontap: () {},
+                imag: "adad.png",
+                name: 'عداد',
+              ),
+              getimag(
+                ontap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const Kisalhath();
+                      });
+                },
+                imag: "kisalhath.png",
+                name: 'كيس الحظ',
+              ),
+              getimag(
+                imag: "m.png",
+                name: 'كرسي اضافي',
+                ontap: () {},
+              ),
+              getimag(
+                imag: "myosic.png",
+                name: 'المسيقى',
+                ontap: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => MusicPlayer(),
+                  //     ));
+                },
+              ),
+              getimag(
+                ontap: () {
+                  // Navigator.push(
+                  //                   context,
+                  //                   MaterialPageRoute(
+                  //                     builder: (context) =>  const MyHomePage(),
+                  //                   ));
+                },
+                imag: "sher.png",
+                name: 'مشاركه',
+              ),
+              getimag(
+                ontap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const SuperChatinroom();
+                      });
+                },
+                imag: "superchat.png",
+                name: 'super chat',
+              ),
+              getimag(
+                imag: "vs11.png",
+                name: 'التحدي',
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

@@ -33,10 +33,7 @@ class SuperChat extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("user neam"),
-                  Text("massig massig massig")
-                ],
+                children: [Text("user neam"), Text("massig massig massig")],
               ),
             ],
           ),
