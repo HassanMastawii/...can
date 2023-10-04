@@ -198,7 +198,7 @@ class _MyRoomState extends State<MyRoom> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 240,
+                      height: 240.h,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -239,11 +239,11 @@ class _MyRoomState extends State<MyRoom> {
                           ),
                           IconButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => RouletteGame(),
-                                    ));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => RouletteGame(),
+                                //     ));
                               },
                               icon: Icon(
                                 Icons.https_rounded,
