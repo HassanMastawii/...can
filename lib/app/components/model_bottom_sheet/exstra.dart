@@ -1,4 +1,4 @@
-import 'package:canary_app/app/components/exstra/mesicplayr.dart';
+import 'package:canary_app/app/components/exstra/musicplayer/mesicplayr.dart';
 import 'package:canary_app/app/components/exstra/super_chat.dart';
 import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
@@ -49,11 +49,11 @@ class _ExstraState extends State<Exstra> {
                 imag: "myosic.png",
                 name: 'المسيقى',
                 ontap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => MusicPlayer(),
-                  //     ));
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const MusicPlayer();
+                      });
                 },
               ),
               getimag(
