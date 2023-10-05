@@ -14,11 +14,11 @@ mixin StatesHandler {
     );
   }
 
-  ProviderStates failureOrRoomsToState(Either<Failure, List<Room>> either) {
+  ProviderStates failureOrListToState<T>(Either<Failure, List<T>> either) {
     return either.fold(
       (failure) => ErrorState(failure: failure),
-      (rooms) => RoomsState(
-        rooms: rooms,
+      (list) => ListState<T>(
+        list: list,
       ),
     );
   }

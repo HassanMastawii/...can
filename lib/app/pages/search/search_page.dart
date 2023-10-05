@@ -1,11 +1,9 @@
-import 'package:canary_app/app/components/image_picker_mobile.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/my_room.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/widgets/my_animated_button.dart';
-import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/profile.dart';
 import 'package:canary_app/domain/models/room.dart';
@@ -27,9 +25,9 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   searchRoom(String text) async {
     final state = await context.read<RoomProvider>().searchRoom(text);
-    if (state is RoomsState) {
+    if (state is ListState<Room>) {
       setState(() {
-        rooms = state.rooms;
+        rooms = state.list;
       });
     } else if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
@@ -103,49 +101,6 @@ class _SearchPageState extends State<SearchPage> {
                       itemBuilder: (context, index) => ListTile(
                         title: Text(rooms[index].name ?? ""),
                         subtitle: Text(rooms[index].contry ?? ""),
-                        trailing: IconButton(
-                            onPressed: () {
-                              TextEditingController image =
-                                  TextEditingController();
-                              showModalBottomSheet(
-                                context: context,
-                                showDragHandle: true,
-                                builder: (context) => ListView(
-                                  children: [
-                                    ImagePickerMobile(
-                                      imageController: image,
-                                      radius: 25,
-                                    ),
-                                    MyButton(
-                                      text: "تعديل",
-                                      color: Colors.blue,
-                                      fontColor: Colors.white,
-                                      onPressed: context
-                                              .watch<RoomProvider>()
-                                              .isLoading
-                                          ? null
-                                          : () async {
-                                              print(image.text);
-                                              final state = await context
-                                                  .read<RoomProvider>()
-                                                  .upRoomImg(image.text);
-                                              if (state is ErrorState) {
-                                                print(state.failure.message);
-
-                                                MySnackBar.showMyToast(
-                                                    text:
-                                                        state.failure.message);
-                                              } else if (state is ResState) {
-                                                MySnackBar.showMyToast(
-                                                    text: state.path);
-                                              }
-                                            },
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.more_vert_sharp)),
                         leading:
                             Image.network("$serverLink${rooms[index].pic}"),
                         onTap: () {
@@ -153,7 +108,10 @@ class _SearchPageState extends State<SearchPage> {
                               context,
                               MyRoom(
                                 room: rooms[index],
-                              ));
+                              )).then((value) {
+                            setState(() {});
+                          });
+                          ;
                         },
                       ),
                     )

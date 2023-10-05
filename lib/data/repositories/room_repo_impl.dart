@@ -1,4 +1,5 @@
 import 'package:canary_app/data/datasources/remote_database/room_remote_repo.dart';
+import 'package:canary_app/domain/models/backgrounds.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/repositories/room_repo.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -86,22 +87,94 @@ class RoomRepositoryImpl implements RoomRepository {
   }
 
   @override
-  Future<Either<Failure, String>> upRoomImg(String path) async {
+  Future<Either<Failure, String>> upRoomImg(String path, int id) async {
     if (await isConnected) {
-      // try {
-      if (_localDataSource.getToken() == null) {
-        return const Left(NotLogedInFailure());
-      } else {
-        final remoteUser = await _authRemoteDataSource.upRoomImg(
-            path, _localDataSource.getToken()!);
-        return Right(remoteUser);
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource.upRoomImg(
+              path, id, _localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
       }
-      // } on ServerException catch (e) {
-      //   return Left(ServerFailure(message: e.message));
-      // } on NotLogedInException catch (e) {
-      //   return Left(NotLogedInFailure(message: e.message));
-      // } on Exception catch (e) {
-      //   return Left(UnKnownFailure(message: e.toString()));
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> setbackgroundImg(
+      String path, int roomId) async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource.setBackgroundImg(
+              path, roomId, _localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Background>>> getBackgrounds() async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource
+              .getBackgrounds(_localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> setRooomPassword(
+      String password, int id) async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource.setRooomPassword(
+              password, id, _localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
     } else {
       return const Left(OfflineFailure());
     }
