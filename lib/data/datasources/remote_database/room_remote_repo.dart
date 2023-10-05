@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:canary_app/domain/models/backgrounds.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart';
@@ -8,9 +9,12 @@ import 'links.dart';
 
 abstract class RoomRemoteDataSource {
   Future<List<Room>> searchRoom(String search, String token);
+  Future<List<Background>> getBackgrounds(String token);
   Future<Room> getRoomInfo(int id, String token);
   Future<Unit> createRoom(Room room, String token);
-  Future<String> upRoomImg(String path, String token);
+  Future<String> upRoomImg(String path, int id, String token);
+  Future<Unit> setBackgroundImg(String path, int id, String token);
+  Future<String> setRooomPassword(String password, int id, String token);
 }
 
 class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
@@ -78,7 +82,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
   }
 
   @override
-  Future<String> upRoomImg(String path, String token) async {
+  Future<String> upRoomImg(String path, int id, String token) async {
     final url = Uri.parse(upRoomImgLink);
 
     // Create the multipart request
@@ -87,7 +91,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     // Set the authorization header
     request.headers['Authorization'] = 'Bearer $token';
     request.headers["Content-Type"] = "application/json";
-
+    request.fields["room_id"] = "$id";
     // Add the file to the request
     final file = File(path);
     final fileStream = ByteStream(file.openRead());
@@ -99,7 +103,6 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
       fileStream,
       fileLength,
       filename: fileName,
-      // contentType: MediaType('image', 'jpeg'), // Adjust the content type based on your file type
     );
 
     request.files.add(multipartFile);
@@ -112,6 +115,66 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
       return src;
     } else {
       throw ServerException(message: response.statusCode.toString());
+    }
+  }
+
+  @override
+  Future<Unit> setBackgroundImg(String path, int id, String token) async {
+    var res = await client.post(
+      Uri.parse("$setbackgroundLink?backsrc=$path&room_id=$id"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    if (res.statusCode == 200) {
+      return unit;
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
+    }
+  }
+
+  @override
+  Future<String> setRooomPassword(String password, int id, String token) async {
+    var res = await client.post(
+      Uri.parse("$updateRoomPassLink?password=$password&room_id=$id"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    if (res.statusCode == 200) {
+      final mapData = jsonDecode(res.body);
+      print(mapData);
+      return mapData["message"];
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
+    }
+  }
+
+  @override
+  Future<List<Background>> getBackgrounds(String token) async {
+    var res = await client.get(
+      Uri.parse(getbackgroundsLink),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    if (res.statusCode == 200) {
+      final List mapData = jsonDecode(res.body);
+      return mapData.map((e) => Background.fromJson(e)).toList();
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
     }
   }
 }

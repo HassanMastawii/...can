@@ -25,10 +25,10 @@ class ProfileState extends ProviderStates {
   ProfileState({required this.profile});
 }
 
-class RoomsState extends ProviderStates {
-  final List<Room> rooms;
+class ListState<T> extends ProviderStates {
+  final List<T> list;
 
-  RoomsState({required this.rooms});
+  ListState({required this.list});
 }
 
 class RoomState extends ProviderStates {

@@ -1,4 +1,5 @@
 import 'package:canary_app/app/pages/profile_public/show_profail_frend.dart';
+import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
@@ -92,32 +93,40 @@ class _MyRoomState extends State<MyRoom> {
                         Expanded(
                           child: ListTile(
                             leading: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Editroom(),
-                                    ));
+                              onTap: () async {
+                                await MyRouter.myPush(
+                                  context,
+                                  Editroom(room: widget.room!),
+                                ).then((value) {
+                                  setState(() {
+                                    print("done");
+                                  });
+                                });
                               },
-                              child: const CircleAvatar(
+                              child: CircleAvatar(
                                 backgroundColor: Colors.amber,
                                 radius: 25,
                                 child: CircleAvatar(
                                   radius: 24,
-                                  backgroundImage:
-                                      AssetImage("images/pic_room.jpg"),
+                                  backgroundImage: NetworkImage(
+                                      "$serverLink${widget.room?.pic}"),
                                 ),
+                                // CircleAvatar(
+                                //   radius: 24,
+                                //   backgroundImage:
+                                //       AssetImage("images/pic_room.jpg"),
+                                // ),
                               ),
                             ),
-                            subtitle: const Text(
-                              "ID:5231564",
-                              style: TextStyle(
+                            subtitle: Text(
+                              "ID:${widget.room?.roomId}",
+                              style: const TextStyle(
                                 color: Colors.grey,
                               ),
                             ),
-                            title: const Text(
-                              "كناري شات",
-                              style: TextStyle(
+                            title: Text(
+                              widget.room?.name ?? "",
+                              style: const TextStyle(
                                 color: Colors.grey,
                               ),
                             ),

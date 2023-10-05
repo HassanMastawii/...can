@@ -1,18 +1,39 @@
+import 'package:canary_app/app/components/image_picker_mobile.dart';
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/a3lanRoom.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/bacpicroom.dart';
 import 'package:canary_app/app/pages/MyRoom.dart/states.dart';
+import 'package:canary_app/app/pages/edit_page/edit_page.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
+import 'package:canary_app/app/widgets/my_button.dart';
+import 'package:canary_app/app/widgets/my_text_field.dart';
+import 'package:canary_app/app/widgets/my_text_form_field.dart';
+import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'adminroom.dart';
 import 'blokroom.dart';
 
 class Editroom extends StatefulWidget {
-  const Editroom({super.key});
-
+  const Editroom({super.key, required this.room});
+  final Room room;
   @override
   State<Editroom> createState() => _EditroomState();
 }
 
 class _EditroomState extends State<Editroom> {
+  late final TextEditingController nameCntrlr;
+  late final TextEditingController password;
+
+  @override
+  void initState() {
+    nameCntrlr = TextEditingController(text: widget.room.name);
+    password = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +47,12 @@ class _EditroomState extends State<Editroom> {
                 Container(
                   height: 300,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          image: AssetImage("images/pic_room.jpg"))),
+                          image: NetworkImage(
+                            "$serverLink${widget.room.pic!}",
+                          ))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -37,39 +60,69 @@ class _EditroomState extends State<Editroom> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Center(
-                        child: IconButton(
-                            color: Colors.black,
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.settings_applications_rounded,
-                              size: 50,
-                            )),
-                      ),
+                      IconButton(
+                          onPressed: () {
+                            TextEditingController image =
+                                TextEditingController();
+                            showModalBottomSheet(
+                              context: context,
+                              showDragHandle: true,
+                              builder: (context) => ListView(
+                                children: [
+                                  ImagePickerMobile(
+                                    imageController: image,
+                                    radius: 25,
+                                  ),
+                                  MyButton(
+                                    text: "تعديل",
+                                    color: Colors.blue,
+                                    fontColor: Colors.white,
+                                    onPressed: context
+                                            .watch<RoomProvider>()
+                                            .isLoading
+                                        ? null
+                                        : () async {
+                                            final state = await context
+                                                .read<RoomProvider>()
+                                                .upRoomImg(image.text,
+                                                    widget.room.roomId!);
+                                            if (state is ErrorState) {
+                                              MySnackBar.showMyToast(
+                                                  text: state.failure.message);
+                                            } else if (state is ResState) {
+                                              setState(() {
+                                                widget.room.pic = state.path;
+                                              });
+                                              MySnackBar.showDoneToast();
+                                            }
+                                          },
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.more_vert_sharp)),
                       Expanded(
-                        child: Container(
-                          height: 60,
-                          decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(33)),
-                              color: Colors.black38),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                                counterStyle: TextStyle(color: Colors.white),
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(33))),
-                                hintText: "اسم الغرف",
-                                hintTextDirection: TextDirection.ltr,
-                                fillColor: Colors.amber,
-                                focusColor: Colors.amber,
-                                helperStyle: TextStyle(
-                                    color: Colors.white, fontSize: 22),
-                                hintStyle: TextStyle(
-                                    color: Colors.white, fontSize: 22),
-                                hoverColor: Colors.blueGrey,
-                                labelStyle: TextStyle(
-                                    color: Colors.white, fontSize: 22)),
+                        child: InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              useSafeArea: true,
+                              isScrollControlled: true,
+                              builder: (context) => EditPage(
+                                title: "أدخل اسم الرووم الجديد",
+                                hint: "اسم الرووم",
+                                oldVal: widget.room.name,
+                                onSubmit: (p0) {},
+                              ),
+                            );
+                          },
+                          child: MyTextFormField(
+                            enabled: false,
+                            color: Colors.white.withOpacity(0.8),
+                            labelText: "اسم الرووم",
+                            textEditingController:
+                                TextEditingController(text: widget.room.name),
                           ),
                         ),
                       ),
@@ -85,34 +138,29 @@ class _EditroomState extends State<Editroom> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      height: 60,
-                      width: 280,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(33)),
-                          color: Colors.black38),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                            counterStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33))),
-                            hintText: "قفل الغرفه",
-                            hintTextDirection: TextDirection.ltr,
-                            fillColor: Colors.amber,
-                            focusColor: Colors.amber,
-                            helperStyle:
-                                TextStyle(color: Colors.white, fontSize: 22),
-                            hintStyle:
-                                TextStyle(color: Colors.white, fontSize: 22),
-                            hoverColor: Colors.blueGrey,
-                            labelStyle:
-                                TextStyle(color: Colors.black, fontSize: 22)),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            useSafeArea: true,
+                            isScrollControlled: true,
+                            builder: (context) => EditPage(
+                              title: "أدخل قفل الغرفة الجديد",
+                              hint: "قفل الغرفة",
+                              oldVal: "",
+                              secure: true,
+                              onSubmit: (p0) {},
+                            ),
+                          );
+                        },
+                        child: MyTextFormField(
+                          enabled: false,
+                          labelText: "قفل الغرفة",
+                          textEditingController:
+                              TextEditingController(text: "********"),
+                        ),
                       ),
-                    ),
-                    const Text(
-                      "قفل الغرفه",
-                      style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ],
                 ),
@@ -187,7 +235,8 @@ class _EditroomState extends State<Editroom> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Bacpicroom(),
+                                builder: (context) =>
+                                    Bacpicroom(room: widget.room),
                               ));
                         },
                         icon: const Icon(

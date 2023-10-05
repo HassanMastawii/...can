@@ -18,6 +18,9 @@ const String newRoomAdsLink = "${apiLink}x/new_room_ads";
 const String checkRoomLink = "${apiLink}x/checkroom";
 const String dads1Link = "${apiLink}x/dads1";
 const String dads2Link = "${apiLink}x/dads2";
+const String getbackgroundsLink = "${apiLink}x/getback";
+const String setbackgroundLink = "${apiLink}x/setbackground";
+const String updateRoomPassLink = "${apiLink}x/update_room_pass";
 
 ///message links
 const String getMessagesLink = "${apiLink}x/messages";

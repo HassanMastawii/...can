@@ -52,7 +52,6 @@ dependencies:
   fluttertoast: ^8.2.2
   image_picker: ^1.0.2
   image_cropper: ^5.0.0
- 
   permission_handler: ^10.4.3
   audioplayers: ^5.1.0
   path_provider: ^2.1.0
@@ -60,6 +59,7 @@ dependencies:
   url_launcher: ^6.0.10
   country_code_picker: ^3.0.0
   just_audio: ^0.9.34
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
