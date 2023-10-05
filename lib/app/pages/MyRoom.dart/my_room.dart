@@ -2,6 +2,7 @@ import 'package:canary_app/app/pages/profile_public/show_profail_frend.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../components/input_area.dart';
@@ -204,39 +205,61 @@ class _MyRoomState extends State<MyRoom> {
                         ],
                       ),
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 30,
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return const ShowProfailFrendInRoom();
-                                  });
-                            },
-                            title: const Text(
-                              "محمد علي كلاي",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            subtitle: const Text(
-                              "رسالة جديدة",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            leading: const CircleAvatar(
-                              backgroundColor: Colors.amber,
-                              radius: 30,
-                              child: CircleAvatar(
-                                radius: 26,
-                                backgroundImage:
-                                    AssetImage("images/pic_room.jpg"),
+                    Container(
+                      width: double.infinity,
+                      height: 240.h,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 20,
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) {
+                                          return const ShowProfailFrendInRoom();
+                                        });
+                                  },
+                                  title: const Text(
+                                    "محمد علي كلاي",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  subtitle: const Text(
+                                    "رسالة جديدة",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  leading: const CircleAvatar(
+                                    backgroundColor: Colors.amber,
+                                    radius: 30,
+                                    child: CircleAvatar(
+                                      radius: 26,
+                                      backgroundImage:
+                                          AssetImage("images/pic_room.jpg"),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          IconButton(
+                              onPressed: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => RouletteGame(),
+                                //     ));
+                              },
+                              icon: Icon(
+                                Icons.https_rounded,
+                                color: Colors.deepOrange,
+                                size: 44,
+                              )),
+                        ],
                       ),
                     ),
                     if (!isTextFeildShown)
@@ -263,9 +286,8 @@ class _MyRoomState extends State<MyRoom> {
                                           showModalBottomSheet(
                                               context: context,
                                               builder: (context) {
-                                                return SizedBox(
-                                                    height: 350.h,
-                                                    child: const Exstra());
+                                                return const SizedBox(
+                                                    child: Exstra());
                                               });
                                         },
                                         icon: const Icon(
