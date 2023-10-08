@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MyTextField extends StatefulWidget {
-  const MyTextField({super.key, this.minLines, this.maxLines = 1});
+  const MyTextField({
+    super.key,
+    this.minLines,
+    this.maxLines = 1,
+  });
   final int? minLines;
   final int? maxLines;
+
   @override
   State<MyTextField> createState() => _MyTextFieldState();
 }
@@ -14,8 +19,8 @@ class _MyTextFieldState extends State<MyTextField> {
     return TextFormField(
       maxLines: widget.maxLines,
       minLines: widget.maxLines,
-      decoration: const InputDecoration(
-        hintText: "اكتب هنا....",
+      decoration: InputDecoration(
+        hintText: "اكتب هنا...",
         // contentPadding: EdgeInsets.symmetric(horizontal: 10),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30))),

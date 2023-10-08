@@ -1,8 +1,9 @@
 import 'dart:io';
-import 'package:canary_app/app/pages/Home/home.dart';
-import 'package:canary_app/app/pages/auth/Login.dart';
+import 'package:canary_app/app/home/button_navgetion_bar.dart';
+
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/themes/light_theme.dart';
+import 'package:canary_app/app/welcome/auth/Login.dart';
 import 'package:canary_app/device/locale/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
