@@ -1,10 +1,16 @@
+import 'package:canary_app/app/provider/providers/message_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/data/datasources/remote_database/message_remote_repo.dart';
 import 'package:canary_app/data/datasources/remote_database/room_remote_repo.dart';
+import 'package:canary_app/data/repositories/message_repo_impl.dart';
 import 'package:canary_app/data/repositories/room_repo_impl.dart';
+import 'package:canary_app/domain/repositories/message_repo.dart';
 import 'package:canary_app/domain/repositories/room_repo.dart';
 import 'package:canary_app/domain/usecases/auth/get_my_profile_usecase.dart';
 import 'package:canary_app/domain/usecases/auth/get_stored_token_usecase.dart';
 import 'package:canary_app/domain/usecases/auth/log_out_usecase.dart';
+import 'package:canary_app/domain/usecases/messages/get_messages_usecase.dart';
+import 'package:canary_app/domain/usecases/messages/post_message_usecase.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/get_backgrounds_usecase.dart';
 import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
@@ -48,11 +54,20 @@ Future<void> initInjections() async {
         sl(),
         sl(),
       ));
+  sl.registerLazySingleton<MessageProvider>(() => MessageProvider(
+        sl(),
+        sl(),
+      ));
   //Useecases
 
   //setting
   sl.registerLazySingleton<GetThemeUsecase>(() => GetThemeUsecase(sl()));
   sl.registerLazySingleton<SetThemeUsecase>(() => SetThemeUsecase(sl()));
+
+  //message
+  sl.registerLazySingleton<GetMessagesUsecase>(() => GetMessagesUsecase(sl()));
+  sl.registerLazySingleton<PostMessagesUsecase>(
+      () => PostMessagesUsecase(sl()));
 
   //room
   sl.registerLazySingleton<CreateRoomUsecase>(() => CreateRoomUsecase(sl()));
@@ -80,6 +95,10 @@ Future<void> initInjections() async {
   sl.registerLazySingleton<SettingRepository>(() => SettingRepositoryImpl(
         sl(),
       ));
+  sl.registerLazySingleton<MessageRepository>(() => MessageRepositoryImpl(
+        sl(),
+        sl(),
+      ));
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
         sl(),
         sl(),
@@ -96,6 +115,10 @@ Future<void> initInjections() async {
   sl.registerLazySingleton<RoomRemoteDataSource>(() => RoomRemoteDataSourceImpl(
         sl(),
       ));
+  sl.registerLazySingleton<MessageRemoteDataSource>(
+      () => MessageRemoteDataSourceImpl(
+            sl(),
+          ));
   //device
   sl.registerLazySingleton<Client>(() => Client());
 }

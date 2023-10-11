@@ -10,7 +10,6 @@ import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
-import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -99,13 +98,11 @@ class _MyRoomState extends State<MyRoom> {
                                   context,
                                   Editroom(room: widget.room!),
                                 ).then((value) {
-                                  setState(() {
-                                    print("done");
-                                  });
+                                  setState(() {});
                                 });
                               },
                               child: Padding(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 child: Row(
                                   children: [
                                     Container(
@@ -119,7 +116,7 @@ class _MyRoomState extends State<MyRoom> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                         width:
                                             10), // Add spacing between image and text
                                     Column(

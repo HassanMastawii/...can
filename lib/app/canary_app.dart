@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:canary_app/app/home/button_navgetion_bar.dart';
-
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/themes/light_theme.dart';
 import 'package:canary_app/app/welcome/auth/Login.dart';

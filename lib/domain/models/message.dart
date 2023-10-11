@@ -6,6 +6,12 @@ class Message extends Equatable {
   int? id;
   int? userId;
   String? message;
+
+  /// ```dart
+  /// 1 for text
+  /// 2 for voice
+  /// 3 for images
+  /// ```
   String? type;
   String? datex;
   String? fromUser;

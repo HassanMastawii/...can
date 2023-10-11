@@ -4,13 +4,10 @@ import 'package:canary_app/app/MyRoom.dart/editroom/admin/adminroom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/block/blokroom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/components_edatRoom/edit_page.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/states/states.dart';
-import 'package:canary_app/app/components/image_picker_mobile.dart';
+import 'package:canary_app/app/components/model_bottom_sheet/my_photo_picker.dart';
 import 'package:canary_app/app/components/toast.dart';
-
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
-import 'package:canary_app/app/widgets/my_button.dart';
-import 'package:canary_app/app/widgets/my_text_field.dart';
 import 'package:canary_app/app/widgets/my_text_form_field.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
@@ -27,12 +24,33 @@ class Editroom extends StatefulWidget {
 class _EditroomState extends State<Editroom> {
   late final TextEditingController nameCntrlr;
   late final TextEditingController password;
+  final MyPhotoPicker _myPhotoPicker = MyPhotoPicker();
+  @override
+  void dispose() {
+    password.dispose();
+    nameCntrlr.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     nameCntrlr = TextEditingController(text: widget.room.name);
     password = TextEditingController();
     super.initState();
+  }
+
+  _changeImg() async {
+    final state = await context
+        .read<RoomProvider>()
+        .upRoomImg(_myPhotoPicker.path!, widget.room.roomId!);
+    if (state is ErrorState) {
+      MySnackBar.showMyToast(text: state.failure.message);
+    } else if (state is ResState) {
+      setState(() {
+        widget.room.pic = state.path;
+      });
+      MySnackBar.showDoneToast();
+    }
   }
 
   @override
@@ -61,48 +79,41 @@ class _EditroomState extends State<Editroom> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            TextEditingController image =
-                                TextEditingController();
-                            showModalBottomSheet(
-                              context: context,
-                              showDragHandle: true,
-                              builder: (context) => ListView(
-                                children: [
-                                  ImagePickerMobile(
-                                    imageController: image,
-                                    radius: 25,
-                                  ),
-                                  MyButton(
-                                    text: "تعديل",
-                                    color: Colors.blue,
-                                    fontColor: Colors.white,
-                                    onPressed: context
-                                            .watch<RoomProvider>()
-                                            .isLoading
-                                        ? null
-                                        : () async {
-                                            final state = await context
-                                                .read<RoomProvider>()
-                                                .upRoomImg(image.text,
-                                                    widget.room.roomId!);
-                                            if (state is ErrorState) {
-                                              MySnackBar.showMyToast(
-                                                  text: state.failure.message);
-                                            } else if (state is ResState) {
-                                              setState(() {
-                                                widget.room.pic = state.path;
-                                              });
-                                              MySnackBar.showDoneToast();
-                                            }
-                                          },
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                          icon: const Icon(Icons.more_vert_sharp)),
+                      PopupMenuButton(
+                        child: CircleAvatar(
+                          child: Visibility(
+                            visible: !context.watch<RoomProvider>().isLoading,
+                            replacement: const CircularProgressIndicator(),
+                            child: const Icon(Icons.more_vert_outlined),
+                          ),
+                        ),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            child: const Text("الاستديو"),
+                            onTap: () async {
+                              await _myPhotoPicker
+                                  .fromGallery()
+                                  .then((value) async {
+                                if (value != null) {
+                                  await _changeImg();
+                                }
+                              });
+                            },
+                          ),
+                          PopupMenuItem(
+                            child: const Text("الكاميرا"),
+                            onTap: () async {
+                              await _myPhotoPicker
+                                  .fromCamera()
+                                  .then((value) async {
+                                if (value != null) {
+                                  await _changeImg();
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      ),
                       Expanded(
                         child: InkWell(
                           onTap: () {
