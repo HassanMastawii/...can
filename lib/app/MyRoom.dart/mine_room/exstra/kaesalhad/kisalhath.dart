@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class Kisalhath extends StatefulWidget {
@@ -62,7 +64,7 @@ class _KisalhathState extends State<Kisalhath> {
           ),
           Container(
             width: double.infinity,
-            height: 70,
+            height: 50,
             decoration: BoxDecoration(
               color: Colors.lightBlue[200],
               borderRadius: BorderRadius.circular(22),
@@ -99,7 +101,7 @@ class _KisalhathState extends State<Kisalhath> {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Container(
               width: double.infinity,
-              height: 65,
+              height: 45,
               decoration: BoxDecoration(
                 color: Colors.lightBlue[200],
                 borderRadius: BorderRadius.circular(22),
@@ -140,6 +142,36 @@ class _KisalhathState extends State<Kisalhath> {
             ),
           ),
           Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 33),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "<<الشحن",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 11),
+                child: const Icon(
+                  Icons.paid_outlined,
+                  size: 25,
+                  color: Colors.amberAccent,
+                ),
+              ),
+              const Text(
+                "1999929",
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: SizedBox(

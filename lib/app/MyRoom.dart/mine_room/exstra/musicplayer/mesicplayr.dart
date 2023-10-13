@@ -1,5 +1,5 @@
-import 'package:canary_app/app/MyRoom.dart/exstra/musicplayer/addmusic.dart';
-import 'package:canary_app/app/MyRoom.dart/exstra/musicplayer/muiscs.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/musicplayer/addmusic.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/musicplayer/muiscs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:canary_app/app/provider/providers/music_provider.dart';
