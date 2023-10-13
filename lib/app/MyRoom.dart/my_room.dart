@@ -1,21 +1,23 @@
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
-import 'package:canary_app/app/MyRoom.dart/exstra/exstra.dart';
+
+import 'package:canary_app/app/MyRoom.dart/mic/mic.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/exstra.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/cardSuperchat.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/imoge/imoge.dart';
+import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicroom.dart';
-import 'package:canary_app/app/MyRoom.dart/super_chat/cardSuperchat.dart';
 import 'package:canary_app/app/components/input_area.dart';
-import 'package:canary_app/app/components/model_bottom_sheet/geft.dart';
-import 'package:canary_app/app/components/model_bottom_sheet/imoge.dart';
+
 import 'package:canary_app/app/messages/list_chat_privt_inroom.dart';
 import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'peopleinroom.dart';
-
-import 'mic.dart';
+import 'mine_room/geft/geft.dart';
 
 class MyRoom extends StatefulWidget {
   const MyRoom({super.key, this.room});
@@ -98,11 +100,13 @@ class _MyRoomState extends State<MyRoom> {
                                   context,
                                   Editroom(room: widget.room!),
                                 ).then((value) {
-                                  setState(() {});
+                                  setState(() {
+                                    print("done");
+                                  });
                                 });
                               },
                               child: Padding(
-                                padding: const EdgeInsets.all(5),
+                                padding: EdgeInsets.all(5),
                                 child: Row(
                                   children: [
                                     Container(
@@ -116,7 +120,7 @@ class _MyRoomState extends State<MyRoom> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                         width:
                                             10), // Add spacing between image and text
                                     Column(
@@ -234,68 +238,75 @@ class _MyRoomState extends State<MyRoom> {
                         ],
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 45,
-                      color: Colors.amber,
-                      child: const CardSuperchat(),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 20,
-                              itemBuilder: (context, index) => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ListTile(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                        context: context,
-                                        builder: (context) {
-                                          return const ShowProfailFrendInRoom();
-                                        });
-                                  },
-                                  title: const Text(
-                                    "محمد علي كلاي",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  subtitle: const Text(
-                                    "رسالة جديدة",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  leading: const CircleAvatar(
-                                    backgroundColor: Colors.amber,
-                                    radius: 30,
-                                    child: CircleAvatar(
-                                      radius: 26,
-                                      backgroundImage:
-                                          AssetImage("images/pic_room.jpg"),
+                    Stack(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: 20,
+                                  itemBuilder: (context, index) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ListTile(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return const ShowProfailFrendInRoom();
+                                            });
+                                      },
+                                      title: const Text(
+                                        "محمد علي كلاي",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      subtitle: const Text(
+                                        "رسالة جديدة",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      leading: const CircleAvatar(
+                                        backgroundColor: Colors.amber,
+                                        radius: 30,
+                                        child: CircleAvatar(
+                                          radius: 26,
+                                          backgroundImage:
+                                              AssetImage("images/pic_room.jpg"),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
+                              IconButton(
+                                  onPressed: () {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) => RouletteGame(),
+                                    //     ));
+                                  },
+                                  icon: Icon(
+                                    Icons.https_rounded,
+                                    color: Colors.deepOrange,
+                                    size: 44,
+                                  )),
+                            ],
                           ),
-                          IconButton(
-                              onPressed: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => RouletteGame(),
-                                //     ));
-                              },
-                              icon: Icon(
-                                Icons.https_rounded,
-                                color: Colors.deepOrange,
-                                size: 44,
-                              )),
-                        ],
-                      ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Colors.black54,
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(color: Colors.amberAccent, width: 2),
+                          ),
+                          child: const CardSuperchat(),
+                        ),
+                      ],
                     ),
                     if (!isTextFeildShown)
                       Stack(alignment: Alignment.center, children: [

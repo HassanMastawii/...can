@@ -1,6 +1,6 @@
-import 'package:canary_app/app/MyRoom.dart/bacpicroom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/a3lan_in_room/a3lanRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/admin/adminroom.dart';
+import 'package:canary_app/app/MyRoom.dart/editroom/backgraondroom/bacpicroom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/block/blokroom.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/components_edatRoom/edit_page.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/states/states.dart';
