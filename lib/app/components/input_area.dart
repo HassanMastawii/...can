@@ -1,6 +1,6 @@
+import 'package:canary_app/app/MyRoom.dart/mine_room/imoge/imoge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'model_bottom_sheet/imoge.dart';
 
 class InputArea extends StatefulWidget {
   const InputArea({super.key, this.onSend, required this.controller});

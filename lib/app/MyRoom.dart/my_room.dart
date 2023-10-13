@@ -1,7 +1,11 @@
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
-import 'package:canary_app/app/MyRoom.dart/exstra/exstra.dart';
+
+import 'package:canary_app/app/MyRoom.dart/mic/mic.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/exstra.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/cardSuperchat.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/imoge/imoge.dart';
+import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicroom.dart';
-import 'package:canary_app/app/MyRoom.dart/super_chat/cardSuperchat.dart';
 import 'package:canary_app/app/components/input_area.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/geft.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/imoge.dart';
@@ -13,11 +17,11 @@ import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
-import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+
 import 'peopleinroom.dart';
+
 import 'mic.dart';
 
 class MyRoom extends StatefulWidget {
@@ -132,11 +136,13 @@ class _MyRoomState extends State<MyRoom> {
                                   context,
                                   Editroom(room: widget.room!),
                                 ).then((value) {
-                                  setState(() {});
+                                  setState(() {
+                                    print("done");
+                                  });
                                 });
                               },
                               child: Padding(
-                                padding: const EdgeInsets.all(5),
+                                padding: EdgeInsets.all(5),
                                 child: Row(
                                   children: [
                                     Container(
@@ -150,7 +156,7 @@ class _MyRoomState extends State<MyRoom> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                         width:
                                             10), // Add spacing between image and text
                                     Column(
@@ -327,7 +333,7 @@ class _MyRoomState extends State<MyRoom> {
                                 //       builder: (context) => RouletteGame(),
                                 //     ));
                               },
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.https_rounded,
                                 color: Colors.deepOrange,
                                 size: 44,
