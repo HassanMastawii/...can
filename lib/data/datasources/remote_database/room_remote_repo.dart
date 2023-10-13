@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:canary_app/domain/models/backgrounds.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart';
 import '../../errors/exceptions.dart';
@@ -11,6 +13,8 @@ abstract class RoomRemoteDataSource {
   Future<List<Room>> searchRoom(String search, String token);
   Future<List<Background>> getBackgrounds(String token);
   Future<Room> getRoomInfo(int id, String token);
+  Future<List<UserCoin>> getUserList(int id, String token);
+  Future<List<Gift>> giftList(String token);
   Future<Unit> createRoom(Room room, String token);
   Future<String> upRoomImg(String path, int id, String token);
   Future<Unit> setBackgroundImg(String path, int id, String token);
@@ -173,6 +177,48 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     if (res.statusCode == 200) {
       final List mapData = jsonDecode(res.body);
       return mapData.map((e) => Background.fromJson(e)).toList();
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
+    }
+  }
+
+  @override
+  Future<List<UserCoin>> getUserList(int id, String token) async {
+    var res = await client.get(
+      Uri.parse("$getUserListLink?room_id=$id"),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    if (res.statusCode == 200) {
+      final List list = jsonDecode(res.body);
+      final List listData = list.first;
+      print(jsonDecode(res.body));
+      return listData.map((e) => UserCoin.fromJson(e)).toList();
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
+    }
+  }
+
+  @override
+  Future<List<Gift>> giftList(String token) async {
+    var res = await client.get(
+      Uri.parse(giftListLink),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    if (res.statusCode == 200) {
+      final List mapData = jsonDecode(res.body);
+      return mapData.map((e) => Gift.fromJson(e)).toList();
     } else {
       throw ServerException(message: res.statusCode.toString() + res.body);
     }

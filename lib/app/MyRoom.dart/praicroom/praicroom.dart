@@ -1,12 +1,12 @@
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicday.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicmonthe.dart';
-
 import 'package:canary_app/app/widgets/my_button.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
 class Praicroom extends StatefulWidget {
-  const Praicroom({Key? key}) : super(key: key);
-
+  const Praicroom({Key? key, required this.userList}) : super(key: key);
+  final List<UserCoin> userList;
   @override
   State<Praicroom> createState() => _PraicroomState();
 }

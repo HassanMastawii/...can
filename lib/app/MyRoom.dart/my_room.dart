@@ -5,16 +5,19 @@ import 'package:canary_app/app/MyRoom.dart/super_chat/cardSuperchat.dart';
 import 'package:canary_app/app/components/input_area.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/geft.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/imoge.dart';
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/messages/list_chat_privt_inroom.dart';
 import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
 import 'peopleinroom.dart';
-
 import 'mic.dart';
 
 class MyRoom extends StatefulWidget {
@@ -28,6 +31,37 @@ class MyRoom extends StatefulWidget {
 class _MyRoomState extends State<MyRoom> {
   bool isVolumeOn = true;
   bool ismic = true;
+  List<UserCoin> _userList = [];
+  bool isLoading = true;
+
+  init() async {
+    isLoading = true;
+    await context
+        .read<RoomProvider>()
+        .getUserList(widget.room!.roomId!)
+        .then((state) {
+      if (state is ListState<UserCoin> && mounted) {
+        setState(() {
+          isLoading = false;
+          _userList = state.list;
+        });
+      }
+      if (state is ErrorState && mounted) {
+        setState(() {
+          isLoading = false;
+        });
+        MySnackBar.showMyToast(text: state.failure.message);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await init();
+    });
+    super.initState();
+  }
 
   void toggleVolume() {
     setState(() {
@@ -151,7 +185,9 @@ class _MyRoomState extends State<MyRoom> {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (context) {
-                                  return const PeopleinRoom();
+                                  return PeopleinRoom(
+                                    userList: _userList,
+                                  );
                                 },
                               );
                             },
@@ -159,9 +195,9 @@ class _MyRoomState extends State<MyRoom> {
                               Icons.group,
                               color: Colors.white,
                             ),
-                            label: const Text(
-                              "1000",
-                              style: TextStyle(color: Colors.white),
+                            label: Text(
+                              _userList.length.toString(),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                           IconButton(
@@ -192,13 +228,15 @@ class _MyRoomState extends State<MyRoom> {
                               showModalBottomSheet(
                                   context: context,
                                   builder: (context) {
-                                    return const Praicroom();
+                                    return Praicroom(
+                                      userList: _userList,
+                                    );
                                   });
                             },
                             icon: const Icon(Icons.attach_money_rounded),
-                            label: const Text(
-                              "1000",
-                              style: TextStyle(color: Colors.yellow),
+                            label: Text(
+                              getTotalAmount(),
+                              style: const TextStyle(color: Colors.yellow),
                             )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -289,7 +327,7 @@ class _MyRoomState extends State<MyRoom> {
                                 //       builder: (context) => RouletteGame(),
                                 //     ));
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.https_rounded,
                                 color: Colors.deepOrange,
                                 size: 44,
@@ -431,6 +469,14 @@ class _MyRoomState extends State<MyRoom> {
         ),
       ),
     );
+  }
+
+  String getTotalAmount() {
+    int total = 0;
+    for (var e in _userList) {
+      total = total + e.totalCoinAmount;
+    }
+    return total.toString();
   }
 
   Widget getMember({double rbig = 35, double rsmall = 33}) {

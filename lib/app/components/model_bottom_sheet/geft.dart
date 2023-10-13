@@ -1,9 +1,19 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:canary_app/app/MyRoom.dart/mic.dart';
+import 'package:canary_app/app/components/toast.dart';
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
+import 'package:canary_app/app/widgets/skeleton.dart';
+import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/extensions/extention.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class Geftbox extends StatefulWidget {
   const Geftbox({super.key});
@@ -15,6 +25,35 @@ class Geftbox extends StatefulWidget {
 class _GeftboxState extends State<Geftbox> {
   List<int> selectedList = [];
   int selectedGift = -1;
+  List<Gift>? _gifts;
+  bool isLoading = true;
+
+  init() async {
+    isLoading = true;
+    await context.read<RoomProvider>().getGiftsList().then((state) {
+      if (state is ListState<Gift> && mounted) {
+        setState(() {
+          isLoading = false;
+          _gifts = state.list;
+        });
+      }
+      if (state is ErrorState && mounted) {
+        setState(() {
+          isLoading = false;
+        });
+        MySnackBar.showMyToast(text: state.failure.message);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await init();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -75,69 +114,72 @@ class _GeftboxState extends State<Geftbox> {
         Expanded(
           child: Container(
             color: Colors.black87,
-            child: GridView.builder(
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                ),
-                itemCount: 56,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (selectedGift == index) {
-                          selectedGift = -1;
-                        } else {
-                          selectedGift = index;
-                        }
-                      });
-                    },
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Stack(
+            child: _gifts == null && isLoading
+                ? getLoader()
+                : _gifts == null
+                    ? getError()
+                    : GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                        ),
+                        itemCount: _gifts?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (selectedGift == index) {
+                                  selectedGift = -1;
+                                } else {
+                                  selectedGift = index;
+                                }
+                              });
+                            },
+                            child: Container(
+                              child: Column(
                                 children: [
-                                  Container(
-                                    height: 59.h,
-                                    width: 59.w,
-                                    decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage('images/sy.png'))),
-                                  ),
-                                  if (selectedGift == index)
-                                    const CircleAvatar(
-                                      backgroundColor: Colors.amber,
-                                      radius: 10,
-                                      child: Icon(
-                                        Icons.done,
-                                        size: 10,
+                                  Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          SizedBox(
+                                            height: 59.h,
+                                            width: 59.w,
+                                            child: SvgPicture.network(
+                                                "$serverLink${_gifts![index].pic}"),
+                                          ),
+                                          if (selectedGift == index)
+                                            const CircleAvatar(
+                                              backgroundColor: Colors.amber,
+                                              radius: 10,
+                                              child: Icon(
+                                                Icons.done,
+                                                size: 10,
+                                              ),
+                                            ),
+                                        ],
                                       ),
+                                      Text(
+                                        _gifts![index].name,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    _gifts![index].price.toString(),
+                                    style: const TextStyle(
+                                      color: Colors.amberAccent,
                                     ),
+                                  ),
                                 ],
                               ),
-                              const Text(
-                                "name geft",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Text(
-                            "2000",
-                            style: TextStyle(
-                              color: Colors.amberAccent,
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
+                          );
+                        }),
           ),
         ),
         Container(
@@ -161,9 +203,10 @@ class _GeftboxState extends State<Geftbox> {
                 size: 35,
                 color: Colors.amberAccent,
               ),
-              const Text(
-                "1999929",
-                style: TextStyle(
+              Text(
+                context.watch<CoreProvider>().myProfile?.balance.toString() ??
+                    "0",
+                style: const TextStyle(
                     color: Colors.amberAccent,
                     fontSize: 22,
                     fontWeight: FontWeight.w700),
@@ -191,6 +234,53 @@ class _GeftboxState extends State<Geftbox> {
             ],
           ),
         )
+      ],
+    );
+  }
+
+  getLoader() {
+    return ListView(
+      children: const [
+        Skeleton(
+          height: 60,
+          width: 60,
+        ),
+        Skeleton(
+          height: 60,
+          width: 60,
+        ),
+        Skeleton(
+          height: 60,
+          width: 60,
+        ),
+        Skeleton(
+          height: 60,
+          width: 60,
+        ),
+        Skeleton(
+          height: 60,
+          width: 60,
+        ),
+      ],
+    );
+  }
+
+  getError() {
+    return Column(
+      children: [
+        100.getHightSizedBox(),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              init();
+            });
+          },
+          child: Text(
+            "إعادة المحاولة",
+            style: TextStyle(
+                fontSize: 18, color: Theme.of(context).colorScheme.tertiary),
+          ),
+        ),
       ],
     );
   }

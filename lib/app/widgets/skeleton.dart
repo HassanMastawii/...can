@@ -13,7 +13,7 @@ class Skeleton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Shimmer.fromColors(
         baseColor: Theme.of(context).focusColor.withOpacity(0.1),
-        highlightColor: Theme.of(context).focusColor.withOpacity(0.1),
+        highlightColor: Theme.of(context).focusColor.withOpacity(0.8),
         child: Container(
           height: height,
           width: width,

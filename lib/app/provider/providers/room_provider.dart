@@ -1,9 +1,13 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
 import 'package:canary_app/domain/models/backgrounds.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/get_backgrounds_usecase.dart';
+import 'package:canary_app/domain/usecases/room/get_gifts_usecase.dart';
+import 'package:canary_app/domain/usecases/room/get_user_list_usecase.dart';
 import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
 import 'package:canary_app/domain/usecases/room/search_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/set_background_img_usecase.dart';
@@ -19,6 +23,8 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   final SetBackgroundImgUsecase _setBackgroundImgUsecase;
   final GetBackgroundsUsecase _getBackgroundsUsecase;
   final SetRoomPasswordUsecase _setRoomPasswordUsecase;
+  final GetGiftsUsecase _getGiftsUsecase;
+  final GetUserListUsecase _getUserListUsecase;
 
   RoomProvider(
     this._searchRoomUsecase,
@@ -28,6 +34,8 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
     this._setBackgroundImgUsecase,
     this._getBackgroundsUsecase,
     this._setRoomPasswordUsecase,
+    this._getGiftsUsecase,
+    this._getUserListUsecase,
   );
   bool isLoading = false;
 
@@ -47,6 +55,24 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
     isLoading = false;
     notifyListeners();
     return failureOrListToState<Background>(failureOrList);
+  }
+
+  Future<ProviderStates> getUserList(int roomid) async {
+    isLoading = true;
+    notifyListeners();
+    final failureOrList = await _getUserListUsecase(roomid);
+    isLoading = false;
+    notifyListeners();
+    return failureOrListToState<UserCoin>(failureOrList);
+  }
+
+  Future<ProviderStates> getGiftsList() async {
+    isLoading = true;
+    notifyListeners();
+    final failureOrList = await _getGiftsUsecase();
+    isLoading = false;
+    notifyListeners();
+    return failureOrListToState<Gift>(failureOrList);
   }
 
   Future<ProviderStates> upRoomImg(String path, int roomid) async {

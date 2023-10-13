@@ -118,7 +118,6 @@ class _SearchPageState extends State<SearchPage> {
                               )).then((value) {
                             setState(() {});
                           });
-                          ;
                         },
                       ),
                     )

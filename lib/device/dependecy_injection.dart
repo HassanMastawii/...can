@@ -13,6 +13,8 @@ import 'package:canary_app/domain/usecases/messages/get_messages_usecase.dart';
 import 'package:canary_app/domain/usecases/messages/post_message_usecase.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/get_backgrounds_usecase.dart';
+import 'package:canary_app/domain/usecases/room/get_gifts_usecase.dart';
+import 'package:canary_app/domain/usecases/room/get_user_list_usecase.dart';
 import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
 import 'package:canary_app/domain/usecases/room/search_room_usecase.dart';
 import 'package:canary_app/domain/usecases/room/set_background_img_usecase.dart';
@@ -53,6 +55,8 @@ Future<void> initInjections() async {
         sl(),
         sl(),
         sl(),
+        sl(),
+        sl(),
       ));
   sl.registerLazySingleton<MessageProvider>(() => MessageProvider(
         sl(),
@@ -74,6 +78,8 @@ Future<void> initInjections() async {
   sl.registerLazySingleton<SearchRoomUsecase>(() => SearchRoomUsecase(sl()));
   sl.registerLazySingleton<RoomInfoUsecase>(() => RoomInfoUsecase(sl()));
   sl.registerLazySingleton<UpRoomImgUsecase>(() => UpRoomImgUsecase(sl()));
+  sl.registerLazySingleton<GetGiftsUsecase>(() => GetGiftsUsecase(sl()));
+  sl.registerLazySingleton<GetUserListUsecase>(() => GetUserListUsecase(sl()));
   sl.registerLazySingleton<SetRoomPasswordUsecase>(
       () => SetRoomPasswordUsecase(sl()));
 

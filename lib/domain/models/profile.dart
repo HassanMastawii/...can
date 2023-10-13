@@ -18,6 +18,8 @@ class Profile extends Equatable {
   String? pic4;
   String? pic5;
   String? frind;
+  int? totalCoinAmount;
+
   // DateTime? birthday;
   // DateTime? created_at;
   // DateTime? updated_at;
@@ -25,6 +27,7 @@ class Profile extends Equatable {
 
   Profile({
     this.email,
+    this.totalCoinAmount,
     this.balance,
     this.bio,
     this.contry,
@@ -47,6 +50,7 @@ class Profile extends Equatable {
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
       email: json["email"],
+      totalCoinAmount: json["total_coin_amount"],
       balance: json["balance"],
       bio: json["bio"],
       contry: json["contry"],
@@ -66,6 +70,7 @@ class Profile extends Equatable {
   }
   Map<String, dynamic> toJson() {
     return {
+      "total_coin_amount": totalCoinAmount,
       "email": email,
       "balance": balance,
       "bio": bio,

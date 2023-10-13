@@ -1,4 +1,3 @@
-import 'package:canary_app/app/colorApp/color.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 

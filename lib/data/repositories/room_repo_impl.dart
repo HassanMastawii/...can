@@ -1,6 +1,8 @@
 import 'package:canary_app/data/datasources/remote_database/room_remote_repo.dart';
 import 'package:canary_app/domain/models/backgrounds.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:canary_app/domain/repositories/room_repo.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
@@ -166,6 +168,52 @@ class RoomRepositoryImpl implements RoomRepository {
         } else {
           final remoteUser = await _authRemoteDataSource.setRooomPassword(
               password, id, _localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<UserCoin>>> getUserList(int id) async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource.getUserList(
+              id, _localDataSource.getToken()!);
+          return Right(remoteUser);
+        }
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.message));
+      } on NotLogedInException catch (e) {
+        return Left(NotLogedInFailure(message: e.message));
+      } on Exception catch (e) {
+        return Left(UnKnownFailure(message: e.toString()));
+      }
+    } else {
+      return const Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Gift>>> giftList() async {
+    if (await isConnected) {
+      try {
+        if (_localDataSource.getToken() == null) {
+          return const Left(NotLogedInFailure());
+        } else {
+          final remoteUser = await _authRemoteDataSource
+              .giftList(_localDataSource.getToken()!);
           return Right(remoteUser);
         }
       } on ServerException catch (e) {

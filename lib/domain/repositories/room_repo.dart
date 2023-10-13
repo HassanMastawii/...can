@@ -1,5 +1,7 @@
 import 'package:canary_app/domain/models/backgrounds.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:dartz/dartz.dart';
 import '../../data/errors/failures.dart';
 
@@ -11,4 +13,6 @@ abstract class RoomRepository {
   Future<Either<Failure, String>> upRoomImg(String path, int roomId);
   Future<Either<Failure, Unit>> setbackgroundImg(String path, int roomId);
   Future<Either<Failure, String>> setRooomPassword(String password, int id);
+  Future<Either<Failure, List<UserCoin>>> getUserList(int id);
+  Future<Either<Failure, List<Gift>>> giftList();
 }

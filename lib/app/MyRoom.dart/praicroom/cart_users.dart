@@ -1,7 +1,10 @@
+import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/models/profile.dart';
 import 'package:flutter/material.dart';
 
 class Carduserspricinroom extends StatefulWidget {
-  const Carduserspricinroom({super.key});
+  const Carduserspricinroom({super.key, this.profile});
+  final Profile? profile;
 
   @override
   State<Carduserspricinroom> createState() => _CarduserspricinroomState();
@@ -16,25 +19,32 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
         elevation: 11,
         child: Row(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage: AssetImage("images/pic_room.jpg"),
-              ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: widget.profile?.pic != null
+                  ? CircleAvatar(
+                      radius: 30,
+                      backgroundImage:
+                          NetworkImage("$serverLink${widget.profile!.pic!}"),
+                    )
+                  : const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage("images/pic_room.jpg"),
+                    ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "user name",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                Text(
+                  widget.profile?.name.toString() ?? "",
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                const Row(
+                Row(
                   children: [
-                    Text("123456789"),
-                    Text(":ID"),
-                    Icon(Icons.library_add_rounded),
+                    Text(widget.profile?.id.toString() ?? ""),
+                    const Text(":ID"),
+                    const Icon(Icons.library_add_rounded),
                   ],
                 ),
                 Row(
