@@ -70,7 +70,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MyRoom(),
+                          builder: (context) => const MyRoom(
+                            userList: [],
+                          ),
                         ));
                   },
                   icon: const Icon(
@@ -116,7 +118,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                   chatName: "شات العرب",
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MyRoom(),
+                      builder: (context) => const MyRoom(
+                        userList: [],
+                      ),
                     ));
                   },
                   imageLink: "images/2.png",

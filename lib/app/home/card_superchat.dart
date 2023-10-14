@@ -12,7 +12,9 @@ class SuperChat extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const MyRoom(),
+            builder: (context) => const MyRoom(
+              userList: [],
+            ),
           ));
         },
         child: Container(
