@@ -120,7 +120,7 @@ class _GeftboxState extends State<Geftbox> {
                                 ],
                               ),
                               const Text(
-                                "name geft",
+                                "اسم الهديه",
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
