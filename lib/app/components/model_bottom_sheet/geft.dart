@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers
 
-import 'package:canary_app/app/MyRoom.dart/mic.dart';
+import 'package:canary_app/app/MyRoom.dart/mic/mic.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';

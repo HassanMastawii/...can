@@ -1,10 +1,13 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:canary_app/app/components/image_handler.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PeopleinRoom extends StatefulWidget {
-  const PeopleinRoom({super.key});
+  const PeopleinRoom({super.key, required this.userList});
+  final List<UserCoin> userList;
 
   @override
   State<PeopleinRoom> createState() => _PeopleinRoomState();
@@ -24,10 +27,10 @@ class _PeopleinRoomState extends State<PeopleinRoom> {
               Container(
                 color: Colors.white30,
                 height: 40,
-                child: const Center(
+                child: Center(
                     child: Text(
-                  "On Line 100",
-                  style: TextStyle(
+                  "OnLine ${widget.userList.length}",
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
@@ -37,7 +40,7 @@ class _PeopleinRoomState extends State<PeopleinRoom> {
               Expanded(
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 56,
+                  itemCount: widget.userList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       child: Card(
@@ -52,14 +55,14 @@ class _PeopleinRoomState extends State<PeopleinRoom> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 11),
-                                    child: Text("user name",
-                                        style: TextStyle(
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 11),
+                                    child: Text(widget.userList[index].username,
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700)),
                                   ),
-                                  Text("ID:45678980"),
+                                  Text("ID:${widget.userList[index].userId}"),
                                   Container(
                                     height: 45,
                                     width: 220.w,
@@ -126,19 +129,18 @@ class _PeopleinRoomState extends State<PeopleinRoom> {
                                 padding:
                                     const EdgeInsets.only(left: 10, right: 10),
                                 child: Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
+                                    width: 70,
+                                    height: 70,
+                                    decoration: BoxDecoration(
                                       border: Border.all(
                                           width: 4,
                                           color: const Color.fromARGB(
                                               207, 255, 224, 85)),
                                       borderRadius: BorderRadius.circular(90),
                                       color: Colors.black,
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'images/pic_room.jpg'))),
-                                ),
+                                    ),
+                                    child: ImageHandler(
+                                        path: widget.userList[index].userPic)),
                               ),
                             ],
                           ),

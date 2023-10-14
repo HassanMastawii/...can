@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:marquee/marquee.dart';
 
 class CardSuperchat extends StatefulWidget {
   const CardSuperchat({Key? key}) : super(key: key);

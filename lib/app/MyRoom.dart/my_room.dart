@@ -1,5 +1,4 @@
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
-
 import 'package:canary_app/app/MyRoom.dart/mic/mic.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/exstra.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/cardSuperchat.dart';
@@ -8,7 +7,6 @@ import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicroom.dart';
 import 'package:canary_app/app/components/input_area.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/geft.dart';
-import 'package:canary_app/app/components/model_bottom_sheet/imoge.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/messages/list_chat_privt_inroom.dart';
 import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
@@ -17,12 +15,10 @@ import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'peopleinroom.dart';
-
-import 'mic.dart';
+import 'package:provider/provider.dart';
 
 class MyRoom extends StatefulWidget {
   const MyRoom({super.key, this.room});
