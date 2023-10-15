@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:canary_app/app/MyRoom.dart/my_room.dart';
 import 'package:canary_app/app/components/toast.dart';
 

@@ -1,8 +1,6 @@
-import 'package:canary_app/app/provider/providers/music_provider.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 
 class AddMusic extends StatefulWidget {
   final Function(List<String>) onFilesSelected;
@@ -29,7 +27,6 @@ class _AddMusicState extends State<AddMusic> {
 
   @override
   Widget build(BuildContext context) {
-    final musicProvider = Provider.of<MusicProvider>(context);
     return IconButton(
       onPressed: () async {
         await _requestStoragePermission();

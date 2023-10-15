@@ -22,7 +22,7 @@ class _CardStatusState extends State<CardStatus> {
         child: Center(
           child: Text(
             widget.h,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
             ),

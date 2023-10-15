@@ -1,8 +1,8 @@
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/kaesalhad/kisalhath.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/mic_plus/mic_pius.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/musicplayer/mesicplayr.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/super_chat.dart';
 
-import 'package:canary_app/games/Roulette/Roulette.dart';
 import 'package:flutter/material.dart';
 
 class Exstra extends StatefulWidget {
@@ -15,7 +15,7 @@ class Exstra extends StatefulWidget {
 class _ExstraState extends State<Exstra> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: [
@@ -43,7 +43,13 @@ class _ExstraState extends State<Exstra> {
               getimag(
                 imag: "m.png",
                 name: 'كرسي اضافي',
-                ontap: () {},
+                ontap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return const MicPlus();
+                      });
+                },
               ),
               getimag(
                 imag: "myosic.png",

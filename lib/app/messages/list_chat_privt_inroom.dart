@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, no_leading_underscores_for_local_identifiers, unused_element
 
 import 'dart:async';
 
 import 'package:canary_app/app/messages/home_message.dart';
 import 'package:canary_app/app/messages/private_chat/masseg_prifet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListChat extends StatefulWidget {
   const ListChat({super.key});

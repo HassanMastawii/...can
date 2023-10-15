@@ -1,9 +1,8 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:canary_app/app/MyRoom.dart/editroom/components_edatRoom/card_admin_and_block.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Blokroom extends StatefulWidget {
   const Blokroom({super.key});
