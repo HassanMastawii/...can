@@ -1,3 +1,4 @@
+import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../components/friend_card.dart';
@@ -18,13 +19,14 @@ class _FolowerPageState extends State<FolowerPage> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                   
-                     
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "المتابعين",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const CupertinoSearchTextField(
@@ -35,9 +37,14 @@ class _FolowerPageState extends State<FolowerPage> {
                   itemCount: 56,
                   itemBuilder: (context, index) {
                     return const FriendCard(
-                      trailing: Tooltip(
-                          message: "2023-09-05 09:05 pm",
-                          child: Text("09:05 pm")),
+                      trailing: Column(children: [
+                        MyButton(
+                          text: "حظر",
+                          color: Colors.red,
+                          size: 14,
+                          fontColor: Colors.white,
+                        ),
+                      ]),
                     );
                   },
                 ),

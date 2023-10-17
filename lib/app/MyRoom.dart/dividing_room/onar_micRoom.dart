@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:canary_app/app/MyRoom.dart/mic/onar_mic.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicroom.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,7 @@ class _OnarMicRoomState extends State<OnarMicRoom> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            getMember(),
+            OnarMic(),
           ],
         ),
       ],

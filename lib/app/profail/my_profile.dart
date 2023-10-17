@@ -18,6 +18,7 @@ import 'package:canary_app/app/welcome/auth/Login.dart';
 import 'package:canary_app/device/locale/locale.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +83,13 @@ class _MyProfileState extends State<MyProfile> {
                           color: Colors.blue),
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (value.myProfile?.id != null) {
+                          Clipboard.setData(ClipboardData(
+                              text: value.myProfile!.id.toString()));
+                          showSnackbar(context, 'تم النسخ بنجاح');
+                        }
+                      },
                       icon: const Icon(Icons.library_add_rounded),
                       label: Text(value.myProfile?.id?.toString() ?? ""),
                     ),
@@ -383,4 +390,17 @@ class _MyProfileState extends State<MyProfile> {
       ),
     );
   }
+}
+
+void showSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
+
+  // عرض الرسالة لمدة 2 ثانية (يمكنك تغيير القيمة حسب رغبتك)
+  Future.delayed(const Duration(seconds: 2), () {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  });
 }

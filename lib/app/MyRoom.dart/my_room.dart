@@ -164,28 +164,4 @@ class _MyRoomState extends State<MyRoom> {
       ),
     );
   }
-
-  Widget getMember({double rbig = 35, double rsmall = 33}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.amber,
-            radius: rbig,
-            child: CircleAvatar(
-              radius: rsmall,
-              backgroundImage: const AssetImage("images/pic_room.jpg"),
-            ),
-          ),
-          const Text(
-            "ali",
-            style: TextStyle(
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

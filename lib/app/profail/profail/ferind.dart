@@ -19,25 +19,14 @@ class _FriendPageState extends State<FriendPage> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.logout,
-                          size: 30,
-                        )),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("الأصدقاء", style: TextStyle(fontSize: 30)),
-                      ],
-                    ),
-                  ],
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "الاصدقاء",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const CupertinoSearchTextField(

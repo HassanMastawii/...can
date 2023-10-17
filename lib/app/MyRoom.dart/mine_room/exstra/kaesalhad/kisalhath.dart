@@ -239,6 +239,7 @@ class _KisalhathState extends State<Kisalhath> {
                               CircleAvatar(
                                 radius: 44,
                                 backgroundColor: Colors.amber,
+                                child: Text("فتح"),
                               )
                             ],
                           )
