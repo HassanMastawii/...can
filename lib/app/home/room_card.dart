@@ -1,3 +1,4 @@
+import 'package:canary_app/app/components/image_handler.dart';
 import 'package:flutter/material.dart';
 
 class RoomCard extends StatelessWidget {
@@ -20,9 +21,7 @@ class RoomCard extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Image.asset(
-            imageLink,
-          ),
+          ImageHandler(path: imageLink),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(

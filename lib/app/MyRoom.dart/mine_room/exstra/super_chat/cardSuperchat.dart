@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 
 class CardSuperchat extends StatefulWidget {
   const CardSuperchat({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class CardSuperchat extends StatefulWidget {
 class _CardSuperchatState extends State<CardSuperchat> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -32,7 +33,7 @@ class _CardSuperchatState extends State<CardSuperchat> {
                 "hassan",
                 style: TextStyle(fontSize: 16, color: Colors.white),
               ),
-              Container(
+              SizedBox(
                 height: 25,
                 width: 220,
                 child: Marquee(

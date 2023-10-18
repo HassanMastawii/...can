@@ -23,6 +23,8 @@ const String setbackgroundLink = "${apiLink}x/setbackground";
 const String updateRoomPassLink = "${apiLink}x/update_room_pass";
 const String getUserListLink = "${apiLink}x/getuserlist";
 const String giftListLink = "${apiLink}x/giftlist";
+const String removetouserlistLink = "${apiLink}x/removetouserlist";
+const String addtouserlistLink = "${apiLink}x/addtouserlist";
 
 ///message links
 const String getMessagesLink = "${apiLink}x/messages";

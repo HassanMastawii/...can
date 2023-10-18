@@ -1,13 +1,18 @@
 import 'package:canary_app/app/MyRoom.dart/my_room.dart';
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/home/bnart.dart';
 import 'package:canary_app/app/home/card_superchat.dart';
 import 'package:canary_app/app/home/my_visits.dart';
 import 'package:canary_app/app/home/room_card.dart';
 import 'package:canary_app/app/home/search_page.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
 
 import 'package:canary_app/app/router/my_router.dart';
+import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:provider/provider.dart';
 
 class HomeRooms extends StatefulWidget {
   const HomeRooms({super.key});
@@ -17,6 +22,25 @@ class HomeRooms extends StatefulWidget {
 }
 
 class _HomeRoomsState extends State<HomeRooms> {
+  List<Room> roomData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData(); // استدعاء الداتا من ال api
+  }
+
+  Future<void> fetchData() async {
+    final state = await context.read<RoomProvider>().searchRoom("");
+    if (state is ListState<Room>) {
+      setState(() {
+        roomData = state.list;
+      });
+    } else if (state is ErrorState) {
+      MySnackBar.showMyToast(text: state.failure.message);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -109,17 +133,17 @@ class _HomeRoomsState extends State<HomeRooms> {
                 crossAxisSpacing: 6,
                 mainAxisSpacing: 6,
               ),
-              itemCount: 56,
+              itemCount: roomData.length,
               itemBuilder: (context, index) {
                 return RoomCard(
-                  chatCountry: "سوريا",
-                  chatName: "شات العرب",
+                  chatCountry: roomData[index].contry ?? "",
+                  chatName: roomData[index].name ?? "",
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MyRoom(),
+                      builder: (context) => MyRoom(room: roomData[index]),
                     ));
                   },
-                  imageLink: "images/2.png",
+                  imageLink: roomData[index].pic ?? "",
                 );
               },
             ),
