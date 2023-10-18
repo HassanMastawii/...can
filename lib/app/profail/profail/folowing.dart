@@ -21,23 +21,12 @@ class _FolowingPageState extends State<FolowingPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.logout,
-                          size: 30,
-                        )),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("أشخاص أتابعهم", style: TextStyle(fontSize: 30)),
-                      ],
-                    ),
-                  ],
+                child: Text(
+                  "اتابعهم",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const CupertinoSearchTextField(
@@ -50,7 +39,7 @@ class _FolowingPageState extends State<FolowingPage> {
                     return const FriendCard(
                       trailing: Column(children: [
                         MyButton(
-                          text: "حظر",
+                          text: " حظر",
                           color: Colors.red,
                           size: 14,
                           fontColor: Colors.white,

@@ -16,7 +16,7 @@ class CardAdmin extends StatefulWidget {
 class _CardAdminState extends State<CardAdmin> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 80.h,
       child: Card(
@@ -37,7 +37,7 @@ class _CardAdminState extends State<CardAdmin> {
                   child: Center(
                     child: Text(
                       widget.v,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
                       ),
@@ -55,21 +55,19 @@ class _CardAdminState extends State<CardAdmin> {
                   Text("ID:45678980"),
                 ],
               ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 11),
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 4,
-                            color: const Color.fromARGB(207, 255, 224, 85)),
-                        borderRadius: BorderRadius.circular(45),
-                        color: Colors.black,
-                        image: const DecorationImage(
-                            image: AssetImage('images/pic_room.jpg'))),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(right: 10, left: 11),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 4,
+                          color: const Color.fromARGB(207, 255, 224, 85)),
+                      borderRadius: BorderRadius.circular(45),
+                      color: Colors.black,
+                      image: const DecorationImage(
+                          image: AssetImage('images/pic_room.jpg'))),
                 ),
               ),
             ],

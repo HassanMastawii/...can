@@ -1,3 +1,7 @@
+// ignore: duplicate_ignore
+// ignore: file_names
+// ignore_for_file: file_names, prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -5,6 +9,7 @@ class RouletteGame extends StatefulWidget {
   const RouletteGame({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _RouletteGameState createState() => _RouletteGameState();
 }
 
@@ -198,7 +203,6 @@ class RoulettePainter extends CustomPainter {
 
     for (int i = 0; i < persons.length; i++) {
       final double startAngle = segmentAngle * i + currentRotation;
-      final double endAngle = segmentAngle * (i + 1) + currentRotation;
 
       final path = Path()
         ..moveTo(centerX, centerY)

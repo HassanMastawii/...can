@@ -184,10 +184,10 @@ class _BacpicroomState extends State<Bacpicroom> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("تأكيد الشراء"),
+          title: const Text("تأكيد الشراء"),
           content: Text(
             "ان سعر الخلفيه هو ${_backgrounds![index].price}",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -195,13 +195,13 @@ class _BacpicroomState extends State<Bacpicroom> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text("نعم"),
+              child: const Text("نعم"),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
             ),
             TextButton(
-              child: Text("لا"),
+              child: const Text("لا"),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },

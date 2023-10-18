@@ -21,23 +21,12 @@ class _VisitorsPageState extends State<VisitorsPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Stack(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.logout,
-                          size: 30,
-                        )),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("الزوار", style: TextStyle(fontSize: 30)),
-                      ],
-                    ),
-                  ],
+                child: Text(
+                  "الزوار",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const CupertinoSearchTextField(
@@ -48,14 +37,9 @@ class _VisitorsPageState extends State<VisitorsPage> {
                   itemCount: 56,
                   itemBuilder: (context, index) {
                     return const FriendCard(
-                      trailing: Column(children: [
-                        MyButton(
-                          text: "حظر",
-                          color: Colors.red,
-                          size: 14,
-                          fontColor: Colors.white,
-                        ),
-                      ]),
+                      trailing: Tooltip(
+                          message: "2023-09-05 09:05 pm",
+                          child: Text("09:05 pm")),
                     );
                   },
                 ),

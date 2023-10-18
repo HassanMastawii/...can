@@ -61,7 +61,7 @@ class _TextInRoomState extends State<TextInRoom> {
                     //       builder: (context) => RouletteGame(),
                     //     ));
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.https_rounded,
                     color: Colors.deepOrange,
                     size: 44,

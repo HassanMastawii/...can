@@ -94,7 +94,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MyRoom(),
+                          builder: (context) => const MyRoom(
+                            userList: [],
+                          ),
                         ));
                   },
                   icon: const Icon(
@@ -140,7 +142,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                   chatName: roomData[index].name ?? "",
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MyRoom(room: roomData[index]),
+                      builder: (context) => const MyRoom(
+                        userList: [],
+                      ),
                     ));
                   },
                   imageLink: roomData[index].pic ?? "",

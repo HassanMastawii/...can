@@ -26,7 +26,7 @@ class _AdminroomState extends State<Adminroom> {
             scrollDirection: Axis.vertical,
             itemCount: 10,
             itemBuilder: (context, index) {
-              return CardAdmin(
+              return const CardAdmin(
                 v: "ازالة",
               );
             },

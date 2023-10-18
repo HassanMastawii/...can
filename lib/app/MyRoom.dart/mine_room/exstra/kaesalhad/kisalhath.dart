@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,7 @@ class _KisalhathState extends State<Kisalhath> {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             height: showGlobalLuckImage ? 70 : 0,
             child: showGlobalLuckImage
@@ -180,6 +180,73 @@ class _KisalhathState extends State<Kisalhath> {
                 onPressed: () {
                   List<int> selectedValues = selectedNumbers.toList();
                   print("الأرقام المحددة: $selectedValues");
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SimpleDialog(
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.amber,
+                                radius: 30,
+                                child: CircleAvatar(
+                                  radius: 29,
+                                  backgroundImage:
+                                      const AssetImage("images/pic_room.jpg"),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text("user name"),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text("ID:15638383392"),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text("لقد ارسلت كيس الحظ العالمي"),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 11),
+                                    child: const Icon(
+                                      Icons.paid_outlined,
+                                      size: 25,
+                                      color: Colors.amberAccent,
+                                    ),
+                                  ),
+                                  Text(
+                                    "$selectedValues",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              CircleAvatar(
+                                radius: 44,
+                                backgroundColor: Colors.amber,
+                                child: Text("فتح"),
+                              )
+                            ],
+                          )
+                        ],
+                      );
+                    },
+                  );
                 },
                 color: Colors.amber,
                 fontColor: Colors.black,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Baner extends StatefulWidget {
-  const Baner({super.key});
+  const Baner({Key? key}) : super(key: key);
 
   @override
   State<Baner> createState() => _BanerState();
