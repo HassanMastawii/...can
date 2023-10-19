@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, library_private_types_in_public_api
 
+import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
 class Kisalhath extends StatefulWidget {
@@ -265,31 +266,5 @@ class _KisalhathState extends State<Kisalhath> {
 
   List<int> generateBiggerNumbers() {
     return [1000, 2500, 5000, 10000];
-  }
-}
-
-class MyButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final Color color;
-  final Color fontColor;
-  final String text;
-
-  const MyButton({
-    required this.onPressed,
-    required this.color,
-    required this.fontColor,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        primary: color,
-        onPrimary: fontColor,
-      ),
-      child: Text(text),
-    );
   }
 }
