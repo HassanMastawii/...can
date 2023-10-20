@@ -24,7 +24,7 @@ class ImageHandler extends StatelessWidget {
   }
 
   Widget getImage() {
-    if (path.startsWith("/img")) {
+    if (path.startsWith("/")) {
       return Image.network(
         "$serverLink$path",
         fit: fit,

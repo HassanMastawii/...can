@@ -13,6 +13,7 @@ import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class HomeRooms extends StatefulWidget {
   const HomeRooms({super.key});
@@ -23,11 +24,20 @@ class HomeRooms extends StatefulWidget {
 
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room> roomData = [];
+  late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    fetchData(); // استدعاء الداتا من ال api
+    _controller = VideoPlayerController.networkUrl(Uri.parse(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await fetchData();
+    }); // استدعاء الداتا من ال api
   }
 
   Future<void> fetchData() async {
@@ -90,6 +100,20 @@ class _HomeRoomsState extends State<HomeRooms> {
                   ),
                 ),
                 IconButton(
+                  onPressed: () async {
+                    await fetchData();
+                  },
+                  icon: context.watch<RoomProvider>().isLoading
+                      ? const Icon(
+                          Icons.watch_later_outlined,
+                          size: 30,
+                        )
+                      : const Icon(
+                          Icons.refresh,
+                          size: 30,
+                        ),
+                ),
+                IconButton(
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -127,29 +151,34 @@ class _HomeRoomsState extends State<HomeRooms> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(8),
-              scrollDirection: Axis.vertical,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 6,
-                mainAxisSpacing: 6,
-              ),
-              itemCount: roomData.length,
-              itemBuilder: (context, index) {
-                return RoomCard(
-                  chatCountry: roomData[index].contry ?? "",
-                  chatName: roomData[index].name ?? "",
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const MyRoom(
-                        userList: [],
-                      ),
-                    ));
+            child: Stack(
+              children: [
+                GridView.builder(
+                  padding: const EdgeInsets.all(8),
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 6,
+                    mainAxisSpacing: 6,
+                  ),
+                  itemCount: roomData.length,
+                  itemBuilder: (context, index) {
+                    return RoomCard(
+                      chatCountry: roomData[index].contry ?? "",
+                      chatName: roomData[index].name ?? "",
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MyRoom(
+                            userList: [],
+                            room: roomData[index],
+                          ),
+                        ));
+                      },
+                      imageLink: roomData[index].pic ?? "",
+                    );
                   },
-                  imageLink: roomData[index].pic ?? "",
-                );
-              },
+                ),
+              ],
             ),
           ),
         ],
