@@ -1,4 +1,3 @@
-import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../components/friend_card.dart';

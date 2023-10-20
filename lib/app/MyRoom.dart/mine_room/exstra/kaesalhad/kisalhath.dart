@@ -237,10 +237,13 @@ class _KisalhathState extends State<Kisalhath> {
                               SizedBox(
                                 height: 8,
                               ),
-                              CircleAvatar(
-                                radius: 44,
-                                backgroundColor: Colors.amber,
-                                child: Text("فتح"),
+                              InkWell(
+                                onTap: () {},
+                                child: CircleAvatar(
+                                  radius: 44,
+                                  backgroundColor: Colors.amber,
+                                  child: Text("فتح"),
+                                ),
                               )
                             ],
                           )
