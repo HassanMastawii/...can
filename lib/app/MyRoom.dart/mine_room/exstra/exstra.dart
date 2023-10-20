@@ -1,7 +1,9 @@
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/kaesalhad/kisalhath.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/mic_plus/mic_pius.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/musicplayer/mesicplayr.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/sher/sher.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/super_chat.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/vs/vs.dart';
 
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,50 @@ class Exstra extends StatefulWidget {
 }
 
 class _ExstraState extends State<Exstra> {
+  void _showModalBottomSheetvs() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return const Vs();
+        });
+  }
+
+  void _showModalBottomSheetKisalhath() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return const Kisalhath();
+      },
+    );
+  }
+
+  void _showModalBottomSheetMicPlus() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return const MicPlus();
+      },
+    );
+  }
+
+  void _showModalBottomSheetMusicPlayer() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return const MusicPlayer();
+      },
+    );
+  }
+
+  void _showModalBottomSheetSuperChatinroom() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return const MusicPlayer();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,11 +77,8 @@ class _ExstraState extends State<Exstra> {
               ),
               getimag(
                 ontap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const Kisalhath();
-                      });
+                  Navigator.pop(context);
+                  _showModalBottomSheetKisalhath();
                 },
                 imag: "kisalhath.png",
                 name: 'كيس الحظ',
@@ -44,47 +87,43 @@ class _ExstraState extends State<Exstra> {
                 imag: "m.png",
                 name: 'كرسي اضافي',
                 ontap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const MicPlus();
-                      });
+                  Navigator.pop(context);
+                  _showModalBottomSheetMicPlus();
                 },
               ),
               getimag(
                 imag: "myosic.png",
                 name: 'المسيقى',
                 ontap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const MusicPlayer();
-                      });
+                  Navigator.pop(context);
+                  _showModalBottomSheetMusicPlayer();
                 },
               ),
               getimag(
                 ontap: () {
-                  // Navigator.push(
-                  //                   context,
-                  //                   MaterialPageRoute(
-                  //                     builder: (context) =>  const MyHomePage(),
-                  //                   ));
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return const Sher();
+                    },
+                  );
                 },
                 imag: "sher.png",
                 name: 'مشاركه',
               ),
               getimag(
                 ontap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return const SuperChatinroom();
-                      });
+                  Navigator.pop(context);
+                  _showModalBottomSheetSuperChatinroom();
                 },
                 imag: "superchat.png",
                 name: 'super chat',
               ),
               getimag(
+                ontap: () {
+                  Navigator.pop(context);
+                  _showModalBottomSheetvs();
+                },
                 imag: "vs11.png",
                 name: 'التحدي',
               ),

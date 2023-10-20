@@ -1,3 +1,4 @@
+import 'package:canary_app/app/components/model_bottom_sheet/geft.dart';
 import 'package:canary_app/app/profail/profile_public/visite_profail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -210,7 +211,13 @@ class _ShowProfailFrendInRoomState extends State<ShowProfailFrendInRoom> {
                   // ),
                   Center(
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return const Geftbox();
+                                });
+                          },
                           icon: const Icon(
                             Icons.gif_box_outlined,
                             color: Colors.amberAccent,

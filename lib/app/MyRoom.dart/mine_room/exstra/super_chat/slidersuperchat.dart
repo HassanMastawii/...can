@@ -21,10 +21,10 @@ class _SliderSuperchatState extends State<SliderSuperchat> {
         aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         viewportFraction: 0.8,
       ),
-      items: [
+      items: const [
         CardSuperchat(),
         CardSuperchat(),
         CardSuperchat(),
