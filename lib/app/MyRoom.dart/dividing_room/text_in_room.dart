@@ -1,5 +1,6 @@
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/slidersuperchat.dart';
 import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
+
 import 'package:flutter/material.dart';
 
 class TextInRoom extends StatefulWidget {
@@ -24,29 +25,36 @@ class _TextInRoomState extends State<TextInRoom> {
                   shrinkWrap: true,
                   itemCount: 20,
                   itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return const ShowProfailFrendInRoom();
-                            });
-                      },
-                      title: const Text(
-                        "محمد علي كلاي",
-                        style: TextStyle(color: Colors.white),
+                    padding: const EdgeInsets.all(2.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.amberAccent, width: 2),
                       ),
-                      subtitle: const Text(
-                        "رسالة جديدة",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        radius: 30,
-                        child: CircleAvatar(
-                          radius: 26,
-                          backgroundImage: AssetImage("images/pic_room.jpg"),
+                      child: ListTile(
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return const ShowProfailFrendInRoom();
+                              });
+                        },
+                        title: const Text(
+                          "محمد علي كلاي",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: const Text(
+                          "رسالة جديدة",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        leading: const CircleAvatar(
+                          backgroundColor: Colors.amber,
+                          radius: 30,
+                          child: CircleAvatar(
+                            radius: 26,
+                            backgroundImage: AssetImage("images/pic_room.jpg"),
+                          ),
                         ),
                       ),
                     ),
@@ -55,11 +63,22 @@ class _TextInRoomState extends State<TextInRoom> {
               ),
               IconButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => RouletteGame(),
-                    //     ));
+                    // showGeneralDialog(
+                    //   context: context,
+                    //   pageBuilder: (BuildContext buildContext,
+                    //       Animation<double> animation,
+                    //       Animation<double> secondaryAnimation) {
+                    //     // يمكنك بناء وتخصيص محتوى حوارك هنا
+                    //     return Center(
+                    //       child: Container(
+                    //         width: 300.0,
+                    //         height: 500.0,
+                    //         color: Colors.transparent,
+                    //         child: const RouletteGame(),
+                    //       ),
+                    //     );
+                    //   },
+                    // );
                   },
                   icon: const Icon(
                     Icons.https_rounded,

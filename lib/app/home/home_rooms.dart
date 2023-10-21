@@ -100,20 +100,6 @@ class _HomeRoomsState extends State<HomeRooms> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () async {
-                    await fetchData();
-                  },
-                  icon: context.watch<RoomProvider>().isLoading
-                      ? const Icon(
-                          Icons.watch_later_outlined,
-                          size: 30,
-                        )
-                      : const Icon(
-                          Icons.refresh,
-                          size: 30,
-                        ),
-                ),
-                IconButton(
                   onPressed: () {
                     Navigator.push(
                         context,
