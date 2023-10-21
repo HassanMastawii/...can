@@ -41,11 +41,22 @@ class _TextInRoomState extends State<TextInRoom> {
               ),
               IconButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => RouletteGame(),
-                    //     ));
+                    // showGeneralDialog(
+                    //   context: context,
+                    //   pageBuilder: (BuildContext buildContext,
+                    //       Animation<double> animation,
+                    //       Animation<double> secondaryAnimation) {
+                    //     // يمكنك بناء وتخصيص محتوى حوارك هنا
+                    //     return Center(
+                    //       child: Container(
+                    //         width: 300.0,
+                    //         height: 500.0,
+                    //         color: Colors.transparent,
+                    //         child: const RouletteGame(),
+                    //       ),
+                    //     );
+                    //   },
+                    // );
                   },
                   icon: const Icon(
                     Icons.https_rounded,
