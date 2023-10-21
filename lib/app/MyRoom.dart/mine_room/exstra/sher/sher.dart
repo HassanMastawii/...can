@@ -1,4 +1,4 @@
-import 'package:appinio_social_share/appinio_social_share.dart';
+// import 'package:appinio_social_share/appinio_social_share.dart';
 import 'package:flutter/material.dart';
 
 class Sher extends StatefulWidget {
@@ -9,7 +9,7 @@ class Sher extends StatefulWidget {
 }
 
 class _SherState extends State<Sher> {
-  AppinioSocialShare appinioSocialShare = AppinioSocialShare();
+  // AppinioSocialShare appinioSocialShare = AppinioSocialShare();
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +35,6 @@ class _SherState extends State<Sher> {
 
   // Updated method to include necessary parameters
   shareToWhatsApp(String message, String filePath) async {
-    await appinioSocialShare.shareToWhatsapp(message, filePath: filePath);
+    // await appinioSocialShare.shareToWhatsapp(message, filePath: filePath);
   }
 }

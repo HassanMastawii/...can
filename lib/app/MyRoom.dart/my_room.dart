@@ -3,15 +3,17 @@ import 'package:canary_app/app/MyRoom.dart/dividing_room/min_icon_room.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/text_in_room.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
-
 import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
-
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/models/messages/system_message.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/models/user_coin.dart';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class MyRoom extends StatefulWidget {
   const MyRoom({
@@ -27,6 +29,31 @@ class MyRoom extends StatefulWidget {
 }
 
 class _MyRoomState extends State<MyRoom> {
+  @override
+  void initState() {
+    // _controller = VideoPlayerController.networkUrl(
+    //     Uri.parse('$serverLink/img/last/gift/Aircraft_7000.webm'))
+    //   ..initialize().then((_) {
+    //     // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+    //     setState(() {});
+    //   });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<RoomProvider>().addMessage(SystemMessage(
+            id: 1,
+            text: "أنضم ${context.read<CoreProvider>().myProfile?.name} للرووم",
+          ));
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  late VideoPlayerController _controller;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,6 +187,9 @@ class _MyRoomState extends State<MyRoom> {
               ),
             ),
           ),
+          // VideoPlayer(_controller
+          //   ..play()
+          //   ..setLooping(true)),
         ],
       ),
     );

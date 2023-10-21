@@ -1,16 +1,26 @@
+import 'package:canary_app/domain/models/messages/gift_message.dart';
+import 'package:canary_app/domain/models/messages/system_message.dart';
+import 'package:canary_app/domain/models/messages/text_message.dart';
 import 'package:canary_app/domain/models/profile.dart';
 import 'package:equatable/equatable.dart';
 
+enum MessageType {
+  gift,
+  system,
+  text,
+}
+
 // ignore: must_be_immutable
-class Message extends Equatable {
+abstract class Message extends Equatable {
   int? id;
   int? userId;
-  String? message;
 
   /// ```dart
   /// 1 for text
   /// 2 for voice
   /// 3 for images
+  /// 4 for gift
+  /// 5 for system
   /// ```
   String? type;
   String? datex;
@@ -23,7 +33,6 @@ class Message extends Equatable {
     this.datex,
     this.fromUser,
     this.id,
-    this.message,
     this.room,
     this.toUser,
     this.type,
@@ -34,24 +43,24 @@ class Message extends Equatable {
   List<Object?> get props => [];
 
   factory Message.fromJson(Map<String, dynamic> json) {
-    return Message(
-      datex: json["datex"],
-      fromUser: json["from_user"],
-      id: json["id"],
-      message: json["message"],
-      room: json["room"],
-      toUser: json["to_user"],
-      type: json["type"],
-      user: json["user"] == null ? null : Profile.fromJson(json["user"]),
-      userId: json["user_id"],
+    final type = MessageType.values.firstWhere(
+      (e) => e.name == json['type'],
     );
+
+    switch (type) {
+      case MessageType.gift:
+        return GiftMessage.fromJson(json);
+      case MessageType.system:
+        return SystemMessage.fromJson(json);
+      case MessageType.text:
+        return TextMessage.fromJson(json);
+    }
   }
   Map<String, dynamic> toJson() {
     return {
       "datex": datex,
       "from_user": fromUser,
       "id": id,
-      "message": message,
       "room": room,
       "to_user": toUser,
       "type": type,
@@ -62,9 +71,5 @@ class Message extends Equatable {
 
   Message copy() {
     return Message.fromJson(toJson());
-  }
-
-  String postQuery() {
-    return "from_user=$fromUser&to_user=$toUser&room_id=$room&type=$type&message=$message";
   }
 }

@@ -2,6 +2,7 @@ import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
 import 'package:canary_app/domain/models/backgrounds.dart';
 import 'package:canary_app/domain/models/gift.dart';
+import 'package:canary_app/domain/models/messages/message.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
@@ -38,6 +39,13 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
     this._getUserListUsecase,
   );
   bool isLoading = false;
+
+  List<Message> messages = [];
+
+  addMessage(Message message) {
+    messages.insert(0, message);
+    notifyListeners();
+  }
 
   Future<ProviderStates> searchRoom(String search) async {
     isLoading = true;

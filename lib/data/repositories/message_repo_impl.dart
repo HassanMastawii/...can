@@ -1,5 +1,5 @@
 import 'package:canary_app/data/datasources/remote_database/message_remote_repo.dart';
-import 'package:canary_app/domain/models/message.dart';
+import 'package:canary_app/domain/models/messages/message.dart';
 import 'package:canary_app/domain/repositories/message_repo.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';

@@ -1,10 +1,16 @@
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/exstra.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/geft/geft.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/imoge/imoge.dart';
-import 'package:canary_app/app/components/input_area.dart';
+import 'package:canary_app/app/components/chat_input/chat_input_area.dart';
 import 'package:canary_app/app/messages/list_chat_privt_inroom.dart';
+import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/domain/models/gift.dart';
+import 'package:canary_app/domain/models/messages/system_message.dart';
+import 'package:canary_app/domain/models/messages/text_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class MiniconRoom extends StatefulWidget {
   const MiniconRoom({super.key});
@@ -29,7 +35,6 @@ class _MiniconRoomState extends State<MiniconRoom> {
     });
   }
 
-  final TextEditingController _controller = TextEditingController();
   bool isTextFeildShown = false;
 
   @override
@@ -42,6 +47,11 @@ class _MiniconRoomState extends State<MiniconRoom> {
             });
             return false;
           } else {
+            context.read<RoomProvider>().addMessage(SystemMessage(
+                  id: 1,
+                  text:
+                      "غادر ${context.read<CoreProvider>().myProfile?.name} الرووم",
+                ));
             return true;
           }
         },
@@ -148,13 +158,16 @@ class _MiniconRoomState extends State<MiniconRoom> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    showModalBottomSheet(
+                  onTap: () async {
+                    final Gift? gift = await showModalBottomSheet(
                         context: context,
                         builder: (context) {
                           return SizedBox(
                               height: 350.h, child: const Geftbox());
                         });
+                    if (gift != null) {
+                      print('${gift.name} ${gift.src}');
+                    } else {}
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 4),
@@ -168,7 +181,16 @@ class _MiniconRoomState extends State<MiniconRoom> {
                   ),
                 ),
               ]),
-            if (isTextFeildShown) InputArea(controller: _controller),
+            if (isTextFeildShown)
+              ChatInputArea(
+                onSendText: (p0) {
+                  context.read<RoomProvider>().addMessage(TextMessage(
+                        id: 1,
+                        fromUser: context.read<CoreProvider>().myProfile?.name,
+                        message: p0,
+                      ));
+                },
+              ),
           ],
         ));
   }
