@@ -75,6 +75,7 @@ class _MyvisitsState extends State<Myvisits> {
                 itemCount: 56,
                 itemBuilder: (context, index) {
                   return RoomCard(
+                    roomstatus: "قران",
                     chatCountry: "سوريا",
                     chatName: "شات العرب",
                     onTap: () {

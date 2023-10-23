@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Mic extends StatefulWidget {
-  const Mic({super.key, this.isSelected = false, this.onTap});
+  const Mic({
+    super.key,
+    this.isSelected = false,
+    this.onTap,
+  });
   final bool isSelected;
   final void Function()? onTap;
 

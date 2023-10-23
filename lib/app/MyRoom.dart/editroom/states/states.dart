@@ -50,7 +50,10 @@ class _StatesState extends State<States> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CardStatus(h: "عيد الميلاد"),
+              CardStatus(
+                h: "عيد الميلاد",
+                onTap: () {},
+              ),
               CardStatus(h: "حب"),
               CardStatus(h: "غناء"),
             ],

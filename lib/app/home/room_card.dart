@@ -8,11 +8,13 @@ class RoomCard extends StatelessWidget {
     this.onTap,
     required this.chatName,
     required this.chatCountry,
+    required this.roomstatus,
   });
   final String imageLink;
   final void Function()? onTap;
   final String chatName;
   final String chatCountry;
+  final String roomstatus;
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +24,43 @@ class RoomCard extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           ImageHandler(path: imageLink),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(22)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(chatName,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      )),
-                  Text(chatCountry,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      )),
-                ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(22)),
+                child: Text(roomstatus,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    )),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(22)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(chatName,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          )),
+                      Text(chatCountry,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

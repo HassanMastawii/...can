@@ -150,6 +150,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                   itemCount: roomData.length,
                   itemBuilder: (context, index) {
                     return RoomCard(
+                      roomstatus: roomData[index].roomStatus ?? "",
                       chatCountry: roomData[index].contry ?? "",
                       chatName: roomData[index].name ?? "",
                       onTap: () {
