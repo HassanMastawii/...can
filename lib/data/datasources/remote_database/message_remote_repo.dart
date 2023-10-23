@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:canary_app/domain/models/message.dart';
+import 'package:canary_app/domain/models/messages/message.dart';
+import 'package:canary_app/domain/models/messages/text_message.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart';
 import '../../errors/exceptions.dart';
@@ -36,6 +37,7 @@ class MessageRemoteDataSourceImpl implements MessageRemoteDataSource {
 
   @override
   Future<Unit> postMessage(String token, Message message) async {
+    message as TextMessage;
     var res = await client.post(
       Uri.parse("$getMessagesLink?${message.postQuery()}"),
       headers: {

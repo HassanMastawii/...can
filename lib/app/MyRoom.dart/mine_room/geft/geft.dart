@@ -10,6 +10,7 @@ import 'package:canary_app/app/widgets/skeleton.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:canary_app/domain/models/gift.dart';
+import 'package:canary_app/domain/models/messages/gift_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -222,7 +223,14 @@ class _GeftboxState extends State<Geftbox> {
                       iconColor: MaterialStatePropertyAll(
                         Color.fromARGB(255, 201, 192, 163),
                       )),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<RoomProvider>().addMessage(GiftMessage(
+                        id: 1,
+                        gift: _gifts?[selectedGift],
+                        text:
+                            "أرسل ${context.read<CoreProvider>().myProfile?.name} هدية الى ${"بو حيدرة"}"));
+                    Navigator.pop(context, _gifts?[selectedGift]);
+                  },
                   child: const Text(
                     "ارسال",
                     style: TextStyle(

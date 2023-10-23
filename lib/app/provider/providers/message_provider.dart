@@ -1,6 +1,6 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
-import 'package:canary_app/domain/models/message.dart';
+import 'package:canary_app/domain/models/messages/message.dart';
 import 'package:canary_app/domain/usecases/messages/get_messages_usecase.dart';
 import 'package:flutter/material.dart';
 
