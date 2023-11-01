@@ -13,7 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class MiniconRoom extends StatefulWidget {
-  const MiniconRoom({super.key});
+  const MiniconRoom({super.key, required this.onGift});
+  final void Function(Gift) onGift;
 
   @override
   State<MiniconRoom> createState() => _MiniconRoomState();
@@ -166,8 +167,8 @@ class _MiniconRoomState extends State<MiniconRoom> {
                               height: 350.h, child: const Geftbox());
                         });
                     if (gift != null) {
-                      print('${gift.name} ${gift.src}');
-                    } else {}
+                      widget.onGift(gift);
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 4),

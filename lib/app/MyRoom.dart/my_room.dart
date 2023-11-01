@@ -4,10 +4,12 @@ import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/text_in_room.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
 import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
+import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/messages/system_message.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/models/user_coin.dart';
@@ -31,12 +33,12 @@ class MyRoom extends StatefulWidget {
 class _MyRoomState extends State<MyRoom> {
   @override
   void initState() {
-    // _controller = VideoPlayerController.networkUrl(
-    //     Uri.parse('$serverLink/img/last/gift/Aircraft_7000.webm'))
-    //   ..initialize().then((_) {
-    //     // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-    //     setState(() {});
-    //   });
+    _controller = VideoPlayerController.networkUrl(
+        Uri.parse('$serverLink/img/last/gift/Aircraft_7000.webm'))
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    _controller.addListener(checkVideo);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<RoomProvider>().addMessage(SystemMessage(
             id: 1,
@@ -46,12 +48,33 @@ class _MyRoomState extends State<MyRoom> {
     super.initState();
   }
 
+  void playGift(Gift gift) {
+    _controller =
+        VideoPlayerController.networkUrl(Uri.parse('$serverLink${gift.src}'))
+          ..initialize().then((_) {
+            setState(() {
+              isPlaying = true;
+            });
+            _controller.addListener(checkVideo);
+            _controller.play();
+          });
+  }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  void checkVideo() {
+    if (_controller.value.position == _controller.value.duration) {
+      setState(() {
+        isPlaying = false;
+      });
+    }
+  }
+
+  bool isPlaying = false;
   late VideoPlayerController _controller;
 
   @override
@@ -179,17 +202,24 @@ class _MyRoomState extends State<MyRoom> {
                       ],
                     ),
                   ),
-                  OnarMicRoom(),
+                  const OnarMicRoom(),
                   const MicatinRoom(),
-                  const TextInRoom(),
-                  const MiniconRoom(),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        const TextInRoom(),
+                        if (isPlaying)
+                          SizedBox(
+                            child: VideoPlayer(_controller),
+                          ),
+                      ],
+                    ),
+                  ),
+                  MiniconRoom(onGift: playGift),
                 ],
               ),
             ),
           ),
-          // VideoPlayer(_controller
-          //   ..play()
-          //   ..setLooping(true)),
         ],
       ),
     );
