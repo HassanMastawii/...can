@@ -113,7 +113,6 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     final response = await request.send();
     var res2 = await Response.fromStream(response);
     if (response.statusCode == 200) {
-      print(res2.body);
       final decodedResponse = jsonDecode(res2.body);
       final src = decodedResponse['src'];
       return src;
@@ -155,7 +154,6 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     );
     if (res.statusCode == 200) {
       final mapData = jsonDecode(res.body);
-      print(mapData);
       return mapData["message"];
     } else {
       throw ServerException(message: res.statusCode.toString() + res.body);
@@ -197,7 +195,6 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     if (res.statusCode == 200) {
       final List list = jsonDecode(res.body);
       final List listData = list.first;
-      print(jsonDecode(res.body));
       return listData.map((e) => UserCoin.fromJson(e)).toList();
     } else {
       throw ServerException(message: res.statusCode.toString() + res.body);

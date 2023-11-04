@@ -35,7 +35,7 @@ class _FenashVsState extends State<FenashVs> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        Container(
+        SizedBox(
           width: double.infinity,
           height: 130,
           child: Stack(

@@ -1,5 +1,3 @@
-// ignore_for_file: sized_box_for_whitespace
-
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
@@ -26,10 +24,10 @@ class _BacpicroomState extends State<Bacpicroom> {
   init() async {
     isLoading = true;
     await context.read<RoomProvider>().getBackgrounds().then((state) {
-      if (state is ListState<Background> && mounted) {
+      if (state is DataState<List<Background>> && mounted) {
         setState(() {
           isLoading = false;
-          _backgrounds = state.list;
+          _backgrounds = state.data;
         });
       }
       if (state is ErrorState && mounted) {

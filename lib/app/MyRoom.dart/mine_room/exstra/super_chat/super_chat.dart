@@ -142,7 +142,7 @@ Widget texttaim({
           ),
           Text(
             taim,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const String validateMax = "يجب ان لايتعدى الحقل عن عدد محارف ";
 const String validateMin = "يجب ان لا يقل الحقل عن عدد محارف ";

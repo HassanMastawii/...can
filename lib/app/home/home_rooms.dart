@@ -9,6 +9,8 @@ import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 
 import 'package:canary_app/app/router/my_router.dart';
+import 'package:canary_app/app/widgets/skeleton.dart';
+import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -22,15 +24,22 @@ class HomeRooms extends StatefulWidget {
 }
 
 class _HomeRoomsState extends State<HomeRooms> {
-  List<Room> roomData = [];
+  List<Room>? roomData;
+  bool isLoading = true;
 
   Future<void> fetchData() async {
+    isLoading = true;
+    setState(() {});
     final state = await context.read<RoomProvider>().searchRoom("");
-    if (state is ListState<Room>) {
+    if (state is DataState<List<Room>>) {
       setState(() {
-        roomData = state.list;
+        isLoading = false;
+        roomData = state.data;
       });
     } else if (state is ErrorState) {
+      setState(() {
+        isLoading = false;
+      });
       MySnackBar.showMyToast(text: state.failure.message);
     }
   }
@@ -96,9 +105,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MyRoom(
-                            userList: [],
-                          ),
+                          builder: (context) => const MyRoom(),
                         ));
                   },
                   icon: const Icon(
@@ -131,37 +138,74 @@ class _HomeRoomsState extends State<HomeRooms> {
           Expanded(
             child: Stack(
               children: [
-                GridView.builder(
-                  padding: const EdgeInsets.all(8),
-                  scrollDirection: Axis.vertical,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 6,
-                    mainAxisSpacing: 6,
-                  ),
-                  itemCount: roomData.length,
-                  itemBuilder: (context, index) {
-                    return RoomCard(
-                      roomstatus: roomData[index].roomStatus ?? "",
-                      chatCountry: roomData[index].contry ?? "",
-                      chatName: roomData[index].name ?? "",
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MyRoom(
-                            userList: [],
-                            room: roomData[index],
+                roomData == null && isLoading
+                    ? getLoader()
+                    : roomData == null
+                        ? getError()
+                        : GridView.builder(
+                            padding: const EdgeInsets.all(8),
+                            scrollDirection: Axis.vertical,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 6,
+                              mainAxisSpacing: 6,
+                            ),
+                            itemCount: roomData!.length,
+                            itemBuilder: (context, index) {
+                              return RoomCard(
+                                roomstatus: roomData![index].roomStatus ?? "",
+                                chatCountry: roomData![index].contry ?? "",
+                                chatName: roomData![index].name ?? "",
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MyRoom(
+                                      room: roomData![index],
+                                    ),
+                                  ));
+                                },
+                                imageLink: roomData![index].pic ?? "",
+                              );
+                            },
                           ),
-                        ));
-                      },
-                      imageLink: roomData[index].pic ?? "",
-                    );
-                  },
-                ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  getLoader() {
+    return GridView.count(
+      crossAxisCount: 2,
+      children: const [
+        Skeleton(),
+        Skeleton(),
+        Skeleton(),
+        Skeleton(),
+        Skeleton(),
+      ],
+    );
+  }
+
+  getError() {
+    return Column(
+      children: [
+        100.getHightSizedBox(),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              fetchData();
+            });
+          },
+          child: Text(
+            "إعادة المحاولة",
+            style: TextStyle(
+                fontSize: 18, color: Theme.of(context).colorScheme.tertiary),
+          ),
+        ),
+      ],
     );
   }
 }

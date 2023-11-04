@@ -11,15 +11,13 @@ class Muisics extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<Muisics> createState() => _MuisicsState(items);
+  State<Muisics> createState() => _MuisicsState();
 }
 
 class _MuisicsState extends State<Muisics> {
   final AudioPlayer _audioPlayer = AudioPlayer();
-  List<String> items;
-  Set<String> newItems = Set(); // تتبع الأغاني الجديدة
-
-  _MuisicsState(this.items);
+  late List<String> items = widget.items;
+  Set<String> newItems = {}; // تتبع الأغاني الجديدة
 
   @override
   void didUpdateWidget(covariant Muisics oldWidget) {
@@ -46,7 +44,7 @@ class _MuisicsState extends State<Muisics> {
       itemCount: musicProvider.filteredItems.length + 1,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return Center(
+          return const Center(
             child: Text(
               "لا يوجد اغاني في المكتبه",
               style: TextStyle(color: Colors.red),
@@ -78,7 +76,7 @@ class _MuisicsState extends State<Muisics> {
                     _audioPlayer.setFilePath(filePath);
                     _audioPlayer.play();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.play_circle,
                     size: 33,
                   ),

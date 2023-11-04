@@ -38,7 +38,7 @@ class _OnarMicRoomState extends State<OnarMicRoom> {
               "1000",
               style: TextStyle(color: Colors.yellow),
             )),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             OnarMic(),

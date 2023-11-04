@@ -11,21 +11,20 @@ class MassegsPrivate extends StatefulWidget {
 }
 
 class _MassegsPrivateState extends State<MassegsPrivate> {
+  bool isVisible = true;
+  @override
+  void initState() {
+    super.initState();
+
+    Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      setState(() {
+        isVisible = !isVisible;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _isVisible = true;
-
-    @override
-    void initState() {
-      super.initState();
-
-      Timer.periodic(Duration(milliseconds: 500), (timer) {
-        setState(() {
-          _isVisible = !_isVisible;
-        });
-      });
-    }
-
     return Stack(
       children: [
         IconButton(
@@ -43,14 +42,14 @@ class _MassegsPrivateState extends State<MassegsPrivate> {
             size: 30,
           ),
         ),
-        if (_isVisible)
+        if (isVisible)
           Positioned(
             top: 5.0,
             right: 5.0,
             child: Container(
               width: 12.0,
               height: 12.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.red,
               ),

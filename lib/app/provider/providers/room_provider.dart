@@ -1,42 +1,18 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
+import 'package:canary_app/data/repositories/room_repo_impl.dart';
 import 'package:canary_app/domain/models/backgrounds.dart';
 import 'package:canary_app/domain/models/gift.dart';
 import 'package:canary_app/domain/models/messages/message.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/models/user_coin.dart';
-import 'package:canary_app/domain/usecases/room/create_room_usecase.dart';
-import 'package:canary_app/domain/usecases/room/get_backgrounds_usecase.dart';
-import 'package:canary_app/domain/usecases/room/get_gifts_usecase.dart';
-import 'package:canary_app/domain/usecases/room/get_user_list_usecase.dart';
-import 'package:canary_app/domain/usecases/room/room_info_usecase.dart';
-import 'package:canary_app/domain/usecases/room/search_room_usecase.dart';
-import 'package:canary_app/domain/usecases/room/set_background_img_usecase.dart';
-import 'package:canary_app/domain/usecases/room/set_room_password_usecase.dart';
-import 'package:canary_app/domain/usecases/room/up_room_img_usecase.dart';
 import 'package:flutter/material.dart';
 
 class RoomProvider extends ChangeNotifier with StatesHandler {
-  final SearchRoomUsecase _searchRoomUsecase;
-  final RoomInfoUsecase _roomInfoUsecase;
-  final CreateRoomUsecase _createRoomUsecase;
-  final UpRoomImgUsecase _upRoomImgUsecase;
-  final SetBackgroundImgUsecase _setBackgroundImgUsecase;
-  final GetBackgroundsUsecase _getBackgroundsUsecase;
-  final SetRoomPasswordUsecase _setRoomPasswordUsecase;
-  final GetGiftsUsecase _getGiftsUsecase;
-  final GetUserListUsecase _getUserListUsecase;
+  final RoomRepository _roomRepository;
 
   RoomProvider(
-    this._searchRoomUsecase,
-    this._roomInfoUsecase,
-    this._createRoomUsecase,
-    this._upRoomImgUsecase,
-    this._setBackgroundImgUsecase,
-    this._getBackgroundsUsecase,
-    this._setRoomPasswordUsecase,
-    this._getGiftsUsecase,
-    this._getUserListUsecase,
+    this._roomRepository,
   );
   bool isLoading = false;
 
@@ -50,52 +26,52 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   Future<ProviderStates> searchRoom(String search) async {
     isLoading = true;
     notifyListeners();
-    final failureOrRooms = await _searchRoomUsecase(search);
+    final failureOrRooms = await _roomRepository.searchRoom(search);
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<Room>(failureOrRooms);
+    return failureOrDataToState<List<Room>>(failureOrRooms);
   }
 
   Future<ProviderStates> getBackgrounds() async {
     isLoading = true;
     notifyListeners();
-    final failureOrList = await _getBackgroundsUsecase();
+    final failureOrList = await _roomRepository.getBackgrounds();
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<Background>(failureOrList);
+    return failureOrDataToState<List<Background>>(failureOrList);
   }
 
   Future<ProviderStates> getUserList(int roomid) async {
     isLoading = true;
     notifyListeners();
-    final failureOrList = await _getUserListUsecase(roomid);
+    final failureOrList = await _roomRepository.getUserList(roomid);
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<UserCoin>(failureOrList);
+    return failureOrDataToState<List<UserCoin>>(failureOrList);
   }
 
   Future<ProviderStates> getGiftsList() async {
     isLoading = true;
     notifyListeners();
-    final failureOrList = await _getGiftsUsecase();
+    final failureOrList = await _roomRepository.giftList();
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<Gift>(failureOrList);
+    return failureOrDataToState<List<Gift>>(failureOrList);
   }
 
   Future<ProviderStates> upRoomImg(String path, int roomid) async {
     isLoading = true;
     notifyListeners();
-    final failureOrRes = await _upRoomImgUsecase(path, roomid);
+    final failureOrRes = await _roomRepository.upRoomImg(path, roomid);
     isLoading = false;
     notifyListeners();
-    return failureOrResToState(failureOrRes);
+    return failureOrDataToState<String>(failureOrRes);
   }
 
   Future<ProviderStates> setbackgroundImg(String path, int roomid) async {
     isLoading = true;
     notifyListeners();
-    final failureOrdone = await _setBackgroundImgUsecase(path, roomid);
+    final failureOrdone = await _roomRepository.setbackgroundImg(path, roomid);
     isLoading = false;
     notifyListeners();
     return failureOrDoneToState(failureOrdone);
@@ -104,16 +80,16 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   Future<ProviderStates> getRoomInfoRoom(int id) async {
     isLoading = true;
     notifyListeners();
-    final failureOrRoom = await _roomInfoUsecase(id);
+    final failureOrRoom = await _roomRepository.getRoomInfo(id);
     isLoading = false;
     notifyListeners();
-    return failureOrRoomToState(failureOrRoom);
+    return failureOrDataToState<Room>(failureOrRoom);
   }
 
   Future<ProviderStates> createRoom(Room room) async {
     isLoading = true;
     notifyListeners();
-    final failureOrDone = await _createRoomUsecase(room);
+    final failureOrDone = await _roomRepository.createRoom(room);
     isLoading = false;
     notifyListeners();
     return failureOrDoneToState(failureOrDone);
@@ -122,9 +98,10 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   Future<ProviderStates> setRoomPassword(String password, int roomId) async {
     isLoading = true;
     notifyListeners();
-    final failureOrRes = await _setRoomPasswordUsecase(password, roomId);
+    final failureOrRes =
+        await _roomRepository.setRooomPassword(password, roomId);
     isLoading = false;
     notifyListeners();
-    return failureOrResToState(failureOrRes);
+    return failureOrDataToState<String>(failureOrRes);
   }
 }

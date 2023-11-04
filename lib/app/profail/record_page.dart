@@ -58,7 +58,7 @@ class _RecordPageState extends State<RecordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('تسجيل صوتي'),
+        title: const Text('تسجيل صوتي'),
       ),
       body: Center(
         child: Column(
@@ -69,15 +69,15 @@ class _RecordPageState extends State<RecordPage> {
               onPressed: () {
                 // Handle recording logic here
               },
-              child: Text('بدء التسجيل'),
+              child: const Text('بدء التسجيل'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (isPlaying)
               ElevatedButton(
                 onPressed: () {
                   _stopAudio();
                 },
-                child: Text('إيقاف التشغيل'),
+                child: const Text('إيقاف التشغيل'),
               )
             else
               ElevatedButton(
@@ -85,7 +85,7 @@ class _RecordPageState extends State<RecordPage> {
                   // Replace 'audioFilePath' with the actual audio file path
                   _playAudio('audioFilePath');
                 },
-                child: Text('تشغيل الصوت'),
+                child: const Text('تشغيل الصوت'),
               ),
           ],
         ),

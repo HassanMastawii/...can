@@ -10,14 +10,12 @@ class PlayMusic extends StatefulWidget {
 class _PlayMusicState extends State<PlayMusic> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [],
-          ),
-        ],
-      ),
+    return const Column(
+      children: [
+        Row(
+          children: [],
+        ),
+      ],
     );
   }
 }

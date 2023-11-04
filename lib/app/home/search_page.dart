@@ -28,9 +28,9 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _controller = TextEditingController();
   searchRoom(String text) async {
     final state = await context.read<RoomProvider>().searchRoom(text);
-    if (state is ListState<Room>) {
+    if (state is DataState<List<Room>>) {
       setState(() {
-        rooms = state.list;
+        rooms = state.data;
       });
     } else if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
@@ -117,7 +117,6 @@ class _SearchPageState extends State<SearchPage> {
                               context,
                               MyRoom(
                                 room: rooms[index],
-                                userList: [],
                               )).then((value) {
                             setState(() {});
                           });

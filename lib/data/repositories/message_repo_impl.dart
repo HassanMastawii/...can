@@ -1,22 +1,20 @@
 import 'package:canary_app/data/datasources/remote_database/message_remote_repo.dart';
 import 'package:canary_app/domain/models/messages/message.dart';
-import 'package:canary_app/domain/repositories/message_repo.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import '../datasources/local_database/local_database.dart';
 import '../errors/exceptions.dart';
 import '../errors/failures.dart';
 
-class MessageRepositoryImpl implements MessageRepository {
+class MessageRepository {
   final MessageRemoteDataSource _authRemoteDataSource;
   final LocalDataSource _localDataSource;
 
-  MessageRepositoryImpl(this._authRemoteDataSource, this._localDataSource);
+  MessageRepository(this._authRemoteDataSource, this._localDataSource);
 
   Future<bool> get isConnected async => Future.value(
       await Connectivity().checkConnectivity() != ConnectivityResult.none);
 
-  @override
   Future<Either<Failure, List<Message>>> getMessages() async {
     if (await isConnected) {
       try {
@@ -39,7 +37,6 @@ class MessageRepositoryImpl implements MessageRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Unit>> postMessage(Message message) async {
     if (await isConnected) {
       try {

@@ -1,5 +1,4 @@
-import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/cardSuperchat.dart';
-
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/card_super_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

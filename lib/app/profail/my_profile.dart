@@ -395,12 +395,9 @@ class _MyProfileState extends State<MyProfile> {
 void showSnackbar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      // عرض الرسالة لمدة 2 ثانية (يمكنك تغيير القيمة حسب رغبتك)
+      duration: const Duration(seconds: 2),
       content: Text(message),
     ),
   );
-
-  // عرض الرسالة لمدة 2 ثانية (يمكنك تغيير القيمة حسب رغبتك)
-  Future.delayed(const Duration(seconds: 2), () {
-    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-  });
 }

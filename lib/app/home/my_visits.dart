@@ -37,9 +37,7 @@ class _MyvisitsState extends State<Myvisits> {
                   IconButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MyRoom(
-                          userList: [],
-                        ),
+                        builder: (context) => const MyRoom(),
                       ));
                     },
                     icon: const Icon(
@@ -80,9 +78,7 @@ class _MyvisitsState extends State<Myvisits> {
                     chatName: "شات العرب",
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const MyRoom(
-                          userList: [],
-                        ),
+                        builder: (context) => const MyRoom(),
                       ));
                     },
                     imageLink: "images/2.png",

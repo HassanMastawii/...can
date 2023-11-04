@@ -45,9 +45,9 @@ class _EditroomState extends State<Editroom> {
         .upRoomImg(_myPhotoPicker.path!, widget.room.roomId!);
     if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
-    } else if (state is ResState) {
+    } else if (state is DataState<String>) {
       setState(() {
-        widget.room.pic = state.path;
+        widget.room.pic = state.data;
       });
       MySnackBar.showDoneToast();
     }

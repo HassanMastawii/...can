@@ -35,7 +35,7 @@ class _PraicroomState extends State<Praicroom> {
                   onPressed: () {
                     _pageController.animateToPage(
                       0,
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                     );
                     setState(() {
@@ -53,7 +53,7 @@ class _PraicroomState extends State<Praicroom> {
                   onPressed: () {
                     _pageController.animateToPage(
                       1,
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
                     );
                     setState(() {
@@ -73,7 +73,7 @@ class _PraicroomState extends State<Praicroom> {
 class PageViewExample extends StatelessWidget {
   final PageController pageController;
 
-  const PageViewExample(this.pageController);
+  const PageViewExample(this.pageController, {super.key});
 
   @override
   Widget build(BuildContext context) {

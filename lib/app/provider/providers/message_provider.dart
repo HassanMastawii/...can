@@ -1,33 +1,32 @@
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/provider/states/states_handler.dart';
+import 'package:canary_app/data/repositories/message_repo_impl.dart';
 import 'package:canary_app/domain/models/messages/message.dart';
-import 'package:canary_app/domain/usecases/messages/get_messages_usecase.dart';
 import 'package:flutter/material.dart';
 
 class MessageProvider extends ChangeNotifier with StatesHandler {
-  final GetMessagesUsecase _getMessagesUsecase;
+  final MessageRepository _messageRepository;
 
   MessageProvider(
-    this._getMessagesUsecase,
-    Object object,
+    this._messageRepository,
   );
   bool isLoading = false;
 
   Future<ProviderStates> getMessages() async {
     isLoading = true;
     notifyListeners();
-    final failureOrMessages = await _getMessagesUsecase();
+    final failureOrMessages = await _messageRepository.getMessages();
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<Message>(failureOrMessages);
+    return failureOrDataToState<List<Message>>(failureOrMessages);
   }
 
   Future<ProviderStates> postMessage(Message message) async {
     isLoading = true;
     notifyListeners();
-    final failureOrMessages = await _getMessagesUsecase();
+    final failureOrDone = await _messageRepository.postMessage(message);
     isLoading = false;
     notifyListeners();
-    return failureOrListToState<Message>(failureOrMessages);
+    return failureOrDoneToState(failureOrDone);
   }
 }

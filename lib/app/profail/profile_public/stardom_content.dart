@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:canary_app/app/colorApp/color.dart';
 import 'package:flutter/material.dart';
 
@@ -13,20 +11,20 @@ class StardomContent extends StatefulWidget {
 class _StardomContentState extends State<StardomContent> {
   @override
   Widget build(BuildContext context) {
-      //جعل هاذه الصفحه كلها تعمل سكرل فيو
+    //جعل هاذه الصفحه كلها تعمل سكرل فيو
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: agency,
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(color: Colors.black)),
-              child: Text("العلاقات الاجتماعيه")),
-          Divider(),
+              child: const Text("العلاقات الاجتماعيه")),
+          const Divider(),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(8),
@@ -45,13 +43,12 @@ class _StardomContentState extends State<StardomContent> {
             ),
           ),
           Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   color: agency,
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(color: Colors.black)),
-              child: Text("التسجيل الصوتي")),
-              
+              child: const Text("التسجيل الصوتي")),
         ],
       ),
     );

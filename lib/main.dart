@@ -15,9 +15,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider<CoreProvider>(
           create: (_) => sl<CoreProvider>()
-            ..getTheme()
             ..getToken()
-            ..getLocale(),
+            ..getLocal(),
         ),
         ChangeNotifierProvider<RoomProvider>(
           create: (_) => sl<RoomProvider>(),
@@ -32,6 +31,6 @@ void main() async {
 }
 
 Future<void> initial() async {
-  await LocalDataSourceImpl.init();
+  await LocalDataSource.init();
   await initInjections();
 }

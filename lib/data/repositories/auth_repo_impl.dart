@@ -2,22 +2,19 @@ import 'package:canary_app/domain/models/profile.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/models/user.dart';
-import '../../domain/repositories/auth_repo.dart';
 import '../datasources/local_database/local_database.dart';
 import '../datasources/remote_database/auth_remote_repo.dart';
 import '../errors/exceptions.dart';
 import '../errors/failures.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
   final LocalDataSource _localDataSource;
-
-  AuthRepositoryImpl(this._authRemoteDataSource, this._localDataSource);
+  AuthRepository(this._authRemoteDataSource, this._localDataSource);
 
   Future<bool> get isConnected async => Future.value(
       await Connectivity().checkConnectivity() != ConnectivityResult.none);
 
-  @override
   Future<Either<Failure, Unit>> logIn(User user) async {
     if (await isConnected) {
       try {
@@ -36,7 +33,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Unit>> register(User user) async {
     if (await isConnected) {
       try {
@@ -62,7 +58,6 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Profile>> getMyProfile() async {
     if (await isConnected) {
       try {
@@ -85,12 +80,18 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<String?> getStoredToken() async {
     return _localDataSource.getToken();
   }
 
-  @override
+  Future<String?> getLocale() async {
+    return _localDataSource.getLocale();
+  }
+
+  Future<void> setLocale(String locale) async {
+    return _localDataSource.setLocale(locale);
+  }
+
   Future<Either<Failure, Unit>> logOut() async {
     try {
       return Right(await _localDataSource.removeToken());

@@ -32,10 +32,10 @@ class _GeftboxState extends State<Geftbox> {
   init() async {
     isLoading = true;
     await context.read<RoomProvider>().getGiftsList().then((state) {
-      if (state is ListState<Gift> && mounted) {
+      if (state is DataState<List<Gift>> && mounted) {
         setState(() {
           isLoading = false;
-          _gifts = state.list;
+          _gifts = state.data;
         });
       }
       if (state is ErrorState && mounted) {

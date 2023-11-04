@@ -26,10 +26,10 @@ class MusicPlayer extends StatelessWidget {
                     onFilesSelected: (filePaths) {},
                   ),
                 ),
-                Center(
+                const Center(
                   child: Text(
                     "مكتبة الأغاني ",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -59,16 +59,16 @@ class MusicPlayer extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: TextButton(
                   onPressed: () {
                     // يمكنك إزالة هذا واستخدام filterItems في onChanged
                     musicProvider
                         .filterItems(musicProvider.searchController.text);
                   },
-                  child: Text(
+                  child: const Text(
                     'بحث',
-                    style: const TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ),

@@ -180,7 +180,6 @@ class _KisalhathState extends State<Kisalhath> {
               child: MyButton(
                 onPressed: () {
                   List<int> selectedValues = selectedNumbers.toList();
-                  print("الأرقام المحددة: $selectedValues");
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {

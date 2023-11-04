@@ -18,8 +18,8 @@ class _VisitorsPageState extends State<VisitorsPage> {
           padding: const EdgeInsets.symmetric(horizontal: 11),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "الزوار",
                   style: TextStyle(

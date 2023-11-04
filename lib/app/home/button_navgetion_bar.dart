@@ -5,6 +5,7 @@ import 'package:canary_app/app/profail/my_profile.dart';
 
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
+import 'package:canary_app/domain/models/profile.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,8 +38,8 @@ class _HomeState extends State<Home> {
 
   getMyProfile() async {
     await context.read<CoreProvider>().getMyProfile().then((value) {
-      if (value is ProfileState) {
-        context.read<CoreProvider>().myProfile = value.profile;
+      if (value is DataState<Profile>) {
+        context.read<CoreProvider>().myProfile = value.data;
         MySnackBar.showDoneToast();
       } else if (value is ErrorState) {
         MySnackBar.showMyToast(text: value.failure.message);

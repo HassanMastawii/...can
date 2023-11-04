@@ -1,15 +1,8 @@
-import 'package:canary_app/domain/models/profile.dart';
-import 'package:canary_app/domain/models/room.dart';
-
 import '../../../data/errors/failures.dart';
 
 abstract class ProviderStates {
   const ProviderStates();
 }
-
-class InitialState extends ProviderStates {}
-
-class LoadingState extends ProviderStates {}
 
 class DoneState extends ProviderStates {}
 
@@ -19,26 +12,8 @@ class ErrorState extends ProviderStates {
   const ErrorState({required this.failure});
 }
 
-class ProfileState extends ProviderStates {
-  final Profile profile;
+class DataState<T> extends ProviderStates {
+  final T data;
 
-  ProfileState({required this.profile});
-}
-
-class ListState<T> extends ProviderStates {
-  final List<T> list;
-
-  ListState({required this.list});
-}
-
-class RoomState extends ProviderStates {
-  final Room room;
-
-  RoomState({required this.room});
-}
-
-class ResState extends ProviderStates {
-  final String path;
-
-  ResState({required this.path});
+  DataState({required this.data});
 }

@@ -66,7 +66,7 @@ class CreateFamily extends StatelessWidget {
                                 ),
                               ),
                               20.getHightSizedBox(),
-                              MyTextField(
+                              const MyTextField(
                                 minLines: 2,
                                 maxLines: 3,
                               ),

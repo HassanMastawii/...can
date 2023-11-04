@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:canary_app/app/MyRoom.dart/praicroom/cart_users.dart';
 import 'package:canary_app/app/colorApp/color.dart';
-
-import 'package:canary_app/app/profail/profile_public/SocialRelations.dart';
-import 'package:canary_app/app/profail/profile_public/StardomContent.dart';
+import 'package:canary_app/app/profail/profile_public/social_relations.dart';
+import 'package:canary_app/app/profail/profile_public/stardom_content.dart';
 import 'package:canary_app/app/profail/profile_public/slidephoto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,14 +14,14 @@ class VisiteProfail extends StatefulWidget {
 }
 
 class _VisiteProfailState extends State<VisiteProfail> {
-  PageController _pageController =
+  final PageController _pageController =
       PageController(initialPage: 0); // تحديد الصفحة الافتراضية
   int _currentPage = 0;
 
   void _navigateToPage(int page) {
     _pageController.animateToPage(
       page,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }
@@ -42,14 +39,14 @@ class _VisiteProfailState extends State<VisiteProfail> {
             child: Stack(
               alignment: Alignment.bottomCenter,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(bottom: 65),
                   child: SizedBox(
                     height: 200,
                     child: Slaidphoto(),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 120,
                   child: Row(
@@ -100,7 +97,7 @@ class _VisiteProfailState extends State<VisiteProfail> {
                               : Colors.black, // تغيير لون الرمز
                         ),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 60,
                         backgroundImage: AssetImage("images/2.png"),
                       ),
@@ -111,17 +108,17 @@ class _VisiteProfailState extends State<VisiteProfail> {
                         },
                         itemBuilder: (BuildContext context) {
                           return [
-                            PopupMenuItem<String>(
+                            const PopupMenuItem<String>(
                               value: 'block',
                               child: Text('حظر المستخدم'),
                             ),
-                            PopupMenuItem<String>(
+                            const PopupMenuItem<String>(
                               value: 'report',
                               child: Text('الإبلاغ عن المستخدم'),
                             ),
                           ];
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.admin_panel_settings_rounded,
                           size: 33,
                           color: Colors.black,
@@ -133,9 +130,9 @@ class _VisiteProfailState extends State<VisiteProfail> {
               ],
             ),
           ),
-          Center(
+          const Center(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text("user name ",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           )),
@@ -143,30 +140,30 @@ class _VisiteProfailState extends State<VisiteProfail> {
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: Row(
               children: [
-                Text(
+                const Text(
                   "50",
                   style: TextStyle(color: Colors.black),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 11),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 11),
                   child: Text(
                     "المتابعين",
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-                Spacer(),
-                Text("15447454"),
-                Text(" :ID "),
+                const Spacer(),
+                const Text("15447454"),
+                const Text(" :ID "),
                 IconButton(
                     onPressed: () {
-                      Clipboard.setData(ClipboardData(text: "15447454"));
+                      Clipboard.setData(const ClipboardData(text: "15447454"));
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text("تم نسخ الرقم بنجاح"),
                         ),
                       );
                     },
-                    icon: Icon(Icons.library_add_rounded))
+                    icon: const Icon(Icons.library_add_rounded))
               ],
             ),
           ),
@@ -202,7 +199,7 @@ class _VisiteProfailState extends State<VisiteProfail> {
               ],
             ),
           ),
-          Text("لا اله الا الله محمد رسول الله "),
+          const Text("لا اله الا الله محمد رسول الله "),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -230,7 +227,7 @@ class _VisiteProfailState extends State<VisiteProfail> {
                           borderRadius: BorderRadius.circular(22),
                           border: Border.all(color: Colors.black),
                         ),
-                        child: Center(child: Text("الملف الشخصي")),
+                        child: const Center(child: Text("الملف الشخصي")),
                       ),
                     ),
                   ),
@@ -249,7 +246,7 @@ class _VisiteProfailState extends State<VisiteProfail> {
                           borderRadius: BorderRadius.circular(22),
                           border: Border.all(color: Colors.black),
                         ),
-                        child: Center(child: Text("النجومية")),
+                        child: const Center(child: Text("النجومية")),
                       ),
                     ),
                   ),
@@ -265,7 +262,7 @@ class _VisiteProfailState extends State<VisiteProfail> {
                   _currentPage = index;
                 });
               },
-              children: [
+              children: const [
                 StardomContent(),
                 SocialRelationsContent(),
               ],

@@ -17,7 +17,7 @@ class _VsPaegPepoleState extends State<VsPaegPepole> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          actions: [
+          actions: const [
             FenashVs(),
           ],
         );

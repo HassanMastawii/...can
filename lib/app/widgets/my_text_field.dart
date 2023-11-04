@@ -19,7 +19,7 @@ class _MyTextFieldState extends State<MyTextField> {
     return TextFormField(
       maxLines: widget.maxLines,
       minLines: widget.maxLines,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: "اكتب هنا...",
         // contentPadding: EdgeInsets.symmetric(horizontal: 10),
         border: OutlineInputBorder(

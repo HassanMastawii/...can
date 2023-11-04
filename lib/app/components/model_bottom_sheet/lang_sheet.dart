@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:canary_app/app/canary_app.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/device/locale/locale.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class LangSheet extends StatelessWidget {
                   value: "ar",
                   groupValue: context.watch<CoreProvider>().local,
                   onChanged: (p0) {
-                    context.read<CoreProvider>().setLocale(p0);
+                    context.read<CoreProvider>().setLocal(p0!);
                     Navigator.pop(context);
                   },
                   title: const Text("Arabic"),
@@ -39,17 +40,17 @@ class LangSheet extends StatelessWidget {
                   value: "en",
                   groupValue: context.watch<CoreProvider>().local,
                   onChanged: (p0) {
-                    context.read<CoreProvider>().setLocale(p0);
+                    context.read<CoreProvider>().setLocal(p0!);
                     Navigator.pop(context);
                   },
                   title: const Text("English"),
                   subtitle: const Text("(الانكليزية)"),
                 ),
                 RadioListTile<String?>(
-                  value: null,
+                  value: getLanguageCode(Platform.localeName),
                   groupValue: context.watch<CoreProvider>().local,
                   onChanged: (p0) {
-                    context.read<CoreProvider>().setLocale(p0);
+                    context.read<CoreProvider>().setLocal(p0!);
                     Navigator.pop(context);
                   },
                   title: Text(
