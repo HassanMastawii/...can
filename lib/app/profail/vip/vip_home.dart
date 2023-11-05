@@ -175,7 +175,8 @@ class _ViphomeState extends State<Viphome> {
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text("تأكيد الشراء"),
-                            content: const Text("هل أنت متأكد من رغبتك في الشراء؟"),
+                            content:
+                                const Text("هل أنت متأكد من رغبتك في الشراء؟"),
                             actions: [
                               TextButton(
                                 child: const Text("إلغاء"),
@@ -216,8 +217,7 @@ class _ViphomeState extends State<Viphome> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Container(
                       width: 80,
                       height: 40,
@@ -284,7 +284,6 @@ class _ViphomeState extends State<Viphome> {
     required int requiredVip,
   }) {
     return Container(
-      color: Colors.blueAccent,
       height: MediaQuery.of(context).size.height / 3,
       width: 300,
       child: Column(
@@ -308,7 +307,7 @@ class _ViphomeState extends State<Viphome> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
-              color: requiredVip <= selectedVip ? Colors.amber : null,
+              color: Colors.black,
             ),
           )
         ],
