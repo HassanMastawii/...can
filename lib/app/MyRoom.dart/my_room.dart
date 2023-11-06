@@ -4,7 +4,9 @@ import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/text_in_room.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
 import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
+import 'package:canary_app/app/canary_app.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
+import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
@@ -40,6 +42,12 @@ class _MyRoomState extends State<MyRoom> {
   }
 
   void playGift(Gift gift) {
+    context.read<GiftOverlayProvider>().show(
+          context,
+          gift,
+          context.read<CoreProvider>().myProfile!.name!,
+          "بو حيدرة",
+        );
     _controller =
         VideoPlayerController.networkUrl(Uri.parse('$serverLink${gift.src}'))
           ..initialize().then((_) {
@@ -54,11 +62,15 @@ class _MyRoomState extends State<MyRoom> {
   @override
   void dispose() {
     _controller?.dispose();
+    navigatorKey.currentState?.context
+        .read<GiftOverlayProvider>()
+        .closeOverLay();
     super.dispose();
   }
 
   void checkVideo() {
     if (_controller?.value.position == _controller?.value.duration) {
+      context.read<GiftOverlayProvider>().closeOverLay();
       setState(() {
         isPlaying = false;
       });

@@ -1,3 +1,4 @@
+import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => MusicProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => GiftOverlayProvider(),
         ),
       ],
       child: const MyApp(),

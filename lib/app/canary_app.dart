@@ -17,6 +17,8 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class _MyAppState extends State<MyApp> {
           useInheritedMediaQuery: true,
           splitScreenMode: false,
           builder: (_, __) => MaterialApp(
+            navigatorKey: navigatorKey,
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,

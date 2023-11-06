@@ -19,69 +19,67 @@ class TextInRoom extends StatefulWidget {
 class _TextInRoomState extends State<TextInRoom> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Consumer<RoomProvider>(builder: (__, msgs, _) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    reverse: true,
-                    itemCount: msgs.messages.length,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: _messageBuilder(msgs.messages[index]),
-                    ),
-                  );
-                }),
-              ),
-              IconButton(
-                  onPressed: () {
-                    // showGeneralDialog(
-                    //   context: context,
-                    //   pageBuilder: (BuildContext buildContext,
-                    //       Animation<double> animation,
-                    //       Animation<double> secondaryAnimation) {
-                    //     // يمكنك بناء وتخصيص محتوى حوارك هنا
-                    //     return Center(
-                    //       child: Container(
-                    //         width: 300.0,
-                    //         height: 500.0,
-                    //         color: Colors.transparent,
-                    //         child: const RouletteGame(),
-                    //       ),
-                    //     );
-                    //   },
-                    // );
-                  },
-                  icon: const Icon(
-                    Icons.https_rounded,
-                    color: Colors.deepOrange,
-                    size: 44,
-                  )),
-            ],
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.black54,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.amberAccent, width: 2),
-              ),
-              child: const SliderSuperchat(),
+    return Stack(
+      alignment: Alignment.bottomLeft,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: Consumer<RoomProvider>(builder: (__, msgs, _) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  reverse: true,
+                  itemCount: msgs.messages.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: _messageBuilder(msgs.messages[index]),
+                  ),
+                );
+              }),
             ),
+            IconButton(
+                onPressed: () {
+                  // showGeneralDialog(
+                  //   context: context,
+                  //   pageBuilder: (BuildContext buildContext,
+                  //       Animation<double> animation,
+                  //       Animation<double> secondaryAnimation) {
+                  //     // يمكنك بناء وتخصيص محتوى حوارك هنا
+                  //     return Center(
+                  //       child: Container(
+                  //         width: 300.0,
+                  //         height: 500.0,
+                  //         color: Colors.transparent,
+                  //         child: const RouletteGame(),
+                  //       ),
+                  //     );
+                  //   },
+                  // );
+                },
+                icon: const Icon(
+                  Icons.https_rounded,
+                  color: Colors.deepOrange,
+                  size: 44,
+                )),
+          ],
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.black54,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.amberAccent, width: 2),
+            ),
+            child: const SliderSuperchat(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

@@ -34,7 +34,7 @@ class ImageHandler extends StatelessWidget {
         path,
         fit: fit,
       );
-    } else if (path.startsWith("assets")) {
+    } else if (path.startsWith("images")) {
       return Image.asset(
         path,
         fit: fit,
