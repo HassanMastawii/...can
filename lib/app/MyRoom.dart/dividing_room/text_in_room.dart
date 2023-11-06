@@ -84,28 +84,36 @@ class _TextInRoomState extends State<TextInRoom> {
   }
 
   Widget listTileBuilder(TextMessage message) {
-    return ListTile(
-      onTap: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return const ShowProfailFrendInRoom();
-            });
-      },
-      title: Text(
-        message.fromUser ?? "",
-        style: const TextStyle(color: Colors.white),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black54,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+            color: const Color.fromARGB(255, 155, 153, 148), width: 1),
       ),
-      subtitle: Text(
-        message.message,
-        style: const TextStyle(color: Colors.white),
-      ),
-      leading: const CircleAvatar(
-        backgroundColor: Colors.amber,
-        radius: 30,
-        child: CircleAvatar(
-          radius: 26,
-          backgroundImage: AssetImage("images/pic_room.jpg"),
+      child: ListTile(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return const ShowProfailFrendInRoom();
+              });
+        },
+        title: Text(
+          message.fromUser ?? "",
+          style: const TextStyle(color: Colors.white),
+        ),
+        subtitle: Text(
+          message.message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        leading: const CircleAvatar(
+          backgroundColor: Colors.amber,
+          radius: 30,
+          child: CircleAvatar(
+            radius: 26,
+            backgroundImage: AssetImage("images/pic_room.jpg"),
+          ),
         ),
       ),
     );

@@ -105,7 +105,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MyRoom(),
+                          builder: (context) => const MyRoom(
+                            userList: [],
+                          ),
                         ));
                   },
                   icon: const Icon(
@@ -161,6 +163,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyRoom(
                                       room: roomData![index],
+                                      userList: [],
                                     ),
                                   ));
                                 },

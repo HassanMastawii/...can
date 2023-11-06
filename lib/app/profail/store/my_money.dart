@@ -235,15 +235,6 @@ class _MyMoneyState extends State<MyMoney> {
               children: [
                 Row(
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(
-                        Icons.logout,
-                        size: 40,
-                      ),
-                    ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

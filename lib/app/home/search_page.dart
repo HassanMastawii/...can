@@ -117,6 +117,7 @@ class _SearchPageState extends State<SearchPage> {
                               context,
                               MyRoom(
                                 room: rooms[index],
+                                userList: [],
                               )).then((value) {
                             setState(() {});
                           });

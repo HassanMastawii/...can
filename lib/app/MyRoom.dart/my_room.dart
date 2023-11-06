@@ -22,8 +22,10 @@ class MyRoom extends StatefulWidget {
   const MyRoom({
     super.key,
     this.room,
+    required this.userList,
   });
   final Room? room;
+  final List<UserCoin> userList;
 
   @override
   State<MyRoom> createState() => _MyRoomState();
@@ -32,6 +34,12 @@ class MyRoom extends StatefulWidget {
 class _MyRoomState extends State<MyRoom> {
   @override
   void initState() {
+    _controller = VideoPlayerController.networkUrl(
+        Uri.parse('$serverLink/img/last/gift/Aircraft_7000.webm'))
+      ..initialize().then((_) {
+        setState(() {});
+      });
+    _controller.addListener(checkVideo);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<RoomProvider>().addMessage(SystemMessage(
             id: 1,
@@ -54,23 +62,19 @@ class _MyRoomState extends State<MyRoom> {
             setState(() {
               isPlaying = true;
             });
-            _controller!.addListener(checkVideo);
-            _controller!.play();
+            _controller.addListener(checkVideo);
+            _controller.play();
           });
   }
 
   @override
   void dispose() {
     _controller?.dispose();
-    navigatorKey.currentState?.context
-        .read<GiftOverlayProvider>()
-        .closeOverLay();
     super.dispose();
   }
 
   void checkVideo() {
     if (_controller?.value.position == _controller?.value.duration) {
-      context.read<GiftOverlayProvider>().closeOverLay();
       setState(() {
         isPlaying = false;
       });
@@ -78,11 +82,10 @@ class _MyRoomState extends State<MyRoom> {
   }
 
   bool isPlaying = false;
-  VideoPlayerController? _controller;
+  late VideoPlayerController _controller;
 
   @override
   Widget build(BuildContext context) {
-    List<UserCoin> userList = [];
     return Scaffold(
       body: Stack(
         children: [
@@ -124,7 +127,9 @@ class _MyRoomState extends State<MyRoom> {
                                 context,
                                 Editroom(room: widget.room!),
                               ).then((value) {
-                                setState(() {});
+                                setState(() {
+                                  print("done");
+                                });
                               });
                             },
                             child: Padding(
@@ -188,8 +193,8 @@ class _MyRoomState extends State<MyRoom> {
                             color: Colors.white,
                           ),
                           label: Text(
-                            "${userList.length}",
-                            style: const TextStyle(color: Colors.white),
+                            "${widget.userList.length}",
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                         IconButton(
@@ -212,7 +217,7 @@ class _MyRoomState extends State<MyRoom> {
                         const TextInRoom(),
                         if (isPlaying)
                           SizedBox(
-                            child: VideoPlayer(_controller!),
+                            child: VideoPlayer(_controller),
                           ),
                       ],
                     ),

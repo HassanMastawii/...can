@@ -2,6 +2,7 @@ import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/kaesalhad/kisalhath.
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/mic_plus/mic_pius.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/musicplayer/mesicplayr.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/sher/sher.dart';
+import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/super_chat.dart';
 import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/vs/vs.dart';
 
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _ExstraState extends State<Exstra> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return const MusicPlayer();
+        return const SuperChatinroom();
       },
     );
   }
