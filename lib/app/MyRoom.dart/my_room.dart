@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:canary_app/app/MyRoom.dart/dividing_room/mic_in_Room.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/min_icon_room.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/text_in_room.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
 import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
-import 'package:canary_app/app/canary_app.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
@@ -15,6 +16,8 @@ import 'package:canary_app/domain/models/messages/system_message.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -39,7 +42,6 @@ class _MyRoomState extends State<MyRoom> {
       ..initialize().then((_) {
         setState(() {});
       });
-    _controller.addListener(checkVideo);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<RoomProvider>().addMessage(SystemMessage(
             id: 1,
@@ -49,36 +51,74 @@ class _MyRoomState extends State<MyRoom> {
     super.initState();
   }
 
-  void playGift(Gift gift) {
-    context.read<GiftOverlayProvider>().show(
-          context,
-          gift,
-          context.read<CoreProvider>().myProfile!.name!,
-          "بو حيدرة",
-        );
-    _controller =
-        VideoPlayerController.networkUrl(Uri.parse('$serverLink${gift.src}'))
-          ..initialize().then((_) {
-            setState(() {
-              isPlaying = true;
-            });
-            _controller.addListener(checkVideo);
-            _controller.play();
-          });
+  void playGift(Gift gift) async {
+    final path = await downloadGift(gift.src);
+    _controller.removeListener(checkVideo);
+    if (mounted) {
+      context.read<GiftOverlayProvider>().show(
+            context,
+            gift,
+            context.read<CoreProvider>().myProfile!.name!,
+            "بو حيدرة",
+          );
+    }
+    _controller = VideoPlayerController.file(File(path))
+      ..initialize().then((_) {
+        setState(() {
+          isPlaying = true;
+        });
+        _controller.addListener(checkVideo);
+        _controller.play();
+      });
   }
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   void checkVideo() {
-    if (_controller?.value.position == _controller?.value.duration) {
+    if (_controller.value.position == _controller.value.duration) {
+      context.read<GiftOverlayProvider>().closeOverLay();
       setState(() {
         isPlaying = false;
       });
     }
+  }
+
+  Future<String> downloadGift(String link) async {
+    final name = link.split("/").last;
+    final tempDir = await getTemporaryDirectory();
+    final giftDir = Directory("${tempDir.path}/gifts");
+    await giftDir.create();
+    final List files = await getAllFilesInDir(giftDir.path);
+    print(" ==================================== ");
+    print(files);
+    if (!files.contains("${giftDir.path}/$name")) {
+      // var response = await Dio().download(link, "${giftDir.path}/$name");
+      print("download start");
+      await FlutterDownloader.enqueue(
+        url: serverLink + link,
+        fileName: name,
+        savedDir: giftDir.path,
+      );
+    }
+    print(" ==================================== ");
+
+    return "${giftDir.path}/$name";
+  }
+
+  Future<List<String>> getAllFilesInDir(String directoryPath) async {
+    final Directory directory = Directory(directoryPath);
+    final List<FileSystemEntity> entities = directory.listSync();
+
+    // Filter the list to only include files.
+    final List<File> files = entities.whereType<File>().toList();
+    // Get the paths of the files.
+    final List<String> filePaths = files.map((file) => file.path).toList();
+
+    return filePaths;
   }
 
   bool isPlaying = false;

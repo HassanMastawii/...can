@@ -1,6 +1,7 @@
 import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
 import 'app/canary_app.dart';
 import 'app/provider/providers/core_provider.dart';
@@ -36,5 +37,11 @@ void main() async {
 
 Future<void> initial() async {
   await LocalDataSource.init();
+  await FlutterDownloader.initialize(
+      debug:
+          true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl:
+          false // option: set to false to disable working with http links (default: false)
+      );
   await initInjections();
 }

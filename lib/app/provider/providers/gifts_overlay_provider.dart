@@ -8,6 +8,7 @@ class GiftOverlayProvider extends ChangeNotifier {
   OverlayEntry? _overlayEntry;
 
   show(BuildContext context, Gift gift, String sender, String reciever) {
+    closeOverLay();
     _overlayEntry = OverlayEntry(
       builder: (context) {
         return GiftBanner(
@@ -21,8 +22,10 @@ class GiftOverlayProvider extends ChangeNotifier {
   }
 
   closeOverLay() {
-    _overlayEntry?.remove();
-    _overlayEntry?.dispose();
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
   }
 }
 

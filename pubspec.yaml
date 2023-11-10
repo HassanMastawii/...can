@@ -90,7 +90,7 @@ dependencies:
   shimmer: ^3.0.0
 
  # ____________________________________________
-
+  flutter_downloader: ^1.11.4
 
 
  
