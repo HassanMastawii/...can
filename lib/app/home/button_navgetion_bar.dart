@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:canary_app/app/colorApp/color.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/messages/home_chat.dart';
 import 'package:canary_app/app/profail/my_profile.dart';
@@ -61,11 +62,9 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         body: _pages[_index],
         bottomNavigationBar: CurvedNavigationBar(
-          color: const Color.fromRGBO(144, 202, 249, 1),
+          color: praimerycalor,
           height: 55,
-          // backgroundColor: Colors.black12,
           animationDuration: const Duration(milliseconds: 400),
-          // buttonBackgroundColor: Colors.blueAccent[200],
           animationCurve: Curves.linear,
           items: const <Widget>[
             Icon(

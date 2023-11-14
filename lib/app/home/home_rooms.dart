@@ -163,7 +163,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyRoom(
                                       room: roomData![index],
-                                      userList: [],
+                                      userList: const [],
                                     ),
                                   ));
                                 },
