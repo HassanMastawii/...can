@@ -15,9 +15,6 @@ class _PraicdayState extends State<Praicday> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 60.h,
-        ),
         Expanded(
           child: ListView.builder(
             scrollDirection: Axis.vertical,

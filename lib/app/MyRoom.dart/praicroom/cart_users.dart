@@ -1,10 +1,12 @@
+import 'package:canary_app/app/components/image_handler.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
-import 'package:canary_app/domain/models/profile.dart';
+
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
 class Carduserspricinroom extends StatefulWidget {
-  const Carduserspricinroom({super.key, this.profile});
-  final Profile? profile;
+  const Carduserspricinroom({super.key, this.user});
+  final UserCoin? user;
 
   @override
   State<Carduserspricinroom> createState() => _CarduserspricinroomState();
@@ -21,28 +23,19 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: widget.profile?.pic != null
-                  ? CircleAvatar(
-                      radius: 30,
-                      backgroundImage:
-                          NetworkImage("$serverLink${widget.profile!.pic!}"),
-                    )
-                  : const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage("images/pic_room.jpg"),
-                    ),
+              child: ImageHandler(path: widget.user!.userPic, radious: 50),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.profile?.name.toString() ?? "",
+                  widget.user?.username ?? "",
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: [
-                    Text(widget.profile?.id.toString() ?? ""),
+                    Text(widget.user?.userId.toString() ?? ""),
                     const Text(":ID"),
                     const Icon(Icons.library_add_rounded),
                   ],
@@ -52,7 +45,7 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
                     getButton(
                       text: "22",
                       imageLink: "images/11.png",
-                      width: 50,
+                      width: 40,
                       hieght: 20,
                     ),
                     Padding(
@@ -60,14 +53,14 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
                       child: getButton(
                         text: "22",
                         imageLink: "images/to.png",
-                        width: 50,
+                        width: 40,
                         hieght: 50,
                       ),
                     ),
                     getButton(
                       text: "15",
                       imageLink: "images/fam.png",
-                      width: 50,
+                      width: 40,
                       hieght: 30,
                     ),
                   ],
@@ -87,7 +80,7 @@ class _CarduserspricinroomState extends State<Carduserspricinroom> {
                           MaterialStatePropertyAll(Colors.lightBlueAccent)),
                   onPressed: () {},
                   icon: const Icon(Icons.attach_money_rounded),
-                  label: const Text("1000")),
+                  label: Text(widget.user?.totalCoinAmount.toString() ?? "")),
             )
           ],
         ),

@@ -2,10 +2,12 @@
 
 import 'package:canary_app/app/MyRoom.dart/mic/onar_mic.dart';
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicroom.dart';
+import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
 class OnarMicRoom extends StatefulWidget {
-  const OnarMicRoom({super.key});
+  final List<UserCoin> userList;
+  const OnarMicRoom({super.key, required this.userList});
 
   @override
   State<OnarMicRoom> createState() => _OnarMicRoomState();
@@ -28,15 +30,15 @@ class _OnarMicRoomState extends State<OnarMicRoom> {
               showModalBottomSheet(
                   context: context,
                   builder: (context) {
-                    return const Praicroom(
-                      userList: [],
+                    return Praicroom(
+                      userList: widget.userList,
                     );
                   });
             },
             icon: const Icon(Icons.attach_money_rounded),
-            label: const Text(
-              "1000",
-              style: TextStyle(color: Colors.yellow),
+            label: Text(
+              "${calculateCoins()}",
+              style: const TextStyle(color: Colors.yellow),
             )),
         const Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -70,5 +72,13 @@ class _OnarMicRoomState extends State<OnarMicRoom> {
         ],
       ),
     );
+  }
+
+  int calculateCoins() {
+    int total = 0;
+    for (var element in widget.userList) {
+      total = total + element.totalCoinAmount;
+    }
+    return total;
   }
 }

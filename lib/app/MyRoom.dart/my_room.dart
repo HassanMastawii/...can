@@ -6,9 +6,11 @@ import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/text_in_room.dart';
 import 'package:canary_app/app/MyRoom.dart/editroom/edit_room.dart';
 import 'package:canary_app/app/MyRoom.dart/peopleroom/peopleinroom.dart';
+import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/provider/providers/core_provider.dart';
 import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/data/datasources/remote_database/links.dart';
 import 'package:canary_app/domain/models/gift.dart';
@@ -35,25 +37,42 @@ class MyRoom extends StatefulWidget {
 }
 
 class _MyRoomState extends State<MyRoom> {
+  List<UserCoin>? userListCoin;
+  bool isLoading = true;
+
+  Future<void> fetchData() async {
+    isLoading = true;
+    setState(() {});
+    final state =
+        await context.read<RoomProvider>().getUserList(widget.room!.roomId!);
+    if (state is DataState<List<UserCoin>>) {
+      setState(() {
+        isLoading = false;
+        userListCoin = state.data;
+      });
+    } else if (state is ErrorState) {
+      setState(() {
+        isLoading = false;
+      });
+      MySnackBar.showMyToast(text: state.failure.message);
+    }
+  }
+
   @override
   void initState() {
-    _controller = VideoPlayerController.networkUrl(
-        Uri.parse('$serverLink/img/last/gift/Aircraft_7000.webm'))
-      ..initialize().then((_) {
-        setState(() {});
-      });
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<RoomProvider>().addMessage(SystemMessage(
             id: 1,
             text: "أنضم ${context.read<CoreProvider>().myProfile?.name} للرووم",
           ));
+      fetchData();
     });
     super.initState();
   }
 
   void playGift(Gift gift) async {
     final path = await downloadGift(gift.src);
-    _controller.removeListener(checkVideo);
+    _controller?.removeListener(checkVideo);
     if (mounted) {
       context.read<GiftOverlayProvider>().show(
             context,
@@ -67,19 +86,19 @@ class _MyRoomState extends State<MyRoom> {
         setState(() {
           isPlaying = true;
         });
-        _controller.addListener(checkVideo);
-        _controller.play();
+        _controller?.addListener(checkVideo);
+        _controller?.play();
       });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   void checkVideo() {
-    if (_controller.value.position == _controller.value.duration) {
+    if (_controller?.value.position == _controller?.value.duration) {
       context.read<GiftOverlayProvider>().closeOverLay();
       setState(() {
         isPlaying = false;
@@ -117,7 +136,7 @@ class _MyRoomState extends State<MyRoom> {
   }
 
   bool isPlaying = false;
-  late VideoPlayerController _controller;
+  VideoPlayerController? _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -165,9 +184,7 @@ class _MyRoomState extends State<MyRoom> {
                                     context,
                                     Editroom(room: widget.room!),
                                   ).then((value) {
-                                    setState(() {
-                                      print("done");
-                                    });
+                                    setState(() {});
                                   });
                                 },
                                 child: Padding(
@@ -221,8 +238,8 @@ class _MyRoomState extends State<MyRoom> {
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (context) {
-                                    return const PeopleinRoom(
-                                      userList: [],
+                                    return PeopleinRoom(
+                                      userList: userListCoin ?? [],
                                     );
                                   },
                                 );
@@ -232,8 +249,8 @@ class _MyRoomState extends State<MyRoom> {
                                 color: Colors.white,
                               ),
                               label: Text(
-                                "${widget.userList.length}",
-                                style: TextStyle(color: Colors.white),
+                                "${userListCoin?.length ?? 0}",
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                             IconButton(
@@ -248,17 +265,17 @@ class _MyRoomState extends State<MyRoom> {
                           ],
                         ),
                       ),
-                      const OnarMicRoom(),
+                      OnarMicRoom(userList: userListCoin ?? []),
                       const MicatinRoom(),
-                      Expanded(child: const TextInRoom()),
+                      const Expanded(child: TextInRoom()),
                       MiniconRoom(onGift: playGift),
                     ],
                   ),
                 ),
               ),
-              if (isPlaying)
+              if (isPlaying && _controller != null)
                 Positioned.fill(
-                  child: VideoPlayer(_controller),
+                  child: VideoPlayer(_controller!),
                 ),
             ],
           ),
