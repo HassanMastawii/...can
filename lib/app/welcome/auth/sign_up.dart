@@ -102,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           preIcon: const Icon(
                             Icons.alternate_email_outlined,
                           ),
-                          textEditingController: email,
+                          controller: email,
                           textInputType: TextInputType.emailAddress,
                           autofillHints: const [AutofillHints.email],
                         ),
@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Icons.account_circle,
                           ),
                           minimum: 2,
-                          textEditingController: username,
+                          controller: username,
                           textInputType: TextInputType.name,
                         ),
                       ),

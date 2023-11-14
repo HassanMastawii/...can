@@ -54,7 +54,7 @@ class _EditPageState extends State<EditPage> {
                   child: !widget.secure
                       ? MyTextFormField(
                           labelText: widget.hint,
-                          textEditingController: _controller,
+                          controller: _controller,
                         )
                       : MyTextPassField(
                           labelText: widget.hint,

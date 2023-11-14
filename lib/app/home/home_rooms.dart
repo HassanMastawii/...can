@@ -1,4 +1,5 @@
 import 'package:canary_app/app/MyRoom.dart/my_room.dart';
+import 'package:canary_app/app/components/dialogs/create_room_dialog.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/home/bnart.dart';
 import 'package:canary_app/app/home/card_superchat.dart';
@@ -7,7 +8,6 @@ import 'package:canary_app/app/home/room_card.dart';
 import 'package:canary_app/app/home/search_page.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
-
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/widgets/skeleton.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
@@ -102,13 +102,10 @@ class _HomeRoomsState extends State<HomeRooms> {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyRoom(
-                            userList: [],
-                          ),
-                        ));
+                    showDialog(
+                      context: context,
+                      builder: (context) => const CreateRoomDialog(),
+                    );
                   },
                   icon: const Icon(
                     Icons.home,
@@ -156,9 +153,9 @@ class _HomeRoomsState extends State<HomeRooms> {
                             itemCount: roomData!.length,
                             itemBuilder: (context, index) {
                               return RoomCard(
-                                roomstatus: roomData![index].roomStatus ?? "",
-                                chatCountry: roomData![index].contry ?? "",
-                                chatName: roomData![index].name ?? "",
+                                roomstatus: roomData?[index].roomStatus ?? "",
+                                chatCountry: roomData?[index].contry ?? "",
+                                chatName: roomData?[index].name ?? "",
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyRoom(
@@ -167,7 +164,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                                     ),
                                   ));
                                 },
-                                imageLink: roomData![index].pic ?? "",
+                                imageLink: roomData?[index].pic ?? "",
                               );
                             },
                           ),

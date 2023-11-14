@@ -133,7 +133,7 @@ class _EditroomState extends State<Editroom> {
                             enabled: false,
                             color: Colors.white.withOpacity(0.8),
                             labelText: "اسم الغرفة",
-                            textEditingController:
+                            controller:
                                 TextEditingController(text: widget.room.name),
                           ),
                         ),
@@ -169,8 +169,7 @@ class _EditroomState extends State<Editroom> {
                         child: MyTextFormField(
                           enabled: false,
                           labelText: "قفل الغرفة",
-                          textEditingController:
-                              TextEditingController(text: "********"),
+                          controller: TextEditingController(text: "********"),
                         ),
                       ),
                     ),

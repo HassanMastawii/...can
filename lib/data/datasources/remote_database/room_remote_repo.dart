@@ -15,6 +15,7 @@ abstract class RoomRemoteDataSource {
   Future<Room> getRoomInfo(int id, String token);
   Future<List<UserCoin>> getUserList(int id, String token);
   Future<List<Gift>> giftList(String token);
+  Future<int> checkRomm(String token);
   Future<Unit> createRoom(Room room, String token);
   Future<String> upRoomImg(String path, int id, String token);
   Future<Unit> setBackgroundImg(String path, int id, String token);
@@ -38,6 +39,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     ).timeout(
       const Duration(seconds: 30),
     );
+    print(res.body);
     if (res.statusCode == 200) {
       return unit;
     } else {
@@ -216,6 +218,26 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     if (res.statusCode == 200) {
       final List mapData = jsonDecode(res.body);
       return mapData.map((e) => Gift.fromJson(e)).toList();
+    } else {
+      throw ServerException(message: res.statusCode.toString() + res.body);
+    }
+  }
+
+  @override
+  Future<int> checkRomm(String token) async {
+    var res = await client.get(
+      Uri.parse(checkRoomLink),
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    ).timeout(
+      const Duration(seconds: 30),
+    );
+    print(res.body);
+    if (res.statusCode == 200) {
+      return int.parse(jsonDecode(res.body));
     } else {
       throw ServerException(message: res.statusCode.toString() + res.body);
     }

@@ -7,7 +7,7 @@ const String validateMin = "يجب ان لا يقل الحقل عن عدد مح�
 class MyTextFormField extends StatefulWidget {
   final String labelText;
   final TextInputType textInputType;
-  TextEditingController? textEditingController;
+  TextEditingController? controller;
   final Widget? preIcon;
   final bool enabled;
   final int minimum;
@@ -30,7 +30,7 @@ class MyTextFormField extends StatefulWidget {
     this.initVal,
     this.autofillHints,
     this.focusnode,
-    this.textEditingController,
+    this.controller,
     this.color = Colors.white,
     this.valError,
   });
@@ -42,8 +42,7 @@ class MyTextFormField extends StatefulWidget {
 class _MyTextFormFieldState extends State<MyTextFormField> {
   @override
   Widget build(BuildContext context) {
-    widget.textEditingController ??=
-        TextEditingController(text: widget.initVal);
+    widget.controller ??= TextEditingController(text: widget.initVal);
 
     return TextFormField(
       minLines: 1,
@@ -61,7 +60,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           ? TextDirection.ltr
           : null,
       autofillHints: widget.autofillHints,
-      controller: widget.textEditingController,
+      controller: widget.controller,
       enabled: widget.enabled,
       onChanged: (value) {
         if (widget.onChanged != null) {

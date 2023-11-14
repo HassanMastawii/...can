@@ -93,19 +93,14 @@ class _MyRoomState extends State<MyRoom> {
     final giftDir = Directory("${tempDir.path}/gifts");
     await giftDir.create();
     final List files = await getAllFilesInDir(giftDir.path);
-    print(" ==================================== ");
-    print(files);
     if (!files.contains("${giftDir.path}/$name")) {
       // var response = await Dio().download(link, "${giftDir.path}/$name");
-      print("download start");
       await FlutterDownloader.enqueue(
         url: serverLink + link,
         fileName: name,
         savedDir: giftDir.path,
       );
     }
-    print(" ==================================== ");
-
     return "${giftDir.path}/$name";
   }
 

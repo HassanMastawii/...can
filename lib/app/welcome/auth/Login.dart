@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
                           preIcon: const Icon(
                             Icons.alternate_email_outlined,
                           ),
-                          textEditingController: email,
+                          controller: email,
                           textInputType: TextInputType.emailAddress,
                           autofillHints: const [AutofillHints.email],
                         ),
