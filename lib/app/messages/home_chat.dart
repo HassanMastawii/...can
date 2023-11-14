@@ -1,96 +1,124 @@
+import 'package:canary_app/app/colorApp/color.dart';
+import 'package:canary_app/app/components/friend_card.dart';
 import 'package:canary_app/app/messages/home_message.dart';
 import 'package:canary_app/app/messages/private_chat/masseg_prifet.dart';
-
+import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/my_button.dart';
+class HomeChat extends StatelessWidget {
+  const HomeChat({Key? key}) : super(key: key);
 
-class HomeChat extends StatefulWidget {
-  const HomeChat({super.key});
-
-  @override
-  State<HomeChat> createState() => _HomeChatState();
-}
-
-class _HomeChatState extends State<HomeChat> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        // color: Colors.cyan[200],
-        padding: const EdgeInsets.symmetric(horizontal: 11),
-        child: Column(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("الرسائل"),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'الرسائل'),
+              Tab(text: 'الأصدقاء'),
+            ],
+          ),
+        ),
+        body: TabBarView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MyButton(
-                    onPressed: () {},
-                    text: "الأصدقاء",
-                  ),
-                  MyButton(
-                    onPressed: () {},
-                    text: "الرسائل",
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: MyButton(
-                  onPressed: () {},
-                  text: "خدمة العملاء",
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: MyButton(
-                  onPressed: () {},
-                  text: "إشعارات النظام",
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(33),
-                    topRight: Radius.circular(33),
-                  ),
-                  // color: Colors.white,
-                ),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: 56,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: MyHomeMessage(
-                        name: "عادل الدرة",
-                        message: "السلام عليكم كيفك كابتن",
-                        time: "12:23 pm",
-                        pictureLink: "images/pic_room.jpg",
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const MassegPraifet(),
-                          ));
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            buildMessagesScreen(context),
+            buildFriendsScreen(),
           ],
         ),
       ),
     );
+  }
+
+  Widget buildMessagesScreen(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: MyButton(
+              color: praimerycalor,
+              fontColor: Colors.black,
+              onPressed: () {},
+              text: 'خدمة العملاء',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: MyButton(
+              color: praimerycalor,
+              fontColor: Colors.black,
+              onPressed: () {},
+              text: 'إشعارات النظام',
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(33),
+                topRight: Radius.circular(33),
+              ),
+            ),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: 56,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: MyHomeMessage(
+                    name: 'عادل الدرة',
+                    message: 'السلام عليكم كيفك كابتن',
+                    time: '12:23 pm',
+                    pictureLink: 'images/pic_room.jpg',
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MassegPraifet(),
+                      ));
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildFriendsScreen() {
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: 56,
+        itemBuilder: (context, index) {
+          return const FriendCard(
+            trailing: Column(children: [
+              MyButton(
+                text: "حظر",
+                color: Colors.red,
+                size: 14,
+                fontColor: Colors.white,
+              ),
+              MyButton(
+                text: "إلغاء",
+                color: Colors.grey,
+                size: 14,
+                fontColor: Colors.white,
+              ),
+            ]),
+          );
+        },
+      ),
+    ));
   }
 }

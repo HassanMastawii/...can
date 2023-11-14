@@ -141,126 +141,126 @@ class _MyRoomState extends State<MyRoom> {
                     ),
             ),
           ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Column(
-                children: [
-                  Container(
-                    height: 65,
-                    decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.amberAccent, width: 2),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async {
-                              await MyRouter.myPush(
-                                context,
-                                Editroom(room: widget.room!),
-                              ).then((value) {
-                                setState(() {
-                                  print("done");
-                                });
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 64,
-                                    width: 64,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                            "$serverLink${widget.room?.pic}"),
-                                        fit: BoxFit.cover, // Adjust as needed
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                      width:
-                                          10), // Add spacing between image and text
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+          Stack(
+            children: [
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 65,
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(8),
+                          border:
+                              Border.all(color: Colors.amberAccent, width: 2),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () async {
+                                  await MyRouter.myPush(
+                                    context,
+                                    Editroom(room: widget.room!),
+                                  ).then((value) {
+                                    setState(() {
+                                      print("done");
+                                    });
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Row(
                                     children: [
-                                      Text(
-                                        widget.room?.name ?? "",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
+                                      Container(
+                                        height: 64,
+                                        width: 64,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                "$serverLink${widget.room?.pic}"),
+                                            fit: BoxFit
+                                                .cover, // Adjust as needed
+                                          ),
                                         ),
                                       ),
-                                      Text(
-                                        "ID: ${widget.room?.roomId}",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
+                                      const SizedBox(
+                                          width:
+                                              10), // Add spacing between image and text
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            widget.room?.name ?? "",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            "ID: ${widget.room?.roomId}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        TextButton.icon(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return const PeopleinRoom(
-                                  userList: [],
+                            TextButton.icon(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return const PeopleinRoom(
+                                      userList: [],
+                                    );
+                                  },
                                 );
                               },
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.group,
-                            color: Colors.white,
-                          ),
-                          label: Text(
-                            "${widget.userList.length}",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                              icon: const Icon(
+                                Icons.group,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                "${widget.userList.length}",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.power_settings_new,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(
-                            Icons.power_settings_new,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const OnarMicRoom(),
+                      const MicatinRoom(),
+                      Expanded(child: const TextInRoom()),
+                      MiniconRoom(onGift: playGift),
+                    ],
                   ),
-                  const OnarMicRoom(),
-                  const MicatinRoom(),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        const TextInRoom(),
-                        if (isPlaying)
-                          SizedBox(
-                            child: VideoPlayer(_controller),
-                          ),
-                      ],
-                    ),
-                  ),
-                  MiniconRoom(onGift: playGift),
-                ],
+                ),
               ),
-            ),
+              if (isPlaying)
+                Positioned.fill(
+                  child: VideoPlayer(_controller),
+                ),
+            ],
           ),
         ],
       ),
