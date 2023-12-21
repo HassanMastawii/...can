@@ -27,16 +27,19 @@ class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
   bool isLoading = true;
 
+  ///تابع لجلب الروومات الموجودة في السيرفر
   Future<void> fetchData() async {
     isLoading = true;
     setState(() {});
     final state = await context.read<RoomProvider>().searchRoom("");
     if (state is DataState<List<Room>>) {
+      //عند نجاح العملية نعرض الروومات المتاحة
       setState(() {
         isLoading = false;
         roomData = state.data;
       });
     } else if (state is ErrorState) {
+      //عند فشل العملية نعرض رسالة خطأ
       setState(() {
         isLoading = false;
       });

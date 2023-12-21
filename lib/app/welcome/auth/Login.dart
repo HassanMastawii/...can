@@ -1,7 +1,6 @@
-// ignore_for_file: file_names
+import 'package:canary_app/app/colorApp/color.dart';
 import 'package:canary_app/app/components/model_bottom_sheet/lang_sheet.dart';
 import 'package:canary_app/app/home/button_navgetion_bar.dart';
-
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/welcome/auth/sign_up.dart';
@@ -17,7 +16,6 @@ import '../../widgets/my_text_button.dart';
 import '../../widgets/my_text_form_field.dart';
 
 class Login extends StatefulWidget {
-  static const String ssroot = 'Login';
   const Login({super.key});
 
   @override
@@ -30,15 +28,18 @@ class _LoginState extends State<Login> {
   bool isRememberMe = false;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
+  ///تابع تسجيل الدخول
   login() async {
     final loginState = await context.read<CoreProvider>().logIn(User(
           email: email.text,
           password: password.text,
         ));
     if (loginState is DoneState && mounted) {
+      //اظهار رسالة اتمام العملية بنجاح والانتقال الى الهووم سكرين
       MySnackBar.showDoneToast();
       MyRouter.myPushReplacmentAll(context, const Home());
     } else if (loginState is ErrorState && mounted) {
+      // اظهار رسالة خطأ عند فشل عملية تسجيل الدخول
       MySnackBar.showMyToast(text: loginState.failure.message);
     }
   }
@@ -46,7 +47,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 197, 247, 247),
+      backgroundColor: praimerycalor,
       body: Form(
         key: _key,
         child: SafeArea(
@@ -54,16 +55,17 @@ class _LoginState extends State<Login> {
             alignment: AlignmentDirectional.topStart,
             children: [
               IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      showDragHandle: true,
-                      isScrollControlled: true,
-                      useSafeArea: true,
-                      builder: (context) => const LangSheet(),
-                    );
-                  },
-                  icon: const Icon(Icons.language)),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    showDragHandle: true,
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    builder: (context) => const LangSheet(),
+                  );
+                },
+                icon: const Icon(Icons.language),
+              ),
               Center(
                 child: SingleChildScrollView(
                   child: Column(

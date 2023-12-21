@@ -9,6 +9,7 @@ import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
 class RoomProvider extends ChangeNotifier with StatesHandler {
+  // كلاس لادارة عمليات الخاصة بالرووم
   final RoomRepository _roomRepository;
 
   RoomProvider(

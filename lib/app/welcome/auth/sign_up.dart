@@ -28,8 +28,11 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController username = TextEditingController();
   int? gender;
   String? country;
+
+  ///تابع انشاء حساب جديد
   register() async {
     if (!_key.currentState!.validate()) {
+      //اذا لم يتم تعبئة الحقول المهمة
       MySnackBar.showMyToast(text: "أملئ الحقول بشكل مناسب");
     } else if (password.text != confirmPassword.text) {
       MySnackBar.showMyToast(text: "كلمتي المرور غير متطابقتين");
@@ -46,9 +49,11 @@ class _RegisterPageState extends State<RegisterPage> {
             password: password.text,
           ));
       if (registerstate is DoneState && mounted) {
+        //عند نجاح العملية عرض رسالة والانتقال الى صفحة الهووم
         MySnackBar.showDoneToast();
         MyRouter.myPushReplacmentAll(context, const Home());
       } else if (registerstate is ErrorState && mounted) {
+        //عند فشل العملية عرض رسالة الخطأ
         MySnackBar.showMyToast(text: registerstate.failure.message);
       }
     }

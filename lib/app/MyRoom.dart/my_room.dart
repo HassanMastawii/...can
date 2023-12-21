@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:canary_app/app/MyRoom.dart/dividing_room/mic_in_Room.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/min_icon_room.dart';
 import 'package:canary_app/app/MyRoom.dart/dividing_room/onar_micRoom.dart';
@@ -61,10 +60,13 @@ class _MyRoomState extends State<MyRoom> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<RoomProvider>().addMessage(SystemMessage(
-            id: 1,
-            text: "أنضم ${context.read<CoreProvider>().myProfile?.name} للرووم",
-          ));
+      context.read<RoomProvider>().addMessage(
+            SystemMessage(
+              id: 1,
+              text:
+                  "أنضم ${context.read<CoreProvider>().myProfile?.name} للرووم",
+            ),
+          );
       fetchData();
     });
     super.initState();

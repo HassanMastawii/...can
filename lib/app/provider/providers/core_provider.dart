@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../domain/models/user.dart';
 
 class CoreProvider extends ChangeNotifier with StatesHandler {
+  // كلاس لادارة حالة عمليات تسجيل الدخول ولغة التطبيق والتوكن المخزنة محليا
   final AuthRepository _authRepository;
 
   CoreProvider(
@@ -34,6 +35,7 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     return failureOrDoneToState(failureOrUser);
   }
 
+  //لجلب الملف الشخصي من السيرفر
   Future<ProviderStates> getMyProfile() async {
     isLoadingProfile = true;
     notifyListeners();
@@ -43,21 +45,26 @@ class CoreProvider extends ChangeNotifier with StatesHandler {
     return failureOrDataToState<Profile>(failureOrUser);
   }
 
+  //لتسجيل الخروج وحذف التوكن المخزن محليا
   logOut() async {
+    token = null;
     await _authRepository.logOut();
     notifyListeners();
   }
 
+  //جلب التوكن المخزن محليا
   getToken() async {
     token = await _authRepository.getStoredToken();
     notifyListeners();
   }
 
+  // جلب لغة التطبيق المخزنة محليا
   getLocal() async {
     local = await _authRepository.getLocale();
     notifyListeners();
   }
 
+  //تغيير لغة التطبيق المخزنة محليا
   setLocal(String locale) async {
     local = locale;
     await _authRepository.setLocale(locale);

@@ -39,7 +39,7 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     ).timeout(
       const Duration(seconds: 30),
     );
-    print(res.body);
+    print(res.statusCode);
     if (res.statusCode == 200) {
       return unit;
     } else {
