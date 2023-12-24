@@ -283,7 +283,7 @@ class _ViphomeState extends State<Viphome> {
     required String img,
     required int requiredVip,
   }) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height / 3,
       width: 300,
       child: Column(
@@ -304,7 +304,7 @@ class _ViphomeState extends State<Viphome> {
           ),
           Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Colors.black,

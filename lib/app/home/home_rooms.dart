@@ -27,7 +27,6 @@ class HomeRooms extends StatefulWidget {
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
   bool isLoading = true;
-  IO.Socket? socket;
 
   ///تابع لجلب الروومات الموجودة في السيرفر
   Future<void> fetchData() async {
