@@ -15,6 +15,7 @@ import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeRooms extends StatefulWidget {
   const HomeRooms({super.key});
@@ -26,6 +27,7 @@ class HomeRooms extends StatefulWidget {
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
   bool isLoading = true;
+  IO.Socket? socket;
 
   ///تابع لجلب الروومات الموجودة في السيرفر
   Future<void> fetchData() async {
@@ -49,10 +51,29 @@ class _HomeRoomsState extends State<HomeRooms> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    Future.delayed(Duration.zero, () async {
       await fetchData();
     });
     super.initState();
+  }
+
+  void initializeSocket() {
+    socket = IO.io('http://localhost:3000', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+    });
+    socket!.on('chat message', (data) {
+      print('Message from server: $data');
+      print(
+          "===================================================================");
+      setState(() {
+        fetchData();
+      });
+    });
+    // socket!.emit('chat message', 'create room');
+
+    //  Start socket connection
+    socket!.connect();
   }
 
   @override
@@ -210,5 +231,12 @@ class _HomeRoomsState extends State<HomeRooms> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    // قطع الاتصال عند إغلاق التطبيق
+    socket?.disconnect();
+    super.dispose();
   }
 }

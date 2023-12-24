@@ -6,6 +6,7 @@ import 'package:canary_app/app/widgets/my_text_form_field.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class CreateRoomDialog extends StatefulWidget {
   const CreateRoomDialog({super.key});
@@ -16,17 +17,34 @@ class CreateRoomDialog extends StatefulWidget {
 
 class _CreateRoomDialogState extends State<CreateRoomDialog> {
   final TextEditingController _roomName = TextEditingController();
-
+  IO.Socket? socket;
   void _createRoom() async {
     final state = await context
         .read<RoomProvider>()
         .createRoom(Room(name: _roomName.text));
+
+    initializeSocket();
     if (state is DoneState) {
       MySnackBar.showMyToast(text: "تم انشاء الرووم بنجاح");
+
       mounted ? Navigator.pop(context) : null;
     } else if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
     }
+  }
+
+  void initializeSocket() {
+    socket = IO.io('http://localhost:3000', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+    });
+    // socket!.on('chat message', (data) {
+    //   setState(() {});
+    // });
+    socket!.emit('chat message', 'creat room');
+
+    //  Start socket connection
+    socket!.connect();
   }
 
   @override
