@@ -1,6 +1,4 @@
 import 'package:canary_app/app/components/image_handler.dart';
-import 'package:canary_app/data/datasources/remote_database/links.dart';
-
 import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
