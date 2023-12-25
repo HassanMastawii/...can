@@ -30,12 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  
   curved_navigation_bar: ^1.0.3
   # get: ^4.6.5
   flutter_screenutil: ^5.7.0
@@ -49,49 +44,41 @@ dependencies:
   http: ^1.1.0
   equatable: ^2.0.5
   connectivity_plus: ^4.0.2
-  fluttertoast: ^8.2.2
-  image_picker: ^1.0.2
-  image_cropper: ^5.0.0
- 
+  fluttertoast: ^8.2.2 
   permission_handler: ^10.4.3
   intl: ^0.18.1
   path_provider: ^2.1.0
   share: ^2.0.4
   url_launcher: ^6.0.10
   country_code_picker: ^3.0.0
-  just_audio: ^0.9.34
-  
-  on_audio_query: ^2.9.0
 # ___________________ للمشاركه على السوشال ميديا_________________
-  appinio_social_share: ^0.2.6
+
 
 
 # ________________  شريط السبر شات المتحرك  ___________________
-
   marquee: ^2.2.3
+  shimmer: ^3.0.0
 # ______________________________________________________________
-
-  flutter_svg: ^2.0.7
   video_player: ^2.7.2
-  flutter_vap: ^1.1.0
-
 
 # _________________لعبة الروليت____________________
-  
 # يلزم لشريط الهدايا اللي يضهر فوق هاذه البكج
   carousel_slider: ^4.2.1 
 # ________________________________________________________________
   flutter_sequence_animation: ^4.0.0
   kbspinningwheel: ^1.0.3
-
-# ________________________مشغل المسيقى____________________
-
-  # audioplayers: ^5.2.0
+# ________________________  كل مايخص الموسيقى ____________________
   file_picker: ^5.5.0
-  shimmer: ^3.0.0
-
- # ____________________________________________
+  just_audio: ^0.9.34
+  on_audio_query: ^2.9.0
+ # _______________________تنزيل ملفات من النت_____________________
   flutter_downloader: ^1.11.4
+
+
+  socket_io_client: ^2.0.3
+  image_picker: ^1.0.5
+  image_cropper: ^5.0.1
+  flutter_svg: ^2.0.9
 
 
  

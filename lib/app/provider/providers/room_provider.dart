@@ -18,6 +18,7 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   bool isLoading = false;
 
   List<Message> messages = [];
+  Room? myRoom;
 
   addMessage(Message message) {
     messages.insert(0, message);
