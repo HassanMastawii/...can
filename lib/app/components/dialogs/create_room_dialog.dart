@@ -22,28 +22,12 @@ class _CreateRoomDialogState extends State<CreateRoomDialog> {
     final state = await context
         .read<RoomProvider>()
         .createRoom(Room(name: _roomName.text));
-
     if (state is DoneState) {
       MySnackBar.showMyToast(text: "تم انشاء الرووم بنجاح");
-      initializeSocket();
       mounted ? Navigator.pop(context) : null;
     } else if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
     }
-  }
-
-  void initializeSocket() {
-    socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true,
-    });
-    // socket!.on('chat message', (data) {
-    //   setState(() {});
-    // });
-    socket!.emit('chat message', 'creat room');
-
-    //  Start socket connection
-    socket!.connect();
   }
 
   @override
