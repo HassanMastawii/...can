@@ -82,7 +82,8 @@ class _EditroomState extends State<Editroom> {
                       PopupMenuButton(
                         child: CircleAvatar(
                           child: Visibility(
-                            visible: !context.watch<RoomProvider>().isLoading,
+                            visible:
+                                !context.watch<RoomProvider>().isChangingImg,
                             replacement: const CircularProgressIndicator(),
                             child: const Icon(Icons.more_vert_outlined),
                           ),

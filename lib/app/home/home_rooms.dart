@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:canary_app/app/MyRoom.dart/my_room.dart';
+import 'package:canary_app/app/colorApp/color.dart';
 import 'package:canary_app/app/components/dialogs/create_room_dialog.dart';
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/home/bnart.dart';
@@ -10,9 +13,12 @@ import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
 import 'package:canary_app/app/widgets/skeleton.dart';
+import 'package:canary_app/domain/extensions/country_code.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:canary_app/domain/models/room.dart';
+import 'package:circle_flags/circle_flags.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +31,15 @@ class HomeRooms extends StatefulWidget {
 
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
+  List<String> roomFlags = [];
+  List<Room> roomFiltered = [];
   bool isLoading = false;
+  List<Room> sample = [
+    Room(contry: "af", name: "maher1"),
+    Room(contry: "sy", name: "maher2"),
+    Room(contry: "af", name: "maher3"),
+    Room(contry: "af", name: "maher4"),
+  ];
 
   ///تابع لجلب الروومات الموجودة في السيرفر
   Future<void> fetchData() async {
@@ -34,15 +48,27 @@ class _HomeRoomsState extends State<HomeRooms> {
     final state = await context.read<RoomProvider>().searchRoom("");
     if (state is DataState<List<Room>>) {
       //عند نجاح العملية نعرض الروومات المتاحة
-      setState(() {
-        isLoading = false;
-        roomData = state.data;
-      });
+      isLoading = false;
+      roomData = state.data;
+      roomFiltered = state.data;
+      for (var element in state.data) {
+        if (!roomFlags.contains(element.contry)) {
+          roomFlags.add(element.contry!);
+        }
+      }
+      setState(() {});
     } else if (state is ErrorState) {
       //عند فشل العملية نعرض رسالة خطأ
-      setState(() {
-        isLoading = false;
-      });
+      isLoading = false;
+      // roomData = sample;
+      // roomFiltered = sample;
+      // for (var element in sample) {
+      //   if (!roomFlags.contains(element.contry)) {
+      //     roomFlags.add(element.contry!);
+      //   }
+      // }
+      setState(() {});
+      log(state.failure.message);
       MySnackBar.showMyToast(text: state.failure.message);
     }
   }
@@ -105,13 +131,26 @@ class _HomeRoomsState extends State<HomeRooms> {
                 ),
                 IconButton(
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const CreateRoomDialog(),
-                    );
+                    if (context.read<RoomProvider>().myRoom != null) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyRoom(
+                          room: context.read<RoomProvider>().myRoom,
+                          userList: const [],
+                        ),
+                      ));
+                    } else if (!context
+                        .read<RoomProvider>()
+                        .isLoadingRoomInfo) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const CreateRoomDialog(),
+                      );
+                    }
                   },
-                  icon: const Icon(
-                    Icons.home,
+                  icon: Icon(
+                    context.watch<RoomProvider>().myRoom != null
+                        ? Icons.home
+                        : Icons.add,
                   ),
                   iconSize: 30,
                 ),
@@ -137,6 +176,37 @@ class _HomeRoomsState extends State<HomeRooms> {
               ],
             ),
           ),
+          FormBuilderFilterChip(
+            name: "country",
+            runSpacing: 5,
+            spacing: 5,
+            direction: Axis.horizontal,
+            onChanged: (value) {
+              if (value!.isEmpty) {
+                roomFiltered = roomData!;
+                log(roomFiltered.toString());
+                setState(() {});
+              } else {
+                log(value.toString());
+                roomFiltered = [];
+                for (var e in roomData!) {
+                  if (value.contains(e.contry)) {
+                    log(e.contry!);
+                    roomFiltered.add(e);
+                  }
+                }
+                setState(() {});
+              }
+            },
+            disabledColor: chipColor,
+            backgroundColor: chipColor,
+            labelStyle: const TextStyle(color: Colors.white),
+            options: roomFlags.map(
+              (e) {
+                return FormBuilderChipOption(value: e, avatar: CircleFlag(e));
+              },
+            ).toList(),
+          ),
           Expanded(
             child: Stack(
               children: [
@@ -153,21 +223,25 @@ class _HomeRoomsState extends State<HomeRooms> {
                               crossAxisSpacing: 6,
                               mainAxisSpacing: 6,
                             ),
-                            itemCount: roomData!.length,
+                            itemCount: roomFiltered.length,
                             itemBuilder: (context, index) {
+                              // if (index % 2 == 0) {
+                              //   return Text("hello");
+                              // }
                               return RoomCard(
-                                roomstatus: roomData?[index].roomStatus ?? "",
-                                chatCountry: roomData?[index].contry ?? "",
-                                chatName: roomData?[index].name ?? "",
+                                roomstatus:
+                                    roomFiltered[index].roomStatus ?? "",
+                                chatCountry: roomFiltered[index].contry ?? "",
+                                chatName: roomFiltered[index].name ?? "",
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => MyRoom(
-                                      room: roomData![index],
+                                      room: roomFiltered[index],
                                       userList: const [],
                                     ),
                                   ));
                                 },
-                                imageLink: roomData?[index].pic ?? "",
+                                imageLink: roomFiltered[index].pic ?? "",
                               );
                             },
                           ),

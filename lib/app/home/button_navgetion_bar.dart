@@ -53,6 +53,7 @@ class _HomeState extends State<Home> {
     if (state is DataState<Room> && mounted) {
       //عند نجاح العملية نعرض الروومات المتاحة
       context.read<RoomProvider>().myRoom = state.data;
+
     } else if (state is ErrorState) {
       //عند فشل العملية نعرض رسالة خطأ
       MySnackBar.showMyToast(text: state.failure.message);
