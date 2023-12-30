@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
+// import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeRooms extends StatefulWidget {
   const HomeRooms({super.key});
@@ -31,9 +32,10 @@ class HomeRooms extends StatefulWidget {
 
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
+  bool isLoading = true;
+  IO.Socket? socket;
   List<String> roomFlags = [];
   List<Room> roomFiltered = [];
-  bool isLoading = false;
   List<Room> sample = [
     Room(contry: "af", name: "maher1"),
     Room(contry: "sy", name: "maher2"),
@@ -75,10 +77,29 @@ class _HomeRoomsState extends State<HomeRooms> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    Future.delayed(Duration.zero, () async {
       await fetchData();
     });
     super.initState();
+  }
+
+  void initializeSocket() {
+    socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': true,
+    });
+    socket!.on('chat message', (data) {
+      print('Message from server: $data');
+      print(
+          "===================================================================");
+      setState(() {
+        fetchData();
+      });
+    });
+    // socket!.emit('chat message', 'create room');
+
+    //  Start socket connection
+    socket!.connect();
   }
 
   @override
@@ -284,5 +305,12 @@ class _HomeRoomsState extends State<HomeRooms> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    // قطع الاتصال عند إغلاق التطبيق
+    socket?.disconnect();
+    super.dispose();
   }
 }

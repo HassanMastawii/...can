@@ -1,4 +1,5 @@
 import 'package:canary_app/app/MyRoom.dart/praicroom/praicmonthe.dart';
+
 import 'package:canary_app/domain/models/user_coin.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,6 @@ class Praicroom extends StatefulWidget {
 class _PraicroomState extends State<Praicroom> with TickerProviderStateMixin {
   late final TabController _pageController =
       TabController(length: 2, vsync: this);
-
   @override
   Widget build(BuildContext context) {
     return Column(
