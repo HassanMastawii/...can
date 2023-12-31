@@ -43,9 +43,9 @@ class Room extends Equatable {
       moderators: json["moderators"],
       owner: json["owner"],
       pic: json["pic"],
-      roomId: json["room_id"],
+      roomId: int.parse(json["room_id"].toString()),
       roomStatus: json["room_status"],
-      status: json["status"],
+      status: int.parse(json["status"].toString()),
     );
   }
   Map<String, dynamic> toJson() {

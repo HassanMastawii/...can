@@ -51,7 +51,7 @@ class Profile extends Equatable {
     return Profile(
       email: json["email"],
       totalCoinAmount: json["total_coin_amount"],
-      balance: json["balance"],
+      balance: int.parse(json["balance"].toString()),
       bio: json["bio"],
       contry: json["contry"],
       familyId: json["family_id"],

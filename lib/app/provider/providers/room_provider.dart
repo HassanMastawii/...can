@@ -16,6 +16,8 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
     this._roomRepository,
   );
   bool isLoading = false;
+  bool isLoadingRoomInfo = false;
+  bool isChangingImg = false;
 
   List<Message> messages = [];
   Room? myRoom;
@@ -62,10 +64,10 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   }
 
   Future<ProviderStates> upRoomImg(String path, int roomid) async {
-    isLoading = true;
+    isChangingImg = true;
     notifyListeners();
     final failureOrRes = await _roomRepository.upRoomImg(path, roomid);
-    isLoading = false;
+    isChangingImg = false;
     notifyListeners();
     return failureOrDataToState<String>(failureOrRes);
   }
@@ -80,10 +82,10 @@ class RoomProvider extends ChangeNotifier with StatesHandler {
   }
 
   Future<ProviderStates> getRoomInfoRoom(int id) async {
-    isLoading = true;
+    isLoadingRoomInfo = true;
     notifyListeners();
     final failureOrRoom = await _roomRepository.getRoomInfo(id);
-    isLoading = false;
+    isLoadingRoomInfo = false;
     notifyListeners();
     return failureOrDataToState<Room>(failureOrRoom);
   }

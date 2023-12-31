@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:canary_app/domain/models/backgrounds.dart';
 import 'package:canary_app/domain/models/gift.dart';
@@ -115,6 +116,8 @@ class RoomRemoteDataSourceImpl implements RoomRemoteDataSource {
     var res2 = await Response.fromStream(response);
     if (response.statusCode == 200) {
       final decodedResponse = jsonDecode(res2.body);
+      log(path);
+      log(decodedResponse.toString());
       final src = decodedResponse['src'];
       return src;
     } else {
