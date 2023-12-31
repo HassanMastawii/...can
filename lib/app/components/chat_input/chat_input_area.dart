@@ -1,4 +1,5 @@
 import 'package:canary_app/app/MyRoom.dart/mine_room/imoge/imoge.dart';
+import 'package:canary_app/app/socket/link_socket.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'chat_text_field.dart';
@@ -17,8 +18,8 @@ class ChatInputArea extends StatefulWidget {
 }
 
 class _ChatInputAreaMobileState extends State<ChatInputArea> {
-  final TextEditingController controler = TextEditingController(
-      text: "https://app.canary-chat.com/img/last/gift/Aircraft_7000.webm");
+  final TextEditingController controler =
+      TextEditingController(text: "welcome");
   bool notEmpty = false;
   @override
   void initState() {
@@ -40,6 +41,13 @@ class _ChatInputAreaMobileState extends State<ChatInputArea> {
   void dispose() {
     controler.dispose();
     super.dispose();
+  }
+
+  void textChatRoom() {
+    SocketLink();
+    // Start socket connection;
+    socket!.connect();
+    socket!.emit('text chat', 'send chat masseg');
   }
 
   @override
@@ -115,6 +123,7 @@ class _ChatInputAreaMobileState extends State<ChatInputArea> {
                       child: GestureDetector(
                         onTap: () async {
                           widget.onSendText!(controler.text.trim());
+                          textChatRoom();
                           controler.clear();
                         },
                         child: ColoredBox(

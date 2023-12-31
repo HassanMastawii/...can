@@ -1,6 +1,7 @@
 import 'package:canary_app/app/components/toast.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
+import 'package:canary_app/app/socket/link_socket.dart';
 import 'package:canary_app/app/widgets/my_button.dart';
 import 'package:canary_app/app/widgets/my_text_form_field.dart';
 import 'package:canary_app/domain/models/room.dart';
@@ -24,10 +25,19 @@ class _CreateRoomDialogState extends State<CreateRoomDialog> {
         .createRoom(Room(name: _roomName.text));
     if (state is DoneState) {
       MySnackBar.showMyToast(text: "تم انشاء الرووم بنجاح");
+      sendSocketCreateRoom();
       mounted ? Navigator.pop(context) : null;
     } else if (state is ErrorState) {
       MySnackBar.showMyToast(text: state.failure.message);
     }
+  }
+
+  void sendSocketCreateRoom() {
+    SocketLink();
+    // Start socket connection;
+    socket!.connect();
+
+    socket!.emit('chat message', 'create room');
   }
 
   @override

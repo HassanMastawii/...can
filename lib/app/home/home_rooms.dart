@@ -9,6 +9,7 @@ import 'package:canary_app/app/home/search_page.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
+import 'package:canary_app/app/socket/link_socket.dart';
 import 'package:canary_app/app/widgets/skeleton.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
 import 'package:canary_app/domain/models/room.dart';
@@ -53,28 +54,24 @@ class _HomeRoomsState extends State<HomeRooms> {
   void initState() {
     Future.delayed(Duration.zero, () async {
       await fetchData();
+      // initializeSocket();
     });
     super.initState();
   }
 
-  void initializeSocket() {
-    socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true,
-    });
-    socket!.on('chat message', (data) {
-      print('Message from server: $data');
-      print(
-          "===================================================================");
-      setState(() {
-        fetchData();
-      });
-    });
-    // socket!.emit('chat message', 'create room');
+  // void initializeSocket() {
+  //   SocketLink();
+  //   // Start socket connection;
+  //   socket!.connect();
+  //   socket!.on('chat message', (data) {
+  //     print('Message from server: $data');
 
-    //  Start socket connection
-    socket!.connect();
-  }
+  //     // setState(() {
+  //     //   fetchData();
+  //     // });
+  //   });
+  //   socket!.emit('chat message', 'create room');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +201,9 @@ class _HomeRoomsState extends State<HomeRooms> {
     return GridView.count(
       crossAxisCount: 2,
       children: const [
+        Skeleton(),
+        Skeleton(),
+        Skeleton(),
         Skeleton(),
         Skeleton(),
         Skeleton(),

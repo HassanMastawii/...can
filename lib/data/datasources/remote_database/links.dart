@@ -1,4 +1,4 @@
-const String serverLink = "https://app.canary-chat.com";
+const String serverLink = "https://app2.canary-chat.com";
 const String apiLink = "$serverLink/api/";
 
 ///auth links

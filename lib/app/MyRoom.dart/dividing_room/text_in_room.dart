@@ -2,12 +2,14 @@ import 'package:canary_app/app/MyRoom.dart/mine_room/exstra/super_chat/slidersup
 import 'package:canary_app/app/messages/message_buble.dart';
 import 'package:canary_app/app/profail/profile_public/show_profail_frend.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/app/socket/link_socket.dart';
 import 'package:canary_app/domain/models/messages/gift_message.dart';
 import 'package:canary_app/domain/models/messages/message.dart';
 import 'package:canary_app/domain/models/messages/system_message.dart';
 import 'package:canary_app/domain/models/messages/text_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class TextInRoom extends StatefulWidget {
   const TextInRoom({super.key});
@@ -17,6 +19,28 @@ class TextInRoom extends StatefulWidget {
 }
 
 class _TextInRoomState extends State<TextInRoom> {
+  // IO.Socket? socket;
+
+  // void textChatRoom() {
+  //   SocketLink();
+  //   // Start socket connection;
+  //   socket!.connect();
+  //   socket!.on('text chat', (data) {
+  //     print('Message from server: $data');
+
+  //     setState(() {
+  //       _messageBuilder;
+  //     });
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   // textChatRoom();
+
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
