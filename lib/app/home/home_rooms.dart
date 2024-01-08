@@ -12,6 +12,7 @@ import 'package:canary_app/app/home/search_page.dart';
 import 'package:canary_app/app/provider/providers/room_provider.dart';
 import 'package:canary_app/app/provider/states/states.dart';
 import 'package:canary_app/app/router/my_router.dart';
+import 'package:canary_app/app/socket/link_socket.dart';
 import 'package:canary_app/app/widgets/skeleton.dart';
 import 'package:canary_app/domain/extensions/country_code.dart';
 import 'package:canary_app/domain/extensions/extention.dart';
@@ -79,27 +80,23 @@ class _HomeRoomsState extends State<HomeRooms> {
   void initState() {
     Future.delayed(Duration.zero, () async {
       await fetchData();
+      // initializeSocket();
     });
     super.initState();
   }
 
   // void initializeSocket() {
-  //   socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
-  //     'transports': ['websocket'],
-  //     'autoConnect': true,
-  //   });
+  //   SocketLink();
+  //   // Start socket connection;
+  //   socket!.connect();
   //   socket!.on('chat message', (data) {
   //     print('Message from server: $data');
-  //     print(
-  //         "===================================================================");
-  //     setState(() {
-  //       fetchData();
-  //     });
-  //   });
-  //   // socket!.emit('chat message', 'create room');
 
-  //   //  Start socket connection
-  //   socket!.connect();
+  //     // setState(() {
+  //     //   fetchData();
+  //     // });
+  //   });
+  //   socket!.emit('chat message', 'create room');
   // }
 
   @override
@@ -246,7 +243,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                             ),
                             itemCount: roomFiltered.length,
                             itemBuilder: (context, index) {
-                              //adding the banners betten every 4 rooms 
+                              //adding the banners betten every 4 rooms
                               // if (index % 2 == 0) {
                               //   return Text("hello");
                               // }
@@ -279,6 +276,9 @@ class _HomeRoomsState extends State<HomeRooms> {
     return GridView.count(
       crossAxisCount: 2,
       children: const [
+        Skeleton(),
+        Skeleton(),
+        Skeleton(),
         Skeleton(),
         Skeleton(),
         Skeleton(),
