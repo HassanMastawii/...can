@@ -33,7 +33,7 @@ class HomeRooms extends StatefulWidget {
 class _HomeRoomsState extends State<HomeRooms> {
   List<Room>? roomData;
   bool isLoading = true;
-  IO.Socket? socket;
+  // IO.Socket? socket;
   List<String> roomFlags = [];
   List<Room> roomFiltered = [];
   List<Room> sample = [
@@ -83,24 +83,24 @@ class _HomeRoomsState extends State<HomeRooms> {
     super.initState();
   }
 
-  void initializeSocket() {
-    socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
-      'transports': ['websocket'],
-      'autoConnect': true,
-    });
-    socket!.on('chat message', (data) {
-      print('Message from server: $data');
-      print(
-          "===================================================================");
-      setState(() {
-        fetchData();
-      });
-    });
-    // socket!.emit('chat message', 'create room');
+  // void initializeSocket() {
+  //   socket = IO.io('https://websocket.exos.lu', <String, dynamic>{
+  //     'transports': ['websocket'],
+  //     'autoConnect': true,
+  //   });
+  //   socket!.on('chat message', (data) {
+  //     print('Message from server: $data');
+  //     print(
+  //         "===================================================================");
+  //     setState(() {
+  //       fetchData();
+  //     });
+  //   });
+  //   // socket!.emit('chat message', 'create room');
 
-    //  Start socket connection
-    socket!.connect();
-  }
+  //   //  Start socket connection
+  //   socket!.connect();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -246,6 +246,7 @@ class _HomeRoomsState extends State<HomeRooms> {
                             ),
                             itemCount: roomFiltered.length,
                             itemBuilder: (context, index) {
+                              //adding the banners betten every 4 rooms 
                               // if (index % 2 == 0) {
                               //   return Text("hello");
                               // }
@@ -310,7 +311,7 @@ class _HomeRoomsState extends State<HomeRooms> {
   @override
   void dispose() {
     // قطع الاتصال عند إغلاق التطبيق
-    socket?.disconnect();
+    // socket?.disconnect();
     super.dispose();
   }
 }

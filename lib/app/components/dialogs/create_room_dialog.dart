@@ -6,7 +6,6 @@ import 'package:canary_app/app/widgets/my_text_form_field.dart';
 import 'package:canary_app/domain/models/room.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class CreateRoomDialog extends StatefulWidget {
   const CreateRoomDialog({super.key});
@@ -17,7 +16,7 @@ class CreateRoomDialog extends StatefulWidget {
 
 class _CreateRoomDialogState extends State<CreateRoomDialog> {
   final TextEditingController _roomName = TextEditingController();
-  IO.Socket? socket;
+
   void _createRoom() async {
     final state = await context
         .read<RoomProvider>()
