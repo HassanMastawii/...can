@@ -1,3 +1,4 @@
+import 'package:canary_app/app/baners/staer_weck.dart';
 import 'package:flutter/material.dart';
 
 class Baner extends StatefulWidget {
@@ -13,7 +14,11 @@ class _BanerState extends State<Baner> {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const StaerWeck(),
+          ));
+        },
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black87),
