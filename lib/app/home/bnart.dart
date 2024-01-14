@@ -1,4 +1,5 @@
-import 'package:canary_app/app/baners/staer_weck.dart';
+import 'package:canary_app/app/baners/bnaerInWeek/staer_weck.dart';
+
 import 'package:flutter/material.dart';
 
 class Baner extends StatefulWidget {

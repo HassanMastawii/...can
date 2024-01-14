@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
 class Gift extends Equatable {
-  final int id;
+  final String id;
   final String name;
   final int baner;
   final String pic;

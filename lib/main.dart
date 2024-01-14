@@ -1,47 +1,30 @@
-import 'package:canary_app/app/provider/providers/gifts_overlay_provider.dart';
-import 'package:canary_app/app/provider/providers/room_provider.dart';
+import 'package:canary_app/bindings/intialbindings.dart';
+import 'package:canary_app/core/localization/changelocal.dart';
+import 'package:canary_app/core/localization/translation.dart';
+import 'package:canary_app/core/services/services.dart';
+import 'package:canary_app/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:provider/provider.dart';
-import 'app/canary_app.dart';
-import 'app/provider/providers/core_provider.dart';
-import 'app/provider/providers/music_provider.dart';
-import 'data/datasources/local_database/local_database.dart';
-import 'device/dependecy_injection.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initial();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<CoreProvider>(
-          create: (_) => sl<CoreProvider>()
-            ..getToken()
-            ..getLocal(),
-        ),
-        ChangeNotifierProvider<RoomProvider>(
-          create: (_) => sl<RoomProvider>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => MusicProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => GiftOverlayProvider(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  await initialServices();
+  runApp(const MyApp());
 }
 
-Future<void> initial() async {
-  await LocalDataSource.init();
-  await FlutterDownloader.initialize(
-      debug:
-          true, // optional: set to false to disable printing logs to console (default: true)
-      ignoreSsl:
-          false // option: set to false to disable working with http links (default: false)
-      );
-  await initInjections();
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    LocaleController controller = Get.put(LocaleController());
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      translations: MyTranslation(),
+      locale: controller.language,
+      theme: controller.appTheme,
+      initialBinding: InitialBindings(),
+      getPages: routes,
+    );
+  }
 }
